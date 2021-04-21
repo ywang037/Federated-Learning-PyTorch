@@ -16,10 +16,17 @@ from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
 
 import time
 start = time.time()
-print('Welcome/n')
 
 if __name__ == '__main__':
+    bs = 64 # batch size
     args = args_parser()
+    print('\nBaseline implementation')
+    print(f'Dataset:\t{args.dataset}')
+    print(f'Optimizer:\t{args.optimizer}')
+    print(f'Learning rate:\t{args.lr}')
+    print(f'Batch size:\t{bs}')
+    print('Model to train:')  
+        
     if args.gpu:
         torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
         #torch.cuda.set_device(args.gpu)
@@ -51,23 +58,22 @@ if __name__ == '__main__':
     # Set the model to train and send it to device.
     global_model.to(device)
     global_model.train()
-    print(global_model)
+    print(global_model, '\n')
 
     # Training
     # Set optimizer and criterion
     if args.optimizer == 'sgd':
-        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr,
-                                    momentum=0.5)
+        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.9, nesterov=True)
     elif args.optimizer == 'adam':
-        optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr,
-                                     weight_decay=1e-4)
+        optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr, weight_decay=1e-4)
 
-    trainloader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    trainloader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
     criterion = torch.nn.NLLLoss().to(device)
     epoch_loss = []
 
     for epoch in tqdm(range(args.epochs)):
         batch_loss = []
+        print('\n')
 
         for batch_idx, (images, labels) in enumerate(trainloader):
             images, labels = images.to(device), labels.to(device)
@@ -78,14 +84,14 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
 
-            if batch_idx % 50 == 0:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            if batch_idx % 100 == 0:
+                print('Train Epoch: {} [{}\t/{}\t({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch+1, batch_idx * len(images), len(trainloader.dataset),
                     100. * batch_idx / len(trainloader), loss.item()))
             batch_loss.append(loss.item())
 
         loss_avg = sum(batch_loss)/len(batch_loss)
-        print('\nTrain loss:', loss_avg)
+        print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}\n')
         epoch_loss.append(loss_avg)
 
     # Plot loss
@@ -98,9 +104,9 @@ if __name__ == '__main__':
 
     # testing
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
-    print('Test on', len(test_dataset), 'samples')
+    print('\nTest on', len(test_dataset), 'samples')
     print("Test Accuracy: {:.2f}%".format(100*test_acc))
 
 # print the wall-clock-time used
 end=time.time() 
-print(f'wall clock time elapsed:{end - start}')
+print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
