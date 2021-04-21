@@ -131,6 +131,7 @@ if __name__ == '__main__':
 
     print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
 
+
     # PLOTTING (optional)
     # import matplotlib
     # import matplotlib.pyplot as plt

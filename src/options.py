@@ -47,8 +47,8 @@ def args_parser():
                         of dataset")
     parser.add_argument('--num_classes', type=int, default=10, help="number \
                         of classes")
-    parser.add_argument('--gpu', default=None, help="To use cuda, set \
-                        to a specific GPU ID. Default set to use CPU.")
+    parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
+                        to a specific GPU ID. Default set to use CPU.") # wy changed this arg type to bool, default to False, to use, set --gpu=True
     parser.add_argument('--optimizer', type=str, default='sgd', help="type \
                         of optimizer")
     parser.add_argument('--iid', type=int, default=1,

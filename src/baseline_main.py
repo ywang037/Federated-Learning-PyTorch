@@ -14,11 +14,15 @@ from options import args_parser
 from update import test_inference
 from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
 
+import time
+start = time.time()
+print('Welcome/n')
 
 if __name__ == '__main__':
     args = args_parser()
     if args.gpu:
-        torch.cuda.set_device(args.gpu)
+        torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
+        #torch.cuda.set_device(args.gpu)
     device = 'cuda' if args.gpu else 'cpu'
 
     # load datasets
@@ -89,10 +93,14 @@ if __name__ == '__main__':
     plt.plot(range(len(epoch_loss)), epoch_loss)
     plt.xlabel('epochs')
     plt.ylabel('Train loss')
-    plt.savefig('../save/nn_{}_{}_{}.png'.format(args.dataset, args.model,
+    plt.savefig('./save/nn_{}_{}_{}.png'.format(args.dataset, args.model,
                                                  args.epochs))
 
     # testing
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
     print('Test on', len(test_dataset), 'samples')
     print("Test Accuracy: {:.2f}%".format(100*test_acc))
+
+# print the wall-clock-time used
+end=time.time() 
+print(f'wall clock time elapsed:{end - start}')
