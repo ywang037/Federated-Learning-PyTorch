@@ -119,9 +119,10 @@ if __name__ == '__main__':
         epoch_loss_test.append(test_loss)
 
     # Plot training loss
-    plt.figure()
+    fig = plt.figure()    
     plt.subplot(1,3,1)
     plt.plot(range(len(epoch_loss)), epoch_loss, label='training loss')
+    plt.legend()
     plt.xlabel('epochs')
     plt.ylabel('Train loss')
     # plt.show()
@@ -131,6 +132,7 @@ if __name__ == '__main__':
     plt.subplot(1,3,2)
     plt.plot(range(len(epoch_loss_test)), epoch_loss_test, label='test loss')
     plt.plot(range(len(epoch_loss)), epoch_loss, label='training loss') # includes training loss for comparison
+    plt.legend()
     plt.xlabel('epochs')
     plt.ylabel('Test loss')
     # plt.show()
@@ -139,8 +141,10 @@ if __name__ == '__main__':
     # plt.figure()
     plt.subplot(1,3,3)
     plt.plot(range(len(epoch_acc_test)), epoch_acc_test, label='test accruacy')
+    plt.legend()
     plt.xlabel('epochs')
     plt.ylabel('Test accuracy')
+    fig.tight_layout()
     plt.show()
 
     # save resulted figures
