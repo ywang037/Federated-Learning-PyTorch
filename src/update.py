@@ -131,7 +131,6 @@ def test_inference(args, model, test_dataset):
 
         # Accumulate loss over batches
         batch_loss = criterion(outputs, labels)
-        # batch_loss = nn.NLLLoss(outputs, labels, reduction='sum').to(device)
         loss += batch_loss.item() 
 
         # Prediction
