@@ -119,7 +119,7 @@ def test_inference(args, model, test_dataset):
     loss, total, correct = 0.0, 0.0, 0.0
 
     device = 'cuda' if args.gpu else 'cpu'
-    criterion = nn.NLLLoss().to(device)
+    criterion = nn.NLLLoss(reduction='sum').to(device)
     testloader = DataLoader(test_dataset, batch_size=128,
                             shuffle=False)
 
@@ -128,8 +128,11 @@ def test_inference(args, model, test_dataset):
 
         # Inference
         outputs = model(images)
+
+        # Accumulate loss over batches
         batch_loss = criterion(outputs, labels)
-        loss += batch_loss.item()
+        # batch_loss = nn.NLLLoss(outputs, labels, reduction='sum').to(device)
+        loss += batch_loss.item() 
 
         # Prediction
         _, pred_labels = torch.max(outputs, 1)
@@ -138,4 +141,4 @@ def test_inference(args, model, test_dataset):
         total += len(labels)
 
     accuracy = correct/total
-    return accuracy, loss
+    return accuracy, loss/total

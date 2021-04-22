@@ -85,6 +85,8 @@ if __name__ == '__main__':
     
     trainloader = DataLoader(train_dataset, batch_size=args.bs, shuffle=True)
     epoch_loss = []
+    epoch_loss_test = []
+    epoch_acc_test = []
 
     for epoch in tqdm(range(args.epochs)):
         batch_loss = []
@@ -106,21 +108,54 @@ if __name__ == '__main__':
             batch_loss.append(loss.item())
 
         loss_avg = sum(batch_loss)/len(batch_loss)
-        print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}\n')
+        print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')
         epoch_loss.append(loss_avg)
 
-    # Plot loss
+        test_acc, test_loss = test_inference(args, global_model, test_dataset)
+        print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
+        print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
+        print(f'Test on {len(test_dataset)} samples\n')
+        epoch_acc_test.append(test_acc)
+        epoch_loss_test.append(test_loss)
+
+    # Plot training loss
     plt.figure()
-    plt.plot(range(len(epoch_loss)), epoch_loss)
+    plt.subplot(1,3,1)
+    plt.plot(range(len(epoch_loss)), epoch_loss, label='training loss')
     plt.xlabel('epochs')
     plt.ylabel('Train loss')
-    plt.savefig('./save/nn_{}_{}_{}.png'.format(args.dataset, args.model,
-                                                 args.epochs))
+    # plt.show()
 
-    # testing
+    # Plot test loss
+    # plt.figure()
+    plt.subplot(1,3,2)
+    plt.plot(range(len(epoch_loss_test)), epoch_loss_test, label='test loss')
+    plt.plot(range(len(epoch_loss)), epoch_loss, label='training loss') # includes training loss for comparison
+    plt.xlabel('epochs')
+    plt.ylabel('Test loss')
+    # plt.show()
+
+    # plot test accuracy
+    # plt.figure()
+    plt.subplot(1,3,3)
+    plt.plot(range(len(epoch_acc_test)), epoch_acc_test, label='test accruacy')
+    plt.xlabel('epochs')
+    plt.ylabel('Test accuracy')
+    plt.show()
+
+    # save resulted figures
+    if args.savefig:
+        plt.savefig(f'./save/train_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
+        plt.savefig(f'./save/test_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
+        plt.savefig(f'./save/test_acc_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
+
+    '''
+    # one-time testing
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
     print('\nTest on', len(test_dataset), 'samples')
     print("Test Accuracy: {:.2f}%".format(100*test_acc))
+    print('Test loss: {:.2f}'.format(test_loss))
+    '''
 
     # print the wall-clock-time used
     end=time.time() 
