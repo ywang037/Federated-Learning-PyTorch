@@ -67,7 +67,11 @@ if __name__ == '__main__':
     elif args.optimizer == 'adam':
         optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr, weight_decay=1e-4)
 
+    # Loss 
+    if 
+    
     trainloader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
+    nn.CrossEntropyLoss()
     criterion = torch.nn.NLLLoss().to(device)
     epoch_loss = []
 

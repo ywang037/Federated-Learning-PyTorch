@@ -15,16 +15,24 @@ from update import test_inference
 from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
 
 import time
-start = time.time()
+
 
 if __name__ == '__main__':
-    bs = 64 # batch size
+    start = time.time()
     args = args_parser()
+
+    # print some welcome messsages to confirm the settings
     print('\nBaseline implementation')
     print(f'Dataset:\t{args.dataset}')
-    print(f'Optimizer:\t{args.optimizer}')
+    if args.optimizer == 'sgd':
+        print('Optimizer:\tvanilla sgd')
+    elif args.optimizer == 'acc-sgd':
+        print('Optimizer:\tsgd with nesterov momentum=0.9')
+    elif args.optimizer == 'adam':
+        print('Optimizer:\tadam')
     print(f'Learning rate:\t{args.lr}')
-    print(f'Batch size:\t{bs}')
+    print(f'Batch size:\t{args.bs}')
+    print(f'Number of epochs:\t{args.epochs}')
     print('Model to train:')  
         
     if args.gpu:
@@ -61,14 +69,21 @@ if __name__ == '__main__':
     print(global_model, '\n')
 
     # Training
-    # Set optimizer and criterion
+    # Set optimizer
     if args.optimizer == 'sgd':
+        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr)
+    elif args.optimizer == 'acc-sgd':
         optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.9, nesterov=True)
     elif args.optimizer == 'adam':
         optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr, weight_decay=1e-4)
 
-    trainloader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
-    criterion = torch.nn.NLLLoss().to(device)
+    # set loss function 
+    if args.loss == 'nll':
+        criterion = torch.nn.NLLLoss().to(device)
+    elif args.loss == 'ce':
+        criterion = torch.nn.CrossEntropyLoss().to(device)
+    
+    trainloader = DataLoader(train_dataset, batch_size=args.bs, shuffle=True)
     epoch_loss = []
 
     for epoch in tqdm(range(args.epochs)):
@@ -107,6 +122,6 @@ if __name__ == '__main__':
     print('\nTest on', len(test_dataset), 'samples')
     print("Test Accuracy: {:.2f}%".format(100*test_acc))
 
-# print the wall-clock-time used
-end=time.time() 
-print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
+    # print the wall-clock-time used
+    end=time.time() 
+    print('\nWall clock time elapsed: {:.2f}s'.format(end-start))

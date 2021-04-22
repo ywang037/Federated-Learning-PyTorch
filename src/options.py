@@ -8,9 +8,20 @@ import argparse
 def args_parser():
     parser = argparse.ArgumentParser()
 
-    # federated arguments (Notation for the arguments followed from paper)
+    # general optimization
+    parser.add_argument('--bs',type=int, default=64, help='batch size')
     parser.add_argument('--epochs', type=int, default=10,
-                        help="number of rounds of training")
+                        help="number of rounds of training")    
+    parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
+    # parser.add_argument('--momentum', type=bool, default=False, help='If to use SGD with Nesterov momentum 0.9')
+    # parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum (default: 0.5)')    
+    parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
+                        to a specific GPU ID. Default set to use CPU.") # modified, changed this arg type to bool, default to False, to use, set --gpu=True
+    parser.add_argument('--optimizer', type=str, default='sgd', help="type \
+                        of optimizer: sgd(vanilla sgd), acc-sgd(accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
+    parser.add_argument('--loss',type=str,default=nll,help='Select between nll and ce(crossentropy)')
+    
+    # federated arguments (Notation for the arguments followed from paper)
     parser.add_argument('--num_users', type=int, default=100,
                         help="number of users: K")
     parser.add_argument('--frac', type=float, default=0.1,
@@ -19,10 +30,7 @@ def args_parser():
                         help="the number of local epochs: E")
     parser.add_argument('--local_bs', type=int, default=10,
                         help="local batch size: B")
-    parser.add_argument('--lr', type=float, default=0.01,
-                        help='learning rate')
-    parser.add_argument('--momentum', type=float, default=0.5,
-                        help='SGD momentum (default: 0.5)')
+
 
     # model arguments
     parser.add_argument('--model', type=str, default='mlp', help='model name')
@@ -47,10 +55,6 @@ def args_parser():
                         of dataset")
     parser.add_argument('--num_classes', type=int, default=10, help="number \
                         of classes")
-    parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
-                        to a specific GPU ID. Default set to use CPU.") # wy changed this arg type to bool, default to False, to use, set --gpu=True
-    parser.add_argument('--optimizer', type=str, default='sgd', help="type \
-                        of optimizer")
     parser.add_argument('--iid', type=int, default=1,
                         help='Default set to IID. Set to 0 for non-IID.')
     parser.add_argument('--unequal', type=int, default=0,
