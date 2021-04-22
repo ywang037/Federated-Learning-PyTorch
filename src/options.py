@@ -19,7 +19,7 @@ def args_parser():
                         to a specific GPU ID. Default set to use CPU.") # modified, changed this arg type to bool, default to False, to use, set --gpu=True
     parser.add_argument('--optimizer', type=str, default='sgd', help="type \
                         of optimizer: sgd(vanilla sgd), acc-sgd(accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
-    parser.add_argument('--loss',type=str,default=nll,help='Select between nll and ce(crossentropy)')
+    parser.add_argument('--loss',type=str,default='nll',help='Select between nll and ce(crossentropy)')
     
     # federated arguments (Notation for the arguments followed from paper)
     parser.add_argument('--num_users', type=int, default=100,
