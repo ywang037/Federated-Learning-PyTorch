@@ -18,3 +18,10 @@ Below is the description of the CNN model for CIFAR10:
 > The model architecture was taken from the TensorFlow tutorial, which consists of two convolutional layers followed by two fully connected layers and then a linear transformation layer to produce logits, for a total of about 106 parameters.
 
 The citation to which they referred in the paper cannot be found as of now. However, official TensorFlow tutorial on implementing a simple CNN can still be found [here](https://www.tensorflow.org/tutorials/images/cnn?hl=zh-cn). Alternatively, one can also refer to [this webpage](https://adventuresinmachinelearning.com/convolutional-neural-networks-tutorial-tensorflow/) for the information and architecture of the example CNN.  
+
+### Implementing the training
+
+One need to take care of the training hyper-parameters that had been used in the vannila paper, e.g., batch size, epochs, learning rate and related decaying schemes:
+1. To reproduce the FL training results, follow careflly what are described in the vanilla paper.
+2. To reproduce the baseline training results, follow the paper and also check out how training goes like in other literatures that use MNIST and CIFAR10 (e.g., the paper *Closing the generalization gap of adaptive gradient methods in training deep neural networks*).
+3. Read necessary literatures and see how to select these hyper parameters (e.g., paper *Optimal mini-batch size selection for fast gradient descent*, etc.)
