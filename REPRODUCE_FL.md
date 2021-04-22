@@ -7,6 +7,8 @@ For the vanilla federated learning paper *Communication-Efficient Learning of De
 
 Both of the above only implemented the experiment on MNIST and CIFAR10, no LSTM language model and related result is reproduced.
 
+Other code implementation can be found on [this page](https://paperswithcode.com/paper/communication-efficient-learning-of-deep) of the *Paper with Code*.
+
 ### Exact CNN model used in the vanilla paper
 
 In the vanilla FL paper, they used two simple CNNs for experimenting with MNIST and CIFAR10. Below is the description of the CNN model for MNIST:
