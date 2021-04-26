@@ -11,6 +11,8 @@ from torchvision import datasets
 # from data_preparation import data_setup
 
 import time
+import csv
+import numpy as np
 
 class TaskMnist():
     def __init__(self, nn='cnn_wy'):
@@ -19,9 +21,9 @@ class TaskMnist():
         self.nn = nn
         
 class TaskCifar():
-    def __init__(self,nn='torch'):
+    def __init__(self,nn='cnn_torch'):
         self.path = '..\data\cifar'
-        self.name = 'cifar10'
+        self.name = 'cifar'
         self.nn = nn
 
 class HyperParam():
@@ -235,42 +237,51 @@ def get_count_params(model):
 
 # training function
 def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
-    for epoch in range(1, epochs+1):
-        train_loss = 0.0
-        test_loss = 0.0
-        test_acc = 0.0
+    with open('../save/results.csv', 'w', newline='') as file:
+        writer = csv.writer(file,delimiter=',')
+        writer.writerow(['epoch','training loss', 'test acc'])
+        for epoch in range(1, epochs+1):
+            train_loss = 0.0
+            test_loss = 0.0
+            test_acc = 0.0
 
-        # training of each epoch
-        model.train()
-        for batch, (images, labels) in enumerate(loader_train):
-            images, labels = images.to(device), labels.to(device)
-            optimizer.zero_grad()
-            outputs = model(images)
-            loss = loss_fn(outputs, labels)
-            loss.backward()
-            optimizer.step()
-            train_loss += loss.item() * images.size(0)
-        train_loss /= len(loader_train.dataset)
-
-        # test after each epoch
-        model.eval()
-        num_correct = 0 
-        with torch.no_grad():
-            for batch, (images, labels) in enumerate(loader_test):
+            # training of each epoch
+            model.train()
+            for batch, (images, labels) in enumerate(loader_train):
                 images, labels = images.to(device), labels.to(device)
+                optimizer.zero_grad()
                 outputs = model(images)
-                loss = loss_fn(outputs,labels)
-                test_loss += loss.item() * images.size(0)
-                pred = outputs.argmax(dim=1)
-                num_correct += pred.eq(labels.view_as(pred)).sum().item()
-        test_loss /= len(loader_test.dataset)
-        test_acc = 100*num_correct/len(loader_test.dataset)
-        print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+                loss = loss_fn(outputs, labels)
+                loss.backward()
+                optimizer.step()
+                train_loss += loss.item() * images.size(0)
+            train_loss /= len(loader_train.dataset)
+
+            # test after each epoch
+            model.eval()
+            num_correct = 0 
+            with torch.no_grad():
+                for batch, (images, labels) in enumerate(loader_test):
+                    images, labels = images.to(device), labels.to(device)
+                    outputs = model(images)
+                    loss = loss_fn(outputs,labels)
+                    test_loss += loss.item() * images.size(0)
+                    pred = outputs.argmax(dim=1)
+                    num_correct += pred.eq(labels.view_as(pred)).sum().item()
+            test_loss /= len(loader_test.dataset)
+            test_acc = 100*num_correct/len(loader_test.dataset)
+            print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+            writer.writerow([
+                epoch, 
+                np.round(train_loss,2), 
+                np.round(test_acc,2)
+                ])
 
 if __name__ == '__main__':
     # configure the task and training settings
-    task = TaskMnist(nn='2nn_wy')    
-    settings = HyperParam(path=task.path)    
+    # task = TaskMnist(nn='2nn_wy')    
+    task = TaskCifar(nn='cnn_torch')
+    settings = HyperParam(path=task.path, learning_rate=0.01,nesterov=True)    
     
     if task.name == 'mnist':
         if task.nn == 'cnn_wy':
@@ -283,7 +294,7 @@ if __name__ == '__main__':
             model = MLP().to(settings.device)
         loader_train, loader_test = data_mnist(path=settings.datapath,batch_size=settings.bs)
     elif task.name == 'cifar':
-        if task.cnn == 'torch':
+        if task.nn == 'cnn_torch':
             model = CNNCifarTorch().to(settings.device)
         else:
             model = CNNCifarTf().to(settings.device)
@@ -319,3 +330,8 @@ if __name__ == '__main__':
     # print the wall-clock-time used
     end=time.time() 
     print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
+    if settings.nesterov:
+        save_path = f'..\save\weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}-nag.pth'
+    else:
+        save_path = f'..\save\weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+    torch.save(model.state_dict(), save_path)
