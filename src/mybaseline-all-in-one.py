@@ -129,7 +129,7 @@ class CNNCifarTf(nn.Module):
         logits=self.fc_layer(x)
         return F.log_softmax(logits,dim=1)
     
-def data_setup(path, batch_size=64):
+def data_cifar(path, batch_size=64):
     """
     returns training data loader and test data loader
     """
@@ -169,35 +169,55 @@ def data_setup(path, batch_size=64):
         transforms.Normalize(mean_1,std_1),
     ])
 
-    # setup the training dataset
+    # setup the CIFAR10 training dataset
     data_train = datasets.CIFAR10(root=path, train=True, download=False, transform=transform_train_0)
     loader_train = data.DataLoader(data_train, batch_size=batch_size, shuffle=True)
 
-    # setup the test dataset
+    # setup the CIFAR10 test dataset
     data_test = datasets.CIFAR10(root=path, train=False, download=False, transform=transform_test)
     loader_test = data.DataLoader(data_test, batch_size=100, shuffle=False)
 
     return loader_train, loader_test
 
+def data_mnist(path,batch_size=64):
+    transform = transforms.Compose([
+        transforms.ToTensor(), 
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])
+    
+    # setup the MNIST training dataset
+    data_train = datasets.MNIST(root=path, train=True, download=False, transform=transform)
+    loader_train = DataLoader(data_train, batch_size=batch_size, shuffle=True) 
+    
+    # setup the MNIST training dataset
+    data_test = datasets.MNIST(root=path, train=False, download=False, transform=transform)
+    loader_test = DataLoader(data_test, batch_size=100, shuffle=False)
+    return loader_train,loader_test
+    
 # the function used to count the number of trainable parameters
 def get_count_params(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
         
 if __name__ == '__main__':
-    start = time.time()
+    # configure the task and training settings
     task = TaskMnist(cnn=True)    
     settings = HyperParam(path=task.path)
+    
+    start = time.time()
     if task.name == 'mnist':
         if task.cnn:
             model = CNNMnistWy().to(settings.device)
         else:
             model = TwoNN().to(settings.device)
+        loader_train, loader_test = data_mnist(path=settings.datapath,batch_size=settings.bs)
     elif task.name == 'cifar':
         if task.cnn == 'torch':
             model = CNNCifarTorch().to(settings.device)
         else:
             model = CNNCifarTf().to(settings.device)
-    loader_train, loader_test = data_setup(path=settings.datapath,batch_size=settings.bs)
+        loader_train, loader_test = data_cifar(path=settings.datapath,batch_size=settings.bs)
+    
+    # set the loss function and optimizer
     loss_fn = nn.CrossEntropyLoss().to(settings.device)
     if settings.nesterov:
         optimizer = torch.optim.SGD(model.parameters(), lr=settings.lr, momentum=settings.momentum, nesterov=settings.nesterov)
