@@ -64,8 +64,11 @@ class CNNFashion_Mnist(nn.Module):
         out = out.view(out.size(0), -1)
         out = self.fc(out)
         return out
+    
+'''
+Since CIFAR10 has only 10 classes for sure, so I sightly changed the model class definition by removing the 'args'
 
-
+# the following is the original 
 class CNNCifar(nn.Module):
     def __init__(self, args):
         super(CNNCifar, self).__init__()
@@ -74,6 +77,7 @@ class CNNCifar(nn.Module):
         self.conv2 = nn.Conv2d(6, 16, 5)
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
         self.fc3 = nn.Linear(84, args.num_classes)
 
     def forward(self, x):
@@ -84,7 +88,30 @@ class CNNCifar(nn.Module):
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
+'''
 
+# the following is my edition
+class CNNCifar(nn.Module):
+    def __init__(self):
+        super(CNNCifar, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, 5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+        self.fc3 = nn.Linear(84, 10)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = x.view(-1, 16 * 5 * 5)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return F.log_softmax(x, dim=1)
+    
+    
 class modelC(nn.Module):
     def __init__(self, input_size, n_classes=10, **kwargs):
         super(AllConvNet, self).__init__()
@@ -118,3 +145,61 @@ class modelC(nn.Module):
         pool_out.squeeze_(-1)
         pool_out.squeeze_(-1)
         return pool_out
+
+'''
+Below are the models for experiment with CIFAR10, which are created by Wang Yuan
+'''
+# the example model used in the official CNN training tutorial of PyTorch using CIFAR10
+# https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+class CNNCifarTorch(nn.Module):
+    def __init__(self):
+        super(CNNCifarTorch,self).__init__()
+        self.conv_layer = nn.Sequential(
+            nn.Conv2d(in_channels=3, out_channels=6, kernel_size=5),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2),
+            nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2)
+        )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(16*5*5,120),
+            nn.ReLU(),
+            nn.Linear(120,84),
+            nn.ReLU(),
+            nn.Linear(84,10)
+        )
+
+    def forward(self,x):
+        x=self.conv_layer(x)
+        x=x.view(-1, 16 * 5 * 5)
+        logits=self.fc_layer(x)
+        return F.log_softmax(logits,dim=1)
+
+# the exmaple model used in the official CNN tutorial of TensorFlow using CIFAR10
+# https://www.tensorflow.org/tutorials/images/cnn
+class CNNCifarTf(nn.Module):
+    def __init__(self):
+        super(CNNCifarTf,self).__init__()
+        self.conv_layer = nn.Sequential(
+            nn.Conv2d(in_channels=3,out_channels=32, kernel_size=3), # output size 30*30, i.e., (32, 30 ,30)
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2), # output size 15*15, i.e., (32, 15 ,15)
+            nn.Conv2d(in_channels=32,out_channels=64,kernel_size=3), # output size 13*13, i.e., (64, 13 ,13)
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2), # output size 6*6, i.e., (64, 6, 6)
+            nn.Conv2d(in_channels=64,out_channels=64,kernel_size=3), # output size 4*4, i.e., (64, 4, 4)
+            nn.ReLU()
+        )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(in_features=1024,out_features=64),
+            nn.ReLU(),
+            nn.Linear(in_features=64,out_features=10),
+            nn.ReLU()
+        )
+
+    def forward(self,x):
+        x=self.conv_layer(x)
+        x=x.view(-1, 16 * 5 * 5)
+        logits=self.fc_layer(x)
+        return F.log_softmax(logits,dim=1)
