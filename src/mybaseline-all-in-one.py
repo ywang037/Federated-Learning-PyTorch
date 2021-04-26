@@ -269,7 +269,7 @@ def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
 
 if __name__ == '__main__':
     # configure the task and training settings
-    task = TaskMnist(nn='cnn')    
+    task = TaskMnist(nn='2nn_wy')    
     settings = HyperParam(path=task.path)    
     
     if task.name == 'mnist':
