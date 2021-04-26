@@ -10,6 +10,8 @@ from torchvision import datasets
 # from models import CNNCifar
 # from data_preparation import data_setup
 
+import time
+
 class HyperParam():
     def __init__(self,path,learning_rate=0.1, batch_size=64, epoch=10, momentum=0.9, nesterov=False):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -66,12 +68,11 @@ class CNNCifarTf(nn.Module):
             nn.Linear(in_features=1024,out_features=64),
             nn.ReLU(),
             nn.Linear(in_features=64,out_features=10),
-            nn.ReLU()
         )
 
     def forward(self,x):
         x=self.conv_layer(x)
-        x=x.view(-1, 16 * 5 * 5)
+        x=x.view(-1,1024)
         logits=self.fc_layer(x)
         return F.log_softmax(logits,dim=1)
     
@@ -125,10 +126,16 @@ def data_setup(path, batch_size=64):
 
     return loader_train, loader_test
 
+# the function used to count the number of trainable parameters
+def get_count_params(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
         
 if __name__ == '__main__':
+    start = time.time()
+    
     settings = HyperParam(path='..\data\cifar')
     model = CNNCifarTorch().to(settings.device)
+#     model = CNNCifarTf().to(settings.device)
     loader_train, loader_test = data_setup(path=settings.datapath,batch_size=settings.bs)
     loss_fn = nn.CrossEntropyLoss().to(settings.device)
     if settings.nesterov:
@@ -147,6 +154,7 @@ if __name__ == '__main__':
     print(f'Batch size:\t{settings.bs}')
     print(f'Num of epochs:\t{settings.epoch}')
     print('Model to train:\n', model)
+    print(f'Trainable model parameters:\t{get_count_params(model)}')
 
     # start training
     for epoch in range(1, settings.epoch+1):
@@ -180,3 +188,7 @@ if __name__ == '__main__':
         test_loss /= len(loader_test.dataset)
         test_acc = 100*num_correct/len(loader_test.dataset)
         print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+
+    # print the wall-clock-time used
+    end=time.time() 
+    print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
