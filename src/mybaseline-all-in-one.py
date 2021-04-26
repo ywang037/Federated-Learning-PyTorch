@@ -15,12 +15,14 @@ import time
 class TaskMnist():
     def __init__(self, cnn):
         self.path = '..\data\mnist'
+        self.name = 'mnist'
         self.cnn = True
         
 class TaskCifar():
-    def __init__(self):
+    def __init__(self,cnn):
         self.path = '..\data\cifar'
-        self.cnn = True
+        self.name = 'cifar'
+        self.cnn = 'torch'
 
 class HyperParam():
     def __init__(self,path,learning_rate=0.1, batch_size=64, epoch=10, momentum=0.9, nesterov=False):
@@ -31,6 +33,47 @@ class HyperParam():
         self.epoch=epoch
         self.momentum=momentum
         self.nesterov=nesterov        
+
+# the 2-NN model described in the vanilla FL paper for experiments with MNIST
+class TwoNN(nn.Module):
+    def __init__(self):
+        super(TwoNN,self).__init__()
+        self.nn_layer=nn.Sequential(
+            nn.Linear(in_features=28*28,out_features=100),
+            nn.ReLU(),
+            nn.Linear(in_features=100,out_features=100),
+            nn.ReLU(),
+            nn.Linear(in_features=100,out_features=10)
+        )
+    def forward(self,x):
+        x = x.view(-1,28*28)
+        logits = self.nn_layer(x)
+        return F.log_softmax(logits,dim=1)
+                 
+        
+# the CNN model describted in the vanilla FL paper for experiments with MNIST
+class CNNMnistWy(nn.Module):
+    def __init__(self):
+        super(CNNMnistWy,self).__init__()
+        self.conv_layer = nn.Sequential(
+            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=5),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2),
+            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=5),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2)
+        )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(in_features=1024,out_features=512),
+            nn.ReLU(),
+            nn.Linear(in_features=512,out_features=10),
+        )
+    
+    def forward(self,x):
+        x=self.conv_layer(x)
+        x=x.view(-1,1024)
+        logits = self.fc_layer(x)
+        return F.log_softmax(logits,dim=1)
 
 # the example model used in the official CNN training tutorial of PyTorch using CIFAR10
 # https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
@@ -142,10 +185,18 @@ def get_count_params(model):
         
 if __name__ == '__main__':
     start = time.time()
-    
-    settings = HyperParam(path='..\data\cifar')
-    model = CNNCifarTorch().to(settings.device)
-#     model = CNNCifarTf().to(settings.device)
+    task = TaskMnist(cnn=True)    
+    settings = HyperParam(path=task.path)
+    if task.name == 'mnist':
+        if task.cnn:
+            model = CNNMnistWy().to(settings.device)
+        else:
+            model = TwoNN().to(settings.device)
+    elif task.name == 'cifar':
+        if task.cnn == 'torch':
+            model = CNNCifarTorch().to(settings.device)
+        else:
+            model = CNNCifarTf().to(settings.device)
     loader_train, loader_test = data_setup(path=settings.datapath,batch_size=settings.bs)
     loss_fn = nn.CrossEntropyLoss().to(settings.device)
     if settings.nesterov:

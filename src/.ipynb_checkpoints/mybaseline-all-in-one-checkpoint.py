@@ -142,7 +142,7 @@ def get_count_params(model):
         
 if __name__ == '__main__':
     start = time.time()
-    
+        
     settings = HyperParam(path='..\data\cifar')
     model = CNNCifarTorch().to(settings.device)
 #     model = CNNCifarTf().to(settings.device)
