@@ -12,6 +12,16 @@ from torchvision import datasets
 
 import time
 
+class TaskMnist():
+    def __init__(self, cnn):
+        self.path = '..\data\mnist'
+        self.cnn = True
+        
+class TaskCifar():
+    def __init__(self):
+        self.path = '..\data\cifar'
+        self.cnn = True
+
 class HyperParam():
     def __init__(self,path,learning_rate=0.1, batch_size=64, epoch=10, momentum=0.9, nesterov=False):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
