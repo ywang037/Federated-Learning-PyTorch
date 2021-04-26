@@ -13,19 +13,19 @@ from torchvision import datasets
 import time
 
 class TaskMnist():
-    def __init__(self, cnn):
+    def __init__(self, nn='cnn_wy'):
         self.path = '..\data\mnist'
         self.name = 'mnist'
-        self.cnn = True
+        self.nn = nn
         
 class TaskCifar():
-    def __init__(self,cnn):
+    def __init__(self,nn='torch'):
         self.path = '..\data\cifar'
-        self.name = 'cifar'
-        self.cnn = 'torch'
+        self.name = 'cifar10'
+        self.nn = nn
 
 class HyperParam():
-    def __init__(self,path,learning_rate=0.1, batch_size=64, epoch=10, momentum=0.9, nesterov=False):
+    def __init__(self,path,learning_rate=0.1, batch_size=100, epoch=10, momentum=0.9, nesterov=False):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.datapath = path
         self.lr=learning_rate
@@ -34,7 +34,7 @@ class HyperParam():
         self.momentum=momentum
         self.nesterov=nesterov        
 
-# the 2-NN model described in the vanilla FL paper for experiments with MNIST
+# the 2NN model described in the vanilla FL paper for experiments with MNIST
 class TwoNN(nn.Module):
     def __init__(self):
         super(TwoNN,self).__init__()
@@ -50,13 +50,29 @@ class TwoNN(nn.Module):
         logits = self.nn_layer(x)
         return F.log_softmax(logits,dim=1)
                  
-        
+# the 2NN model in AshwinRJ's repository
+class MLP(nn.Module):
+    def __init__(self):
+        super(MLP, self).__init__()
+        self.layer_input = nn.Linear(28*28, 64)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout()
+        self.layer_hidden = nn.Linear(64, 10)
+
+    def forward(self, x):
+        x = x.view(-1, x.shape[1]*x.shape[-2]*x.shape[-1])
+        x = self.layer_input(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.layer_hidden(x)
+        return F.log_softmax(x,dim=1)
+
 # the CNN model describted in the vanilla FL paper for experiments with MNIST
 class CNNMnistWy(nn.Module):
     def __init__(self):
         super(CNNMnistWy,self).__init__()
         self.conv_layer = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=5),
+            nn.Conv2d(in_channels=1, out_channels=32, kernel_size=5),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2,stride=2),
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=5),
@@ -74,6 +90,25 @@ class CNNMnistWy(nn.Module):
         x=x.view(-1,1024)
         logits = self.fc_layer(x)
         return F.log_softmax(logits,dim=1)
+
+# the CNN model in AshwinRJ's repository
+class CNNMnist(nn.Module):
+    def __init__(self):
+        super(CNNMnist, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.conv2_drop = nn.Dropout2d()
+        self.fc1 = nn.Linear(320, 50)
+        self.fc2 = nn.Linear(50, 10)
+
+    def forward(self, x):
+        x = F.relu(F.max_pool2d(self.conv1(x), 2))
+        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+        x = x.view(-1, x.shape[1]*x.shape[2]*x.shape[3])
+        x = F.relu(self.fc1(x))
+        x = F.dropout(x, training=self.training)
+        x = self.fc2(x)
+        return F.log_softmax(x, dim=1)
 
 # the example model used in the official CNN training tutorial of PyTorch using CIFAR10
 # https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
@@ -187,11 +222,11 @@ def data_mnist(path,batch_size=64):
     
     # setup the MNIST training dataset
     data_train = datasets.MNIST(root=path, train=True, download=False, transform=transform)
-    loader_train = DataLoader(data_train, batch_size=batch_size, shuffle=True) 
+    loader_train = data.DataLoader(data_train, batch_size=batch_size, shuffle=True) 
     
     # setup the MNIST training dataset
     data_test = datasets.MNIST(root=path, train=False, download=False, transform=transform)
-    loader_test = DataLoader(data_test, batch_size=100, shuffle=False)
+    loader_test = data.DataLoader(data_test, batch_size=100, shuffle=False)
     return loader_train,loader_test
     
 # the function used to count the number of trainable parameters
@@ -200,15 +235,19 @@ def get_count_params(model):
         
 if __name__ == '__main__':
     # configure the task and training settings
-    task = TaskMnist(cnn=True)    
+    task = TaskMnist(nn='cnn')    
     settings = HyperParam(path=task.path)
     
     start = time.time()
     if task.name == 'mnist':
-        if task.cnn:
+        if task.nn == 'cnn_wy':
             model = CNNMnistWy().to(settings.device)
-        else:
+        elif task.nn == 'cnn':
+            model = CNNMnist().to(settings.device)
+        elif task.nn == '2nn_wy':
             model = TwoNN().to(settings.device)
+        else:
+            model = MLP().to(settings.device)
         loader_train, loader_test = data_mnist(path=settings.datapath,batch_size=settings.bs)
     elif task.name == 'cifar':
         if task.cnn == 'torch':
@@ -226,7 +265,7 @@ if __name__ == '__main__':
     
     # print some welcome messages
     print('\nModel training initiated...\n')
-    print('Dataset:\tCIFAR10')
+    print(f'Dataset:\t{task.name}')
     print(f'Loss function:\t{loss_fn}')
 #     optimizer_selection = 'SGD with Nesterov momentum=0.9' if settings.nesterov else 'vanilla SGD'
 #     print('Optimizer:\t',optimizer_selection)
