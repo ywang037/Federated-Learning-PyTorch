@@ -232,13 +232,46 @@ def data_mnist(path,batch_size=64):
 # the function used to count the number of trainable parameters
 def get_count_params(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
-        
+
+# training function
+def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
+    for epoch in range(1, epochs+1):
+        train_loss = 0.0
+        test_loss = 0.0
+        test_acc = 0.0
+
+        # training of each epoch
+        model.train()
+        for batch, (images, labels) in enumerate(loader_train):
+            images, labels = images.to(device), labels.to(device)
+            optimizer.zero_grad()
+            outputs = model(images)
+            loss = loss_fn(outputs, labels)
+            loss.backward()
+            optimizer.step()
+            train_loss += loss.item() * images.size(0)
+        train_loss /= len(loader_train.dataset)
+
+        # test after each epoch
+        model.eval()
+        num_correct = 0 
+        with torch.no_grad():
+            for batch, (images, labels) in enumerate(loader_test):
+                images, labels = images.to(device), labels.to(device)
+                outputs = model(images)
+                loss = loss_fn(outputs,labels)
+                test_loss += loss.item() * images.size(0)
+                pred = outputs.argmax(dim=1)
+                num_correct += pred.eq(labels.view_as(pred)).sum().item()
+        test_loss /= len(loader_test.dataset)
+        test_acc = 100*num_correct/len(loader_test.dataset)
+        print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+
 if __name__ == '__main__':
     # configure the task and training settings
     task = TaskMnist(nn='cnn')    
-    settings = HyperParam(path=task.path)
+    settings = HyperParam(path=task.path)    
     
-    start = time.time()
     if task.name == 'mnist':
         if task.nn == 'cnn_wy':
             model = CNNMnistWy().to(settings.device)
@@ -267,8 +300,6 @@ if __name__ == '__main__':
     print('\nModel training initiated...\n')
     print(f'Dataset:\t{task.name}')
     print(f'Loss function:\t{loss_fn}')
-#     optimizer_selection = 'SGD with Nesterov momentum=0.9' if settings.nesterov else 'vanilla SGD'
-#     print('Optimizer:\t',optimizer_selection)
     print('Optimizer:\tSGD with Nesterov momentum=0.9') if settings.nesterov else print('Optimizer:\tvanilla SGD')
     print(f'learning rate:\t{settings.lr}')
     print(f'Batch size:\t{settings.bs}')
@@ -277,37 +308,13 @@ if __name__ == '__main__':
     print(f'Trainable model parameters:\t{get_count_params(model)}')
 
     # start training
-    for epoch in range(1, settings.epoch+1):
-        train_loss = 0.0
-        test_loss = 0.0
-        test_acc = 0.0
-        
-        # training of each epoch
-        model.train()
-        for batch, (images, labels) in enumerate(loader_train):
-            images, labels = images.to(settings.device), labels.to(settings.device)
-            optimizer.zero_grad()
-            outputs = model(images)
-            loss = loss_fn(outputs, labels)
-            loss.backward()
-            optimizer.step()
-            train_loss += loss.item() * images.size(0)
-        train_loss /= len(loader_train.dataset)
-
-        # test after each epoch
-        model.eval()
-        num_correct = 0 
-        with torch.no_grad():
-            for batch, (images, labels) in enumerate(loader_test):
-                images, labels = images.to(settings.device), labels.to(settings.device)
-                outputs = model(images)
-                loss = loss_fn(outputs,labels)
-                test_loss += loss.item() * images.size(0)
-                pred = outputs.argmax(dim=1)
-                num_correct += pred.eq(labels.view_as(pred)).sum().item()
-        test_loss /= len(loader_test.dataset)
-        test_acc = 100*num_correct/len(loader_test.dataset)
-        print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+    start = time.time()
+    train_model(loader_train=loader_train,
+                loader_test=loader_test,
+                loss_fn=loss_fn,
+                optimizer=optimizer,
+                epochs=settings.epoch,
+                device=settings.device)
 
     # print the wall-clock-time used
     end=time.time() 
