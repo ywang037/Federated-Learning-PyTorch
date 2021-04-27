@@ -1,0 +1,1 @@
+python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --bs=100 --lr=0.1 --momentum=0.0 --nag=False --epochs=10
