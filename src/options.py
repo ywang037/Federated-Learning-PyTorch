@@ -13,12 +13,12 @@ def args_parser():
     parser.add_argument('--epochs', type=int, default=10,
                         help="number of rounds of training")    
     parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
-    # parser.add_argument('--momentum', type=bool, default=False, help='If to use SGD with Nesterov momentum 0.9')
-    # parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum (default: 0.5)')    
+    parser.add_argument('--momentum', type=float, default=0.9, help='set momentum (default 0.9)')
+    parser.add_argument('--nag', type=bool, default=False, help='if to use nesterov acceralted gradient')    
     parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
-                        to a specific GPU ID. Default set to use CPU.") # modified, changed this arg type to bool, default to False, to use, set --gpu=True
-    parser.add_argument('--optimizer', type=str, default='sgd-v', help="type \
-                        of optimizer: sgd-v(vanilla sgd), sgd-m(sgd with momentum), sgd-nag(nesterov accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
+                        to a specific GPU ID. Default set to use CPU.") 
+    parser.add_argument('--optimizer', type=str, default='sgd', help="type \
+                        of optimizer: sgd, or adam") 
     parser.add_argument('--loss',type=str,default='nll',help='Select between nll and ce(crossentropy)')
     
     # federated arguments (Notation for the arguments followed from paper)
