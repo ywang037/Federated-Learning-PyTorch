@@ -12,14 +12,14 @@ from torch.utils.data import DataLoader
 from utils import get_dataset
 from options import args_parser
 from update import test_inference
-from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 
 import time
 
 
 if __name__ == '__main__':
-    start = time.time()
     args = args_parser()
+    torch.manual_seed(args.seed)
 
     # print some welcome messsages to confirm the settings
     print('\nBaseline implementation')
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifar() # use WY's edition, no args are needed
+            global_model = CNNCifarTorch() # use WY's edition, no args are needed
             # global_model = CNNCifar(args=args)
     elif args.model == 'mlp':
         # Multi-layer preceptron
@@ -98,6 +98,7 @@ if __name__ == '__main__':
     epoch_loss_test = []
     epoch_acc_test = []
 
+    start = time.time()
     for epoch in tqdm(range(args.epochs)):
         batch_loss = []
         print('\n')
@@ -124,7 +125,7 @@ if __name__ == '__main__':
         epoch_acc_test.append(test_acc)
         epoch_loss_test.append(test_loss)
 
-        print('Epoch: {:>4}/{} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
+        print('\nEpoch: {:>4}/{} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
         # print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')       
         # print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
         # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
