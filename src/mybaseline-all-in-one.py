@@ -270,7 +270,7 @@ def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
                     num_correct += pred.eq(labels.view_as(pred)).sum().item()
             test_loss /= len(loader_test.dataset)
             test_acc = 100*num_correct/len(loader_test.dataset)
-            print('Epoch: {} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, train_loss, test_loss, test_acc))
+            print('Epoch: {:>4}/{} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch, epochs, train_loss, test_loss, test_acc))
             writer.writerow([
                 epoch, 
                 np.round(train_loss,2), 
@@ -281,7 +281,7 @@ if __name__ == '__main__':
     # configure the task and training settings
     # task = TaskMnist(nn='2nn_wy')    
     task = TaskCifar(nn='cnn_torch')
-    settings = HyperParam(path=task.path, learning_rate=0.01,nesterov=True)    
+    settings = HyperParam(path=task.path, learning_rate=0.1, epoch=1000, nesterov=False)    
     
     if task.name == 'mnist':
         if task.nn == 'cnn_wy':
