@@ -82,7 +82,8 @@ if __name__ == '__main__':
     start_time = time.time()
     for epoch in tqdm(range(args.epochs)):
         local_weights, local_losses = [], []
-        print(f'\n | Global Training Round : {epoch+1} |\n')
+        print('\n')
+        print(f'\n| Global Round : {epoch+1} | Learning rate : {args.lr}')
 
         # randomly pick m clients from num_users
         m = max(int(args.frac * args.num_users), 1)
@@ -101,7 +102,7 @@ if __name__ == '__main__':
                 global_round=epoch)
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
-
+        
         # update global weights
         global_weights = average_weights(local_weights)
 
@@ -111,6 +112,9 @@ if __name__ == '__main__':
         loss_avg = sum(local_losses) / len(local_losses)
         train_loss.append(loss_avg)
 
+        # decay the learning rate
+        args.lr *= args.lr_decay
+        
         # Calculate avg training accuracy over all users at every epoch
         list_acc, list_loss = [], []
         global_model.eval()
