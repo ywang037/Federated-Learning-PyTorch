@@ -70,12 +70,14 @@ if __name__ == '__main__':
 
     # Training
     # Set optimizer
-    if args.optimizer == 'sgd-v':
-        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr) # vanilla sgd
-    elif args.optimizer == 'sgd-m':
-        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.5) # momentum accelerated sgd
-    elif args.optimizer == 'sgd-nag':
-        optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.9, nesterov=True) # nesterov momentum sgd
+    if args.optimizer == 'sgd':
+        if args.momentum:
+            if args.nag:
+                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.9, nesterov=True) # nesterov momentum sgd
+            else:
+                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum) # momentum accelerated sgd
+        else:
+            optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr) # vanilla sgd
     elif args.optimizer == 'adam':
         optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr, weight_decay=1e-4) # adam
 
