@@ -13,7 +13,7 @@ def args_parser():
     parser.add_argument('--epochs', type=int, default=10,
                         help="number of rounds of training")    
     parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
-    parser.add_argument('--momentum', type=float, default=0.9, help='set momentum (default 0.9)')
+    parser.add_argument('--momentum', type=float, default=0.0, help='set momentum (default 0.0)')
     parser.add_argument('--nag', type=bool, default=False, help='if to use nesterov acceralted gradient')    
     parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
                         to a specific GPU ID. Default set to use CPU.") 
