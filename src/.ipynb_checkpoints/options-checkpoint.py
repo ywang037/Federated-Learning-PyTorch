@@ -8,18 +8,19 @@ import argparse
 def args_parser():
     parser = argparse.ArgumentParser()
 
-    # general optimization
+    # general training arguments
     parser.add_argument('--bs',type=int, default=64, help='batch size')
     parser.add_argument('--epochs', type=int, default=10,
                         help="number of rounds of training")    
     parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
-    # parser.add_argument('--momentum', type=bool, default=False, help='If to use SGD with Nesterov momentum 0.9')
-    # parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum (default: 0.5)')    
+    parser.add_argument('--lr_decay', type=float, default=0.99, help='decaying rate of learning rate')
+    parser.add_argument('--momentum', type=float, default=0.0, help='set momentum (default 0.0)')
+    parser.add_argument('--nag', type=bool, default=False, help='if to use nesterov acceralted gradient')    
     parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
-                        to a specific GPU ID. Default set to use CPU.") # modified, changed this arg type to bool, default to False, to use, set --gpu=True
+                        to a specific GPU ID. Default set to use CPU.") 
     parser.add_argument('--optimizer', type=str, default='sgd', help="type \
-                        of optimizer: sgd(vanilla sgd), acc-sgd(accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
-    parser.add_argument('--loss',type=str,default='nll',help='Select between nll and ce(crossentropy)')
+                        of optimizer: sgd, or adam") 
+    parser.add_argument('--loss',type=str,default='ce',help='Select between nll(negative log likelihood) and ce(crossentropy)')
     
     # federated arguments (Notation for the arguments followed from paper)
     parser.add_argument('--num_users', type=int, default=100,
@@ -50,7 +51,7 @@ def args_parser():
                         help="Whether use max pooling rather than \
                         strided convolutions")
 
-    # other arguments
+    # dataset arguments
     parser.add_argument('--dataset', type=str, default='mnist', help="name \
                         of dataset")
     parser.add_argument('--num_classes', type=int, default=10, help="number \
@@ -60,9 +61,17 @@ def args_parser():
     parser.add_argument('--unequal', type=int, default=0,
                         help='whether to use unequal data splits for  \
                         non-i.i.d setting (use 0 for equal splits)')
+
+    # other arguments
     parser.add_argument('--stopping_rounds', type=int, default=10,
                         help='rounds of early stopping')
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
     parser.add_argument('--seed', type=int, default=1, help='random seed')
+    
+    # results argument
+    parser.add_argument('--plot', type=bool, default=False, help='If to plot learning curves')
+    parser.add_argument('--save_fig', type=bool, default=False, help='If to save the figure to local repository')
+    parser.add_argument('--save_model', type=bool, default=False, help='If to save the trained model weights')
+    parser.add_argument('--save_record', type=bool, default=False, help='If to save the training records to csv file')
     args = parser.parse_args()
     return args
