@@ -5,7 +5,6 @@
 
 import os
 import copy
-import time
 import pickle
 import numpy as np
 from tqdm import tqdm
@@ -20,8 +19,8 @@ from update import LocalUpdate, test_inference
 from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 from utils import get_dataset, average_weights, exp_details
 
-# import time, csv
-# from itertools import zip_longest
+import time, csv
+from itertools import zip_longest
 
 if __name__ == '__main__':
      # define paths
@@ -73,11 +72,12 @@ if __name__ == '__main__':
     global_weights = global_model.state_dict()
 
     # Training
-    train_loss, train_accuracy = [], []
-    val_acc_list, net_list = [], []
-    cv_loss, cv_acc = [], []
-    print_every = 2
-    val_loss_pre, counter = 0, 0
+    # train_loss, train_accuracy = [], []
+    # val_acc_list, net_list = [], []
+    # cv_loss, cv_acc = [], []
+    # print_every = 2
+    # val_loss_pre, counter = 0, 0
+    train_loss, test_loss, test_acc = [], [], []
 
     start_time = time.time()
     for epoch in tqdm(range(args.epochs)):
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         global_model.load_state_dict(global_weights)
 
         loss_avg = sum(local_losses) / len(local_losses)
-        train_loss.append(loss_avg)
+        train_loss.append(np.around(loss_avg,4))
 
         # decay the learning rate
         args.lr *= args.lr_decay
@@ -131,11 +131,13 @@ if __name__ == '__main__':
         '''
 
         # test per round
-        test_acc, test_loss = test_inference(args, global_model, test_dataset)
-        
+        round_test_acc, round_test_loss = test_inference(args, global_model, test_dataset)
+        test_acc.append(np.around(round_test_acc,4)) 
+        test_loss.append(np.around(round_test_loss,4))
+
         # show training performance after each round
         print('\n| Global Round : {:>4}/{} | Training loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
-            epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
+            epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
         
         '''
         # print global training loss after every 'i' rounds
@@ -164,12 +166,20 @@ if __name__ == '__main__':
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
-        file_name = '../save/objects/{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}].pkl'.\
-            format(args.dataset, args.model, args.epochs, args.frac, args.iid,
-                args.local_ep, args.local_bs)
-
-        with open(file_name, 'wb') as f:
-            pickle.dump([train_loss, train_accuracy], f)
+        # write results to csv file
+        if args.save_record:
+            results = [torch.arange(1,args.epochs+1).tolist(), train_loss, test_loss, test_acc]
+            export_data = zip_longest(*results, fillvalue = '')
+            with open('./save/results-fedavg.csv', 'w', newline='') as file:
+                writer = csv.writer(file,delimiter=',')
+                writer.writerow(['Epoch', 'Training loss', 'Test loss', 'Test acc'])
+                writer.writerows(export_data)
+        
+        # # write to pkl file
+        # file_name = f'./save/objects/{args.dataset}_{args.model}_{args.epochs}_C[{args.frac}]_iid[{args.iid}]_E[{args.local_ep}]_B[{args.local_bs}].pkl'
+        # with open(file_name, 'wb') as f:
+        #     pickle.dump([train_loss, test_loss, test_acc], f)
+        #     # pickle.dump([train_loss, train_accuracy], f)
 
     # visualize the training results
     if args.plot:
