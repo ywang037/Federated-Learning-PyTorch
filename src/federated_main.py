@@ -9,6 +9,7 @@ import time
 import pickle
 import numpy as np
 from tqdm import tqdm
+import matplotlib
 import matplotlib.pyplot as plt
 
 import torch
@@ -23,9 +24,7 @@ import time, csv
 from itertools import zip_longest
 
 if __name__ == '__main__':
-    
-
-    # define paths
+     # define paths
     path_project = os.path.abspath('..')
     logger = SummaryWriter('../logs')
 
@@ -43,12 +42,13 @@ if __name__ == '__main__':
     if args.model == 'cnn':
         # Convolutional neural netork
         if args.dataset == 'mnist':
-            global_model = CNNMnist(args=args)
+            global_model = CNNMnist() # use WY's edition, no args are needed
+            # global_model = CNNMnist(args=args)
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifar(args=args)
-
+            global_model = CNNCifarTorch() # use WY's edition, no args are needed
+            # global_model = CNNCifar(args=args)
     elif args.model == 'mlp':
         # Multi-layer preceptron
         img_size = train_dataset[0][0].shape
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     # Set the model to train and send it to device.
     global_model.to(device)
     global_model.train()
-    print(global_model)
+    print(global_model,'\n')
 
     # copy weights
     global_weights = global_model.state_dict()
@@ -80,16 +80,21 @@ if __name__ == '__main__':
         local_weights, local_losses = [], []
         print(f'\n | Global Training Round : {epoch+1} |\n')
 
-        global_model.train()
+        # randomly pick m clients from num_users
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
 
         # perform per-user update, in a round-robin fashion
+        global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdate(args=args, dataset=train_dataset,
-                                      idxs=user_groups[idx], logger=logger)
+            local_model = LocalUpdate(
+                args=args,
+                dataset=train_dataset,
+                idxs=user_groups[idx], 
+                logger=logger)
             w, loss = local_model.update_weights(
-                model=copy.deepcopy(global_model), global_round=epoch)
+                model=copy.deepcopy(global_model), 
+                global_round=epoch)
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
 
@@ -120,9 +125,10 @@ if __name__ == '__main__':
             print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
 
     # print the wall-clock-time used
-    end=time.time() 
-    print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
-    
+    end_time=time.time() 
+    print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
+    # print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
+
     # Test inference after completion of training
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
 
@@ -131,37 +137,38 @@ if __name__ == '__main__':
     print("|---- Test Accuracy: {:.2f}%".format(100*test_acc))
 
     # Saving the objects train_loss and train_accuracy:
-    file_name = '../save/objects/{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}].pkl'.\
-        format(args.dataset, args.model, args.epochs, args.frac, args.iid,
-               args.local_ep, args.local_bs)
+    if args.save_record:
+        file_name = '../save/objects/{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}].pkl'.\
+            format(args.dataset, args.model, args.epochs, args.frac, args.iid,
+                args.local_ep, args.local_bs)
 
-    with open(file_name, 'wb') as f:
-        pickle.dump([train_loss, train_accuracy], f)
+        with open(file_name, 'wb') as f:
+            pickle.dump([train_loss, train_accuracy], f)
 
-    print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
-
+    # visualize the training results
+    if args.plot:
+        matplotlib.use('Agg')
+        # Plot Loss curve
+        plt.figure()
+        plt.title('Training Loss vs Communication rounds')
+        plt.plot(range(len(train_loss)), train_loss, color='r')
+        plt.ylabel('Training loss')
+        plt.xlabel('Communication Rounds')
+        plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_loss.png'.
+                    format(args.dataset, args.model, args.epochs, args.frac,
+                        args.iid, args.local_ep, args.local_bs))
+        
+        # Plot Average Accuracy vs Communication rounds
+        plt.figure()
+        plt.title('Average Accuracy vs Communication rounds')
+        plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
+        plt.ylabel('Average Accuracy')
+        plt.xlabel('Communication Rounds')
+        plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
+                    format(args.dataset, args.model, args.epochs, args.frac,
+                        args.iid, args.local_ep, args.local_bs))
 
     # PLOTTING (optional)
     # import matplotlib
     # import matplotlib.pyplot as plt
-    # matplotlib.use('Agg')
 
-    # Plot Loss curve
-    # plt.figure()
-    # plt.title('Training Loss vs Communication rounds')
-    # plt.plot(range(len(train_loss)), train_loss, color='r')
-    # plt.ylabel('Training loss')
-    # plt.xlabel('Communication Rounds')
-    # plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_loss.png'.
-    #             format(args.dataset, args.model, args.epochs, args.frac,
-    #                    args.iid, args.local_ep, args.local_bs))
-    #
-    # # Plot Average Accuracy vs Communication rounds
-    # plt.figure()
-    # plt.title('Average Accuracy vs Communication rounds')
-    # plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
-    # plt.ylabel('Average Accuracy')
-    # plt.xlabel('Communication Rounds')
-    # plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
-    #             format(args.dataset, args.model, args.epochs, args.frac,
-    #                    args.iid, args.local_ep, args.local_bs))
