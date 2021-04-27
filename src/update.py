@@ -155,8 +155,7 @@ def test_inference(args, model, test_dataset):
     elif args.loss == 'ce':
         criterion = nn.CrossEntropyLoss(reduction='sum').to(device)
     
-    testloader = DataLoader(test_dataset, batch_size=100,
-                            shuffle=False)
+    testloader = DataLoader(test_dataset, batch_size=200, shuffle=False)
 
     for batch_idx, (images, labels) in enumerate(testloader):
         images, labels = images.to(device), labels.to(device)
