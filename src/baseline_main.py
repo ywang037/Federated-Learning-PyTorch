@@ -14,8 +14,8 @@ from options import args_parser
 from update import test_inference
 from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 
-import time
-
+import time, csv
+from itertools import zip_longest
 
 if __name__ == '__main__':
     args = args_parser() 
@@ -133,7 +133,18 @@ if __name__ == '__main__':
         # print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
         # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
         print(f'Tested on {len(test_dataset)} samples\n')
+    
+    # print the wall-clock-time used
+    end=time.time() 
+    print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
 
+    # write results to csv file
+    results = [torch.arange(args.epochs+1).tolist(), epoch_loss, epoch_loss_test, epoch_acc_test]
+    export_data = zip_longest(*results, fillvalue = '')
+    with open('./save/results.csv', 'w', newline='') as file:
+        writer = csv.writer(file,delimiter=',')
+        writer.writerow(['Epoch', 'training loss', 'test lost', 'test acc'])
+        writer.writerows(export_data)
         
     # visualize the training results
     if args.plot:
@@ -172,6 +183,10 @@ if __name__ == '__main__':
         plt.savefig(f'./save/test_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
         plt.savefig(f'./save/test_acc_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
 
+    # save trained weights
+    save_path = f'./save/weights-baseline-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+    torch.save(model.state_dict(), save_path)
+
     '''
     # one-time testing
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
@@ -180,6 +195,4 @@ if __name__ == '__main__':
     print('Test loss: {:.2f}'.format(test_loss))
     '''
 
-    # print the wall-clock-time used
-    end=time.time() 
-    print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
+
