@@ -23,21 +23,22 @@ if __name__ == '__main__':
 
     # print some welcome messsages to confirm the settings
     print('\nBaseline implementation')
-    print('{:<20}: {}'.format('Dataset',args.dataset))
+    print('{:<18}: {}'.format('Dataset',args.dataset))
+    print('{:<18}: {}'.format('Loss',args.loss))
     if args.optimizer == 'sgd':
         if args.momentum:
             if args.nag:
-                print('{:<20}: sgd with nesterov momentum={}'.format('Optimizer',args.momentum)) # nesterov accelerated sgd
+                print('{:<18}: sgd with nesterov momentum={}'.format('Optimizer',args.momentum)) # nesterov accelerated sgd
             else:
-                print('{:<20}: sgd with momentum={}'.format('Optimizer',args.momentum)) # sgd with momentum                
+                print('{:<18}: sgd with momentum={}'.format('Optimizer',args.momentum)) # sgd with momentum                
         else:
-            print('{:<20}: vanilla sgd'.format('Optimizer')) # vanilla sgd
+            print('{:<18}: vanilla sgd'.format('Optimizer')) # vanilla sgd
     elif args.optimizer == 'adam':
-        print('{:<20}: adam'.format('Optimizer')) # adam
-    print('{:<20}: {}'.format('Learning rate',args.lr))
-    print('{:<20}: {}'.format('Batch size',args.bs))
-    print('{:<20}: {}'.format('Number of epochs',args.epochs))
-    print('{:<20}: {}-{}'.format('Model to train',args.dataset,args.model))  
+        print('{:<18}: adam'.format('Optimizer')) # adam
+    print('{:<18}: {}'.format('Learning rate',args.lr))
+    print('{:<18}: {}'.format('Batch size',args.bs))
+    print('{:<18}: {}'.format('Number of epochs',args.epochs))
+    print('{:<18}: {}-{}'.format('Model to train',args.dataset,args.model))  
         
     if args.gpu:
         torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
