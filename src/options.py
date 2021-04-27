@@ -19,7 +19,7 @@ def args_parser():
                         to a specific GPU ID. Default set to use CPU.") 
     parser.add_argument('--optimizer', type=str, default='sgd', help="type \
                         of optimizer: sgd, or adam") 
-    parser.add_argument('--loss',type=str,default='nll',help='Select between nll and ce(crossentropy)')
+    parser.add_argument('--loss',type=str,default='ce',help='Select between nll(negative log likelihood) and ce(crossentropy)')
     
     # federated arguments (Notation for the arguments followed from paper)
     parser.add_argument('--num_users', type=int, default=100,
@@ -64,6 +64,7 @@ def args_parser():
                         help='rounds of early stopping')
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
     parser.add_argument('--seed', type=int, default=1, help='random seed')
+    parser.add_argument('--plot', type=bool, default=False, help='if to plot learning curves')
     parser.add_argument('--savefig', type=bool, default=False, help='If to save the figure to local repository')
     args = parser.parse_args()
     return args
