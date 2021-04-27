@@ -18,8 +18,8 @@ import time
 
 
 if __name__ == '__main__':
-    torch.manual_seed(args.seed)
     args = args_parser() 
+    torch.manual_seed(args.seed)    
         
     if args.gpu:
         torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
