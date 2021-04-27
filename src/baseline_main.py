@@ -140,7 +140,7 @@ if __name__ == '__main__':
 
     # write results to csv file
     if args.save_record:
-        results = [torch.arange(1,args.epochs).tolist(), epoch_loss, epoch_loss_test, epoch_acc_test]
+        results = [torch.arange(1,args.epochs+1).tolist(), epoch_loss, epoch_loss_test, epoch_acc_test]
         export_data = zip_longest(*results, fillvalue = '')
         with open('./save/results-baseline.csv', 'w', newline='') as file:
             writer = csv.writer(file,delimiter=',')
