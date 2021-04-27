@@ -30,8 +30,8 @@ class LocalUpdate(object):
         self.trainloader, self.validloader, self.testloader = self.train_val_test(
             dataset, list(idxs))
         self.device = 'cuda' if args.gpu else 'cpu'
-        # Default criterion set to Cross Entropy loss function
-        self.criterion = nn.CrossEntropyLoss().to(self.device)
+        self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
+        # self.criterion = nn.CrossEntropyLoss().to(self.device)
         # # Default criterion set to NLL loss function (WHY???)
         # self.criterion = nn.NLLLoss().to(self.device)
 
@@ -98,7 +98,9 @@ class LocalUpdate(object):
 
                 if self.args.verbose and (batch_idx % 10 == 0):
                     print('| Global Round : {} | Local Epoch : {} | [{}/{} ({:>2.0f}%)]\tLoss: {:.6f}'.format(
-                        global_round+1, iter+1, batch_idx * len(images),
+                        global_round+1, 
+                        iter+1, 
+                        batch_idx * len(images),
                         len(self.trainloader.dataset),
                         100. * batch_idx / len(self.trainloader), loss.item()))
                 self.logger.add_scalar('loss', loss.item())
@@ -135,13 +137,16 @@ class LocalUpdate(object):
 def test_inference(args, model, test_dataset):
     """ Returns the test accuracy and loss.
     """
-
     model.eval()
     loss, total, correct = 0.0, 0.0, 0.0
-
     device = 'cuda' if args.gpu else 'cpu'
-    criterion = nn.NLLLoss(reduction='sum').to(device)
-    testloader = DataLoader(test_dataset, batch_size=128,
+
+    if args.loss == 'nll':
+        criterion = nn.NLLLoss(reduction='sum').to(device)
+    elif args.loss == 'ce':
+        criterion = nn.CrossEntropyLoss(reduction='sum').to(device)
+    
+    testloader = DataLoader(test_dataset, batch_size=100,
                             shuffle=False)
 
     for batch_idx, (images, labels) in enumerate(testloader):
