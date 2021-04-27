@@ -16,13 +16,13 @@ import numpy as np
 
 class TaskMnist():
     def __init__(self, nn='cnn_wy'):
-        self.path = '..\data\mnist'
+        self.path = './data/mnist'
         self.name = 'mnist'
         self.nn = nn
         
 class TaskCifar():
     def __init__(self,nn='cnn_torch'):
-        self.path = '..\data\cifar'
+        self.path = './data/cifar'
         self.name = 'cifar'
         self.nn = nn
 
@@ -184,6 +184,11 @@ def data_cifar(path, batch_size=64):
         transforms.ToTensor(),
         transforms.Normalize(mean_0,std_0),
     ])
+    # configure transform for test data
+    transform_test_0 = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean_0,std_0),
+    ])
 
     # enhanced transform, random crop and flip is optional
     transform_train_1 = transforms.Compose([
@@ -201,7 +206,7 @@ def data_cifar(path, batch_size=64):
     ])
 
     # configure transform for test data
-    transform_test = transforms.Compose([
+    transform_test_1 = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(mean_1,std_1),
     ])
@@ -211,7 +216,7 @@ def data_cifar(path, batch_size=64):
     loader_train = data.DataLoader(data_train, batch_size=batch_size, shuffle=True)
 
     # setup the CIFAR10 test dataset
-    data_test = datasets.CIFAR10(root=path, train=False, download=False, transform=transform_test)
+    data_test = datasets.CIFAR10(root=path, train=False, download=False, transform=transform_test_0)
     loader_test = data.DataLoader(data_test, batch_size=100, shuffle=False)
 
     return loader_train, loader_test
@@ -237,7 +242,7 @@ def get_count_params(model):
 
 # training function
 def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
-    with open('../save/results.csv', 'w', newline='') as file:
+    with open('./save/results.csv', 'w', newline='') as file:
         writer = csv.writer(file,delimiter=',')
         writer.writerow(['epoch','training loss', 'test acc'])
         for epoch in range(1, epochs+1):
@@ -278,10 +283,11 @@ def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
                 ])
 
 if __name__ == '__main__':
+    torch.manual_seed(1)
     # configure the task and training settings
     # task = TaskMnist(nn='2nn_wy')    
     task = TaskCifar(nn='cnn_torch')
-    settings = HyperParam(path=task.path, learning_rate=0.1, epoch=1000, nesterov=False)    
+    settings = HyperParam(path=task.path, learning_rate=0.1, epoch=10, nesterov=False)  
     
     if task.name == 'mnist':
         if task.nn == 'cnn_wy':
@@ -330,8 +336,9 @@ if __name__ == '__main__':
     # print the wall-clock-time used
     end=time.time() 
     print('\nWall clock time elapsed: {:.2f}s'.format(end-start))
-    if settings.nesterov:
-        save_path = f'..\save\weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}-nag.pth'
-    else:
-        save_path = f'..\save\weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+    # if settings.nesterov:
+    #     save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}-nag.pth'
+    # else:
+    #     save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+    save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
     torch.save(model.state_dict(), save_path)
