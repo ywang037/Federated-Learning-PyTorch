@@ -23,17 +23,21 @@ if __name__ == '__main__':
 
     # print some welcome messsages to confirm the settings
     print('\nBaseline implementation')
-    print(f'Dataset:\t{args.dataset}')
+    print('{:<20}: {}'.format('Dataset',args.dataset))
     if args.optimizer == 'sgd':
-        print('Optimizer:\tvanilla sgd')
-    elif args.optimizer == 'acc-sgd':
-        print('Optimizer:\tsgd with nesterov momentum=0.9')
+        if args.momentum:
+            if args.nag:
+                print('{:<20}: sgd with nesterov momentum={}'.format('Optimizer',args.momentum)) # nesterov accelerated sgd
+            else:
+                print('{:<20}: sgd with momentum={}'.format('Optimizer',args.momentum)) # sgd with momentum                
+        else:
+            print('{:<20}: vanilla sgd'.format('Optimizer')) # vanilla sgd
     elif args.optimizer == 'adam':
-        print('Optimizer:\tadam')
-    print(f'Learning rate:\t{args.lr}')
-    print(f'Batch size:\t{args.bs}')
-    print(f'Number of epochs:\t{args.epochs}')
-    print('Model to train:')  
+        print('{:<20}: adam'.format('Optimizer')) # adam
+    print('{:<20}: {}'.format('Learning rate',args.lr))
+    print('{:<20}: {}'.format('Batch size',args.bs))
+    print('{:<20}: {}'.format('Number of epochs',args.epochs))
+    print('{:<20}: {}-{}'.format('Model to train',args.dataset,args.model))  
         
     if args.gpu:
         torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
@@ -75,7 +79,7 @@ if __name__ == '__main__':
     if args.optimizer == 'sgd':
         if args.momentum:
             if args.nag:
-                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=0.9, nesterov=True) # nesterov momentum sgd
+                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum, nesterov=True) # nesterov momentum sgd
             else:
                 optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum) # momentum accelerated sgd
         else:
