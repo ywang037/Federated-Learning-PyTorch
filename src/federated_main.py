@@ -83,7 +83,7 @@ if __name__ == '__main__':
     for epoch in tqdm(range(args.epochs)):
         local_weights, local_losses = [], []
         print('\n')
-        print(f'\n| Global Round : {epoch+1} | Learning rate : {args.lr}')
+        print('\n| Global Round : {:>4}/{} | Learning rate : {:.6f}'.format(epoch+1, args.epochs, args.lr))
 
         # randomly pick m clients from num_users
         m = max(int(args.frac * args.num_users), 1)
@@ -92,14 +92,8 @@ if __name__ == '__main__':
         # perform per-user update, in a round-robin fashion
         global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdate(
-                args=args,
-                dataset=train_dataset,
-                idxs=user_groups[idx], 
-                logger=logger)
-            w, loss = local_model.update_weights(
-                model=copy.deepcopy(global_model), 
-                global_round=epoch)
+            local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            w, loss = local_model.update_weights(model=copy.deepcopy(global_model), global_round=epoch)
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
         
@@ -115,22 +109,41 @@ if __name__ == '__main__':
         # decay the learning rate
         args.lr *= args.lr_decay
         
-        # Calculate avg training accuracy over all users at every epoch
-        list_acc, list_loss = [], []
+        '''
+        # but since training dataset is too large for performing test in reasonable time, 
+        # calculating average training acc over participants is abandoned
+        # calculate average training acc over participated clients at each round
         global_model.eval()
-        for c in range(args.num_users):
-            local_model = LocalUpdate(args=args, dataset=train_dataset,
-                                      idxs=user_groups[idx], logger=logger)
-            acc, loss = local_model.inference(model=global_model)
+        list_acc = []
+        for idx in idxs_users:
+            acc, _ = test_inference(args=args, model=global_model, test_dataset=train_dataset)
             list_acc.append(acc)
-            list_loss.append(loss)
         train_accuracy.append(sum(list_acc)/len(list_acc))
 
+        # Calculate avg training accuracy over all users at every epoch (WY: why??? shouldn't be averaged over participants?)
+        # list_acc, list_loss = [], [] # WY: seems no point to compute training loss shall be computed by list_loss
+        # for c in range(args.num_users):
+        #     local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+        #     acc, loss = local_model.inference(model=global_model)
+        #     list_acc.append(acc)
+        #     list_loss.append(loss)
+        # train_accuracy.append(sum(list_acc)/len(list_acc))
+        '''
+
+        # test per round
+        test_acc, test_loss = test_inference(args, global_model, test_dataset)
+        
+        # show training performance after each round
+        print('\n| Global Round : {:>4}/{} | Training loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
+            epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
+        
+        '''
         # print global training loss after every 'i' rounds
         if (epoch+1) % print_every == 0:
             print(f' \nAvg Training Stats after {epoch+1} global rounds:')
             print(f'Training Loss : {np.mean(np.array(train_loss))}')
             print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
+        '''
 
     logger.flush()
     logger.close()
@@ -140,12 +153,14 @@ if __name__ == '__main__':
     print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
     # print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
 
+    '''
     # Test inference after completion of training
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
-
+    # print training performance after completion    
     print(f' \n Results after {args.epochs} global rounds of training:')
     print("|---- Avg Train Accuracy: {:.2f}%".format(100*train_accuracy[-1]))
     print("|---- Test Accuracy: {:.2f}%".format(100*test_acc))
+    '''
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
