@@ -141,7 +141,7 @@ if __name__ == '__main__':
         export_data = zip_longest(*results, fillvalue = '')
         with open('./save/results-baseline.csv', 'w', newline='') as file:
             writer = csv.writer(file,delimiter=',')
-            writer.writerow(['Epoch', 'training loss', 'test lost', 'test acc'])
+            writer.writerow(['Epoch', 'training loss', 'test loss', 'test acc'])
             writer.writerows(export_data)
         
     # visualize the training results
