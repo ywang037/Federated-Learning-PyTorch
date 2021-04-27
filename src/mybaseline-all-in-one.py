@@ -242,7 +242,7 @@ def get_count_params(model):
 
 # training function
 def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
-    with open('./save/results.csv', 'w', newline='') as file:
+    with open('./save/results-mybaseline.csv', 'w', newline='') as file:
         writer = csv.writer(file,delimiter=',')
         writer.writerow(['epoch','training loss', 'test acc'])
         for epoch in range(1, epochs+1):
@@ -340,5 +340,5 @@ if __name__ == '__main__':
     #     save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}-nag.pth'
     # else:
     #     save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
-    save_path = f'./save/weights-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+    save_path = f'./save/weights-mybaseline-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
     torch.save(model.state_dict(), save_path)
