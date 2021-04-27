@@ -91,7 +91,7 @@ def exp_details(args):
     print(f'    Optimizer           : {args.optimizer}')    
     print(f'    Learning rate       : {args.lr}')
     print(f'    Momentum            : {args.momentum}')
-    print(f'    Nesterov accleration: {args.nesterov}')
+    print(f'    Nesterov accleration: {args.nag}')
     print(f'    Global Rounds       : {args.epochs}\n')
 
     print('    Federated parameters:')
