@@ -59,13 +59,10 @@ if __name__ == '__main__':
     # Training
     # Set optimizer
     if args.optimizer == 'sgd':
-        if args.momentum:
-            if args.nag:
-                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum, nesterov=True) # nesterov momentum sgd
-            else:
-                optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum) # momentum accelerated sgd
+        if args.nag:
+            optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum, nesterov=True) # nesterov momentum sgd
         else:
-            optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr) # vanilla sgd
+            optimizer = torch.optim.SGD(global_model.parameters(), lr=args.lr, momentum=args.momentum) # vanilla sgd or momentum accelerated sgd
     elif args.optimizer == 'adam':
         optimizer = torch.optim.Adam(global_model.parameters(), lr=args.lr, weight_decay=1e-4) # adam
 
