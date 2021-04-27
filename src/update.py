@@ -10,7 +10,6 @@ from torch.utils.data import DataLoader, Dataset
 class DatasetSplit(Dataset):
     """An abstract Dataset class wrapped around Pytorch Dataset class.
     """
-
     def __init__(self, dataset, idxs):
         self.dataset = dataset
         self.idxs = [int(i) for i in idxs]
@@ -27,14 +26,20 @@ class LocalUpdate(object):
     def __init__(self, args, dataset, idxs, logger):
         self.args = args
         self.logger = logger
-        self.trainloader, self.validloader, self.testloader = self.train_val_test(
-            dataset, list(idxs))
-        self.device = 'cuda' if args.gpu else 'cpu'
+        self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
+        self.trainloader = DataLoader(DatasetSplit(dataset, idxs), batch_size=self.args.local_bs, shuffle=True)
         # self.criterion = nn.CrossEntropyLoss().to(self.device)
-        # # Default criterion set to NLL loss function (WHY???)
+        # # Default criterion set to NLL loss function (WY: WHY???)
         # self.criterion = nn.NLLLoss().to(self.device)
+        # self.trainloader, self.validloader, self.testloader = self.train_val_test(dataset, list(idxs))
 
+    '''
+    # WY's comment: 
+    # Below is the original function which splits the entire dataset into training, validation, and test.        
+    # However, there's no point to use the following method for MNIST and CIFIAR, 
+    # because dedicated test dataset is available,
+    # so that one does not need to manually split train, val, test dataset
     def train_val_test(self, dataset, idxs):
         """
         Returns train, validation and test dataloaders for a given dataset
@@ -52,7 +57,7 @@ class LocalUpdate(object):
         testloader = DataLoader(DatasetSplit(dataset, idxs_test),
                                 batch_size=int(len(idxs_test)/10), shuffle=False)
         return trainloader, validloader, testloader
-
+    '''
     def update_weights(self, model, global_round):
         # Set mode to train model
         model.train()
@@ -109,12 +114,16 @@ class LocalUpdate(object):
 
         return model.state_dict(), sum(epoch_loss) / len(epoch_loss)
 
+    '''
+    # WY's comment: 
+    # There's no point to return the loss using the following method for MNIST and CIFIAR, 
+    # because the loss below is computed from a manually splitted test dataset, 
+    # which is used for the case where no dedicated test dataest is available
     def inference(self, model):
         """ Returns the inference accuracy and loss.
         """
-
         model.eval()
-        loss, total, correct = 0.0, 0.0, 0.0
+        total, correct = 0.0, 0.0, 0.0
 
         for batch_idx, (images, labels) in enumerate(self.testloader):
             images, labels = images.to(self.device), labels.to(self.device)
@@ -122,7 +131,7 @@ class LocalUpdate(object):
             # Inference
             outputs = model(images)
             batch_loss = self.criterion(outputs, labels)
-            loss += batch_loss.item()
+            loss += batch_loss.item()*len(labels) # corrected by WY
 
             # Prediction
             _, pred_labels = torch.max(outputs, 1)
@@ -131,8 +140,8 @@ class LocalUpdate(object):
             total += len(labels)
 
         accuracy = correct/total
-        return accuracy, loss
-
+        return accuracy, loss/total
+    '''
 
 def test_inference(args, model, test_dataset):
     """ Returns the test accuracy and loss.
