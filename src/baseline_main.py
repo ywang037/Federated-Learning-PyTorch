@@ -180,13 +180,13 @@ if __name__ == '__main__':
 
     # save resulted figures
     if args.save_fig:
-        plt.savefig(f'./save/train_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
-        plt.savefig(f'./save/test_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
-        plt.savefig(f'./save/test_acc_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
+        plt.savefig(f'./save/train_loss_{args.dataset}_{args.model}_ep{args.epochs}_bs{args.bs}_lr{args.lr}.png')
+        plt.savefig(f'./save/test_loss_{args.dataset}_{args.model}_ep{args.epochs}_bs{args.bs}_lr{args.lr}.png')
+        plt.savefig(f'./save/test_acc_{args.dataset}_{args.model}_ep{args.epochs}_bs{args.bs}_lr{args.lr}.png')
 
     # save trained weights
     if args.save_model:
-        save_path = f'./save/weights-baseline-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+        save_path = f'./save/weights-baseline-{args.dataset}-{args.model}-ep{args.epochs}-bs{args.bs}-lr{args.lr}.pth'
         torch.save(model.state_dict(), save_path)
 
     '''
