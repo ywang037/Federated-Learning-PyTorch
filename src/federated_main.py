@@ -9,18 +9,21 @@ import time
 import pickle
 import numpy as np
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 import torch
 from tensorboardX import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, test_inference
-from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 from utils import get_dataset, average_weights, exp_details
 
+import time, csv
+from itertools import zip_longest
 
 if __name__ == '__main__':
-    start_time = time.time()
+    
 
     # define paths
     path_project = os.path.abspath('..')
@@ -72,6 +75,7 @@ if __name__ == '__main__':
     print_every = 2
     val_loss_pre, counter = 0, 0
 
+    start_time = time.time()
     for epoch in tqdm(range(args.epochs)):
         local_weights, local_losses = [], []
         print(f'\n | Global Training Round : {epoch+1} |\n')
@@ -115,6 +119,10 @@ if __name__ == '__main__':
             print(f'Training Loss : {np.mean(np.array(train_loss))}')
             print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
 
+    # print the wall-clock-time used
+    end=time.time() 
+    print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
+    
     # Test inference after completion of training
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
 
