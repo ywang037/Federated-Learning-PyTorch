@@ -116,7 +116,7 @@ if __name__ == '__main__':
             optimizer.step()
 
             if batch_idx % 100 == 0:
-                print('Train Epoch: {} [{}\t/{}\t({:.0f}%)]\tLoss: {:.6f}'.format(
+                print('Train Epoch: {} [{:>5}/{} ({:>2.0f}%)]\tLoss: {:.6f}'.format(
                     epoch+1, batch_idx * len(images), len(trainloader.dataset),
                     100. * batch_idx / len(trainloader), loss.item()))
             batch_loss.append(loss.item())
@@ -139,12 +139,13 @@ if __name__ == '__main__':
     print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
 
     # write results to csv file
-    results = [torch.arange(args.epochs+1).tolist(), epoch_loss, epoch_loss_test, epoch_acc_test]
-    export_data = zip_longest(*results, fillvalue = '')
-    with open('./save/results.csv', 'w', newline='') as file:
-        writer = csv.writer(file,delimiter=',')
-        writer.writerow(['Epoch', 'training loss', 'test lost', 'test acc'])
-        writer.writerows(export_data)
+    if args.save_record:
+        results = [torch.arange(1,args.epochs).tolist(), epoch_loss, epoch_loss_test, epoch_acc_test]
+        export_data = zip_longest(*results, fillvalue = '')
+        with open('./save/results-baseline.csv', 'w', newline='') as file:
+            writer = csv.writer(file,delimiter=',')
+            writer.writerow(['Epoch', 'training loss', 'test lost', 'test acc'])
+            writer.writerows(export_data)
         
     # visualize the training results
     if args.plot:
@@ -178,14 +179,15 @@ if __name__ == '__main__':
         plt.show()
 
     # save resulted figures
-    if args.savefig:
+    if args.save_fig:
         plt.savefig(f'./save/train_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
         plt.savefig(f'./save/test_loss_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
         plt.savefig(f'./save/test_acc_{args.dataset}_{args.model}_{args.optimizer}_{args.lr}_{args.epochs}_{args.bs}.png')
 
     # save trained weights
-    save_path = f'./save/weights-baseline-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
-    torch.save(model.state_dict(), save_path)
+    if args.save_model:
+        save_path = f'./save/weights-baseline-{task.nn}-{task.name}-ep{settings.epoch}-bs{settings.bs}-lr{settings.lr}.pth'
+        torch.save(model.state_dict(), save_path)
 
     '''
     # one-time testing
