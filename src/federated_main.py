@@ -20,8 +20,8 @@ from update import LocalUpdate, test_inference
 from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 from utils import get_dataset, average_weights, exp_details
 
-import time, csv
-from itertools import zip_longest
+# import time, csv
+# from itertools import zip_longest
 
 if __name__ == '__main__':
      # define paths
