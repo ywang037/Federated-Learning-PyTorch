@@ -114,17 +114,21 @@ if __name__ == '__main__':
             batch_loss.append(loss.item())
 
         loss_avg = sum(batch_loss)/len(batch_loss)
-        print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')
         epoch_loss.append(loss_avg)
-
+        
         test_acc, test_loss = test_inference(args, global_model, test_dataset)
-        print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
-        print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
-        print(f'Test on {len(test_dataset)} samples\n')
         epoch_acc_test.append(test_acc)
         epoch_loss_test.append(test_loss)
 
-    if args.plotfig:
+        print('Epoch: {:>4}/{} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
+        # print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')       
+        # print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
+        # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
+        print(f'Tested on {len(test_dataset)} samples\n')
+
+        
+    # visualize the training results
+    if args.plot:
         # Plot training loss
         fig = plt.figure()    
         plt.subplot(1,3,1)
