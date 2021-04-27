@@ -85,20 +85,23 @@ def average_weights(w):
 
 
 def exp_details(args):
-    print('\nExperimental details:')
-    print(f'    Model     : {args.model}')
-    print(f'    Optimizer : {args.optimizer}')
-    print(f'    Learning  : {args.lr}')
-    print(f'    Global Rounds   : {args.epochs}\n')
+    print('\nFedAvg experiment details:')
+    print(f'    Model               : {args.model}')
+    print(f'    Loss function       : {args.loss}')
+    print(f'    Optimizer           : {args.optimizer}')    
+    print(f'    Learning rate       : {args.lr}')
+    print(f'    Momentum            : {args.momentum}')
+    print(f'    Nesterov accleration: {args.nesterov}')
+    print(f'    Global Rounds       : {args.epochs}\n')
 
     print('    Federated parameters:')
     if args.iid:
         print('    IID')
     else:
         print('    Non-IID')
-    print(f'    Fraction of users  : {args.frac}')
-    print(f'    Local Batch size   : {args.local_bs}')
-    print(f'    Local Epochs       : {args.local_ep}\n')
+    print(f'    Fraction of users   : {args.frac}')
+    print(f'    Local Batch size    : {args.local_bs}')
+    print(f'    Local Epochs        : {args.local_ep}\n')
     return
 
 # the function added by WY, used to count the number of trainable parameters
