@@ -26,7 +26,7 @@ from utils import get_dataset, average_weights, exp_details
 if __name__ == '__main__':
      # define paths
     path_project = os.path.abspath('..')
-    logger = SummaryWriter('../logs')
+    logger = SummaryWriter('./logs')
 
     args = args_parser()
     exp_details(args)
