@@ -17,8 +17,8 @@ def args_parser():
     # parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum (default: 0.5)')    
     parser.add_argument('--gpu', type=bool, default=False, help="To use cuda, set \
                         to a specific GPU ID. Default set to use CPU.") # modified, changed this arg type to bool, default to False, to use, set --gpu=True
-    parser.add_argument('--optimizer', type=str, default='sgd', help="type \
-                        of optimizer: sgd(vanilla sgd), acc-sgd(accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
+    parser.add_argument('--optimizer', type=str, default='sgd-v', help="type \
+                        of optimizer: sgd-v(vanilla sgd), sgd-m(sgd with momentum), sgd-nag(nesterov accelerated sgd), adam") # modified, merged optimizer type and momentum setting (default to use nesterov momentum 0.9)
     parser.add_argument('--loss',type=str,default='nll',help='Select between nll and ce(crossentropy)')
     
     # federated arguments (Notation for the arguments followed from paper)
