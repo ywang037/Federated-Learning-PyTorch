@@ -64,7 +64,11 @@ def args_parser():
                         help='rounds of early stopping')
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
     parser.add_argument('--seed', type=int, default=1, help='random seed')
-    parser.add_argument('--plot', type=bool, default=False, help='if to plot learning curves')
-    parser.add_argument('--savefig', type=bool, default=False, help='If to save the figure to local repository')
+    
+    # results argument
+    parser.add_argument('--plot', type=bool, default=False, help='If to plot learning curves')
+    parser.add_argument('--save_fig', type=bool, default=False, help='If to save the figure to local repository')
+    parser.add_argument('--save_model', type=bool, default=False, help='If to save the trained model weights')
+    parser.add_argument('--save_record', type=bool, default=False, help='If to save the training records to csv file')
     args = parser.parse_args()
     return args
