@@ -8,7 +8,7 @@ import argparse
 def args_parser():
     parser = argparse.ArgumentParser()
 
-    # general optimization
+    # general training arguments
     parser.add_argument('--bs',type=int, default=64, help='batch size')
     parser.add_argument('--epochs', type=int, default=10,
                         help="number of rounds of training")    
@@ -50,7 +50,7 @@ def args_parser():
                         help="Whether use max pooling rather than \
                         strided convolutions")
 
-    # other arguments
+    # dataset arguments
     parser.add_argument('--dataset', type=str, default='mnist', help="name \
                         of dataset")
     parser.add_argument('--num_classes', type=int, default=10, help="number \
@@ -60,6 +60,8 @@ def args_parser():
     parser.add_argument('--unequal', type=int, default=0,
                         help='whether to use unequal data splits for  \
                         non-i.i.d setting (use 0 for equal splits)')
+
+    # other arguments
     parser.add_argument('--stopping_rounds', type=int, default=10,
                         help='rounds of early stopping')
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
