@@ -1,1 +1,5 @@
-python src/baseline_main.py --model=cnn --dataset=cifar --lr=0.1 --gpu=0 --epochs=10
+python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --bs=100 --lr=0.1 --momentum=0.0 --nag=False --epochs=10
+
+python src/baseline_main.py --gpu=True --model=cnn --dataset=mnist --bs=100 --lr=0.1 --momentum=0.0 --nag=False --epochs=10
+
+python src/baseline_main.py --gpu=True --model=mlp --dataset=mnist --bs=100 --lr=0.1 --momentum=0.0 --nag=False --epochs=10
