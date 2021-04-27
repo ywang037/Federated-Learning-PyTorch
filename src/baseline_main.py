@@ -47,11 +47,13 @@ if __name__ == '__main__':
     if args.model == 'cnn':
         # Convolutional neural netork
         if args.dataset == 'mnist':
-            global_model = CNNMnist(args=args)
+            global_model = CNNMnist() # use WY's edition, no args are needed
+            # global_model = CNNMnist(args=args)
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifar(args=args)
+            global_model = CNNCifar() # use WY's edition, no args are needed
+            # global_model = CNNCifar(args=args)
     elif args.model == 'mlp':
         # Multi-layer preceptron
         img_size = train_dataset[0][0].shape
