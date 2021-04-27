@@ -27,7 +27,7 @@ python src/federated_main.py --gpu=True --model=cnn --dataset=mnist --iid=0 --un
 
 2.2 For CIFAR10
 
-python src/federated_main.py --gpu=True --model=cnn --dataset=cifar --iid=1 --epochs=20 --local_ep=10 --local_bs=10 --lr=0.1 --momentum=0.0 --nag=False
+python src/federated_main.py --gpu=True --model=cnn --dataset=cifar --iid=1 --epochs=20 --local_ep=10 --local_bs=10 --lr=0.1 --nag=False  --momentum=0.0 
 
 python src/federated_main.py --gpu=True --model=cnn --dataset=cifar --iid=0 --unequal=0 --epochs=20 --local_ep=10 --local_bs=10 --lr=0.1 --momentum=0.0 --nag=False
 

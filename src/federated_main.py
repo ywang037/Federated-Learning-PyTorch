@@ -128,6 +128,9 @@ if __name__ == '__main__':
             print(f'Training Loss : {np.mean(np.array(train_loss))}')
             print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
 
+    logger.flush()
+    logger.close()
+    
     # print the wall-clock-time used
     end_time=time.time() 
     print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
