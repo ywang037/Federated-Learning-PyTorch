@@ -30,8 +30,10 @@ class LocalUpdate(object):
         self.trainloader, self.validloader, self.testloader = self.train_val_test(
             dataset, list(idxs))
         self.device = 'cuda' if args.gpu else 'cpu'
-        # Default criterion set to NLL loss function
-        self.criterion = nn.NLLLoss().to(self.device)
+        # Default criterion set to Cross Entropy loss function
+        self.criterion = nn.CrossEntropyLoss().to(self.device)
+        # # Default criterion set to NLL loss function (WHY???)
+        # self.criterion = nn.NLLLoss().to(self.device)
 
     def train_val_test(self, dataset, idxs):
         """
@@ -56,6 +58,24 @@ class LocalUpdate(object):
         model.train()
         epoch_loss = []
 
+        # Below is WY'es edition for optimizer setup
+        if self.args.optimizer == 'sgd':
+            if self.args.nag:
+                # nesterov momentum sgd
+                optimizer = torch.optim.SGD(model.parameters(), 
+                                            lr=self.args.lr, 
+                                            momentum=self.args.momentum, 
+                                            nesterov=True) 
+            else:
+                # vanilla or momentum accelerated sgd
+                optimizer = torch.optim.SGD(model.parameters(), 
+                                            lr=self.args.lr, 
+                                            momentum=self.args.momentum) 
+        elif self.args.optimizer == 'adam':
+            optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lr, weight_decay=1e-4) # adam
+        
+        '''
+        # Below is the original code section
         # Set optimizer for the local updates
         if self.args.optimizer == 'sgd':
             optimizer = torch.optim.SGD(model.parameters(), lr=self.args.lr,
@@ -63,7 +83,8 @@ class LocalUpdate(object):
         elif self.args.optimizer == 'adam':
             optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lr,
                                          weight_decay=1e-4)
-
+        '''
+        
         for iter in range(self.args.local_ep):
             batch_loss = []
             for batch_idx, (images, labels) in enumerate(self.trainloader):
