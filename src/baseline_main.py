@@ -73,7 +73,7 @@ if __name__ == '__main__':
         criterion = torch.nn.CrossEntropyLoss().to(device)
     
    # print some welcome messsages to confirm the setup
-    print('\nBaseline implementation')
+    print('\nBaseline settings:')
     print('{:<18}: {}'.format('Dataset',args.dataset))
     print('{:<18}: {}'.format('Loss',args.loss))
     if args.optimizer == 'sgd':
