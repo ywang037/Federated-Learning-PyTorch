@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import torch
 from torch.utils.data import DataLoader
 
-from utils import get_dataset
+from utils import get_dataset, get_count_params
 from options import args_parser
 from update import test_inference
 from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
@@ -18,27 +18,8 @@ import time
 
 
 if __name__ == '__main__':
-    args = args_parser()
     torch.manual_seed(args.seed)
-
-    # print some welcome messsages to confirm the settings
-    print('\nBaseline implementation')
-    print('{:<18}: {}'.format('Dataset',args.dataset))
-    print('{:<18}: {}'.format('Loss',args.loss))
-    if args.optimizer == 'sgd':
-        if args.momentum:
-            if args.nag:
-                print('{:<18}: sgd with nesterov momentum={}'.format('Optimizer',args.momentum)) # nesterov accelerated sgd
-            else:
-                print('{:<18}: sgd with momentum={}'.format('Optimizer',args.momentum)) # sgd with momentum                
-        else:
-            print('{:<18}: vanilla sgd'.format('Optimizer')) # vanilla sgd
-    elif args.optimizer == 'adam':
-        print('{:<18}: adam'.format('Optimizer')) # adam
-    print('{:<18}: {}'.format('Learning rate',args.lr))
-    print('{:<18}: {}'.format('Batch size',args.bs))
-    print('{:<18}: {}'.format('Number of epochs',args.epochs))
-    print('{:<18}: {}-{}'.format('Model to train',args.dataset,args.model))  
+    args = args_parser() 
         
     if args.gpu:
         torch.cuda.device(torch.cuda.current_device())  # this line is changed by wy on 21-April-2021 
@@ -94,6 +75,27 @@ if __name__ == '__main__':
     elif args.loss == 'ce':
         criterion = torch.nn.CrossEntropyLoss().to(device)
     
+   # print some welcome messsages to confirm the setup
+    print('\nBaseline implementation')
+    print('{:<18}: {}'.format('Dataset',args.dataset))
+    print('{:<18}: {}'.format('Loss',args.loss))
+    if args.optimizer == 'sgd':
+        if args.momentum:
+            if args.nag:
+                print('{:<18}: sgd with nesterov momentum={}'.format('Optimizer',args.momentum)) # nesterov accelerated sgd
+            else:
+                print('{:<18}: sgd with momentum={}'.format('Optimizer',args.momentum)) # sgd with momentum                
+        else:
+            print('{:<18}: vanilla sgd'.format('Optimizer')) # vanilla sgd
+    elif args.optimizer == 'adam':
+        print('{:<18}: adam'.format('Optimizer')) # adam
+    print('{:<18}: {}'.format('Learning rate',args.lr))
+    print('{:<18}: {}'.format('Batch size',args.bs))
+    print('{:<18}: {}'.format('Number of epochs',args.epochs))
+    print('{:<18}: {}-{}'.format('Model to train',args.dataset,args.model))  
+    print('{:<18}: {}'.format('Parameter amount',get_count_params(global_model)))
+
+    # start training
     trainloader = DataLoader(train_dataset, batch_size=args.bs, shuffle=True)
     epoch_loss = []
     epoch_loss_test = []
