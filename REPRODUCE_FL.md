@@ -33,3 +33,8 @@ For baseline training on CIFAR, it is found that both the CNN model created by W
 For both models, the training loss keeps reduced and then converges around 50 epochs, while the test accuracies first increase (to approximately 63%) then start to decline gradually below 60% (around 58%) only after about 15 epochs.
 
 It looks like the models **might be overfitted**.
+
+#### 28 April 2021
+A fixed learning rate 0.01 does not show test accuracy drops as was observed in the previous experiment using lr=0.1, for same epoch number 100, batch size 100 and vanilla SGD. 
+
+After 100 epochs, the training loss keeps declining and test accuracy converges around 60 epochs to an accuracy about 64%.
