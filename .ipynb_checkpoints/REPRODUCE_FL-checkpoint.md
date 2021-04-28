@@ -102,5 +102,6 @@ A **source code for doing grid searches** of learning rate can be found in page 
 
 `GridSearchCV` class provided in `scikit-learn` package can also help with the grid search of learning rate, see the following resources to learn this technique:
 * Page 117, section *Fine-tune Your Model/Grid Search* in chapter 2 of the book *Hands-on Machine Learning with Scikit-learn, Keras, and TensorFlow*
+* Scikit-learn doc [Tuning the hyper-parameters of an estimator](https://scikit-learn.org/stable/modules/grid_search.html)
 * [How to Grid Search Hyperparameters for Deep Learning Models in Python With Keras](https://machinelearningmastery.com/grid-search-hyperparameters-deep-learning-models-python-keras/)
 * [Hyperparameter Optimization With Random Search and Grid Search](https://machinelearningmastery.com/hyperparameter-optimization-with-random-search-and-grid-search/)
