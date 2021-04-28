@@ -63,6 +63,7 @@ However, for learning rate 0.01 combined with momentum 0.5/0.9, the test accurac
 #### B. On CIFAR10 learning with *tf cnn* model 
 
 #### C. On the optimized learning rate
+##### How the vanilla FL paper did
 It seems that, in the vanilla FL paper, for each set of parameter combination, the resulted learning curve shown in the figures or entry in the tables are obtained by optimizing the learning rate such that the best value of test-set accuracy was obtained. As they wrote:
 
 >we construct a learning curve for each combination of parameter settings, optimizing η and then making each curve monotonically improving by **taking the best value of test-set accuracy achieved over all prior rounds**. We then calculate the number of rounds where the curve crosses the target accuracy...
@@ -71,6 +72,11 @@ This means that, when doing comparison, they compare the best-possible learning 
 
 The author reported that they did **grid searches** for optimizing the learning rate on *a multiplicative grid with an resolution of $10^\frac{1}{3}$ or $10^\frac{1}{6}$*.
 
+##### Methods of grid search for the learning rate
 This could be done by two stages:
 1. Rough search using a bigger resolution, e.g., a factor of 10 or 0.1, say, start from 1e-4, then 1e-3, 1e-2, 1e-1, and 1.0,
 2. Finer search using a smaller resolution within an interval, i.e., between two best values found in the previous rough search.
+
+A grid search of optimized learning rate can be implemented using a small portion of the training dataset, **typically 20%**, this seperated portion is called **validation set** or **development set**. References includes:
+* Section 4.4.4, page 95, in *Probabilistic Machine Learning: An Introduction*, 2020, by K.Murhpy
+* Section 5.2, page 10, in *Stochastic gradient descent tricks*, 2012, by L.Bottou
