@@ -9,7 +9,7 @@ Both of the above only implemented the experiment on MNIST and CIFAR10, no LSTM 
 
 Other code implementation can be found on [this page](https://paperswithcode.com/paper/communication-efficient-learning-of-deep) of the *Paper with Code*.
 
-### Exact CNN model used in the vanilla paper
+### Exact CNN models used in the vanilla paper
 
 In the vanilla FL paper, they used two simple CNNs for experimenting with MNIST and CIFAR10. Below is the description of the CNN model for MNIST:
 > A CNN with two 5x5 convolution layers (the first with 32 channels, the second with 64, each followed with 2x2 max pooling), a fully connected layer with 512 units and ReLu activation, and a final softmax output layer (1,663,370 total parameters).
@@ -25,6 +25,26 @@ One need to take care of the training hyper-parameters that had been used in the
 1. To reproduce the FL training results, follow careflly what are described in the vanilla paper.
 2. To reproduce the baseline training results, follow the paper and also check out how training goes like in other literatures that use MNIST and CIFAR10 (e.g., the paper *Closing the generalization gap of adaptive gradient methods in training deep neural networks*).
 3. Read necessary literatures and see how to select these hyper parameters (e.g., paper *Optimal mini-batch size selection for fast gradient descent*, etc.)
+
+### Differing from the exact results in the vanilla FL paper [IMPORTANT]
+Although we hope to "reproduce" the results reported in [the vanilla FL paper](https://arxiv.org/abs/1602.05629), **due to limited computational power, code resources and timeline**, one may face the following constraints for the time being:
+1. not be able to initilize the model optimally or luckily,
+2. not be able to find optimized hyper parameter e.g., the learning rate, given that grid searches takes time,
+3. have to make do with (too) earlier stopping of the training, e.g., only perform hundreds of communication rounds rather than thousands of rounds.
+4. not be able to perform experiment for LSTM model with language datasets
+5. cannot afford to do the non-iid study for CIFAR10 learning task. In the vanilla FL paper, the author also did not conduct related experiments 
+    * **you may report that this experiments can be carried out in the future** e.g., how to divide CIFAR10 for balanced/unbalanced non-iid scenarios.
+
+However, since our goal is to evaluate FL vs baseline methods, rather than achieving the best possible accuracy on MNIST/CIFAR10 learning tasks, therefore **simplified and reduced experiments can be acceptable as long as the results can reflect the core conclusions drawn for the comparisons reported in the vanilla paper** among FedAVg, FedSGD, and SGD, on the following aspects:
+1. Increasing parallism by increasing the clients fraction does not lead to significant improvement on speed-up, with smaller batch size (B=10), a small fraction (C=0.1) is sufficient to have significant improvement over the case with C=0 (one client per round).
+2. Adding more local SGD updates per round can produce a dramatic decrease in communication costs, for same local epoch E, a smaller B leads to more local mini-batch updates and a fewer rounds of communication. 
+    * *To reflect this conclusion, one might not need to use that many combinations of E and B as the vanilla FL paper*.
+3. FedAvg converges to a higher level of test-set accuracy than the baseline FedSGD models:
+> For example, for the CNN the B = ∞, E = 1 FedSGD model eventually reaches 99.22% accuracy after 1200 rounds (and had not improved further after 6000 rounds), while the B = 10, E = 20 FedAvg model reaches an accuracy of 99.44% after 300 rounds.
+4. FedAvg improves speed-up over FedSGD and baseline SGD for *test acc vs comm rounds* experiments.
+    * One may skip CIFAR10 experiments if computational power does not allow for optimized learning rate searches.
+    * In fact, no existing implementation has ever reproduced CIFAR10 experiments.
+
 
 ### Work logs
 #### 27 April 2021
