@@ -58,3 +58,5 @@ It looks like the models **might be overfitted**.
 A fixed learning rate 0.01 does not show test accuracy drops as was observed in the previous experiment using lr=0.1, for same epoch number 100, batch size 100 and vanilla SGD. 
 
 After 100 epochs, the training loss keeps declining and test accuracy converges around 60 epochs to an accuracy about 64%.
+
+However, for learning rate 0.01 combined with momentum 0.5, the test accuracy starts to slightly drop to around 60% after 60 epochs.
