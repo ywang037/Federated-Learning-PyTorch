@@ -27,7 +27,7 @@ class TaskCifar():
         self.nn = nn
 
 class HyperParam():
-    def __init__(self,path,learning_rate=0.1, batch_size=100, epoch=10, momentum=0.9, nesterov=False):
+    def __init__(self,path,learning_rate=0.1, batch_size=100, epoch=10, momentum=0.0, nesterov=False):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.datapath = path
         self.lr=learning_rate
@@ -285,19 +285,19 @@ def train_model(loader_train, loader_test, epochs, loss_fn, optimizer, device):
 if __name__ == '__main__':
     torch.manual_seed(1)
     # configure the task and training settings
-    # task = TaskMnist(nn='2nn_wy')    
-    task = TaskCifar(nn='cnn_torch')
-    settings = HyperParam(path=task.path, learning_rate=0.1, epoch=10, nesterov=False)  
+    task = TaskMnist(nn='cnn')    
+    # task = TaskCifar(nn='cnn_tf')
+    settings = HyperParam(path=task.path, learning_rate=0.01, epoch=200, momentum=0.0, nesterov=False)  
     
     if task.name == 'mnist':
         if task.nn == 'cnn_wy':
-            model = CNNMnistWy().to(settings.device)
+            model = CNNMnistWy().to(settings.device) # use CNN createdy by WY for MNIST learning
         elif task.nn == 'cnn':
-            model = CNNMnist().to(settings.device)
+            model = CNNMnist().to(settings.device) # use CNN in the original repository for MNIST learning
         elif task.nn == '2nn_wy':
-            model = TwoNN().to(settings.device)
+            model = TwoNN().to(settings.device) # use 2NN MLP created by WY for MNIST learning
         else:
-            model = MLP().to(settings.device)
+            model = MLP().to(settings.device) # use 2NN MLP in the original repository for MNIST learning
         loader_train, loader_test = data_mnist(path=settings.datapath,batch_size=settings.bs)
     elif task.name == 'cifar':
         if task.nn == 'cnn_torch':
@@ -310,6 +310,8 @@ if __name__ == '__main__':
     loss_fn = nn.CrossEntropyLoss().to(settings.device)
     if settings.nesterov:
         optimizer = torch.optim.SGD(model.parameters(), lr=settings.lr, momentum=settings.momentum, nesterov=settings.nesterov)
+    elif settings.momentum:
+        optimizer = torch.optim.SGD(model.parameters(), lr=settings.lr, momentum=settings.momentum)
     else:
         optimizer = torch.optim.SGD(model.parameters(), lr=settings.lr)
     
