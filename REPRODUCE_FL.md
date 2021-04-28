@@ -28,7 +28,7 @@ One need to take care of the training hyper-parameters that had been used in the
 
 ### IV. Differing from the exact results in the vanilla FL paper [IMPORTANT]
 Although we hope to "reproduce" the results reported in [the vanilla FL paper](https://arxiv.org/abs/1602.05629), **due to limited computational power, code resources and timeline**, one may face the following constraints for the time being:
-1. not be able to initilize the model optimally or luckily,
+1. not be able to initilize the model optimally or luckily with a good seed,
 2. not be able to find optimized hyper parameter e.g., the learning rate, given that grid searches is very time-consuming, and thus making do with a "suitable" learning rate heuristically found.
 3. have to make do with (too) earlier stopping of the training, e.g., only perform hundreds of communication rounds rather than thousands of rounds.
 4. cannot afford to do the non-iid study for CIFAR10 learning task. In the vanilla FL paper, the author also did not conduct related experiments 
@@ -74,9 +74,16 @@ The author reported that they did **grid searches** for optimizing the learning 
 
 ##### Methods of grid search for the learning rate
 This could be done by two stages:
-1. Rough search using a bigger resolution, e.g., a factor of 10 or 0.1, say, start from 1e-4, then 1e-3, 1e-2, 1e-1, and 1.0,
-2. Finer search using a smaller resolution within an interval, i.e., between two best values found in the previous rough search.
+1. Coarse search using a bigger resolution, e.g., a factor of 10 or 0.1, say, start from 1e-4, then 1e-3, 1e-2, 1e-1, and 1.0,
+2. Finer search using a smaller resolution within an interval, i.e., between two best values found in the previous coarse search.
 
 A grid search of optimized learning rate can be implemented using a small portion of the training dataset, **typically 20%**, this seperated portion is called **validation set** or **development set**. References includes:
 * Section 4.4.4, page 95, in *Probabilistic Machine Learning: An Introduction*, 2020, by K.Murhpy
 * Section 5.2, page 10, in *Stochastic gradient descent tricks*, 2012, by L.Bottou
+
+A **source code for doing grid searches** of learning rate can be found in page 74, Chapter 4, under the section *Finding that learning rate* of the book *Programming PyTorch for Deep Learning, O'Reilly Media, 2019*
+
+`GridSearchCV` class provided in `scikit-learn` package can also help with the grid search of learning rate, see the following resources to learn this technique:
+* Page 117, section *Fine-tune Your Model/Grid Search* in chapter 2 of the book *Hands-on Machine Learning with Scikit-learn, Keras, and TensorFlow*
+* [How to Grid Search Hyperparameters for Deep Learning Models in Python With Keras](https://machinelearningmastery.com/grid-search-hyperparameters-deep-learning-models-python-keras/)
+* [Hyperparameter Optimization With Random Search and Grid Search](https://machinelearningmastery.com/hyperparameter-optimization-with-random-search-and-grid-search/)
