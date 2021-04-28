@@ -1,6 +1,6 @@
 # On reproducing the results in classic FL paper
 
-### Off-the-shelf code
+### I. Off-the-shelf code
 For the vanilla federated learning paper *Communication-Efficient Learning of Deep Networks from Decentralized Data*, there is only few open-source code implementation:
 1. The [repository where this project is forked from](https://github.com/AshwinRJ/Federated-Learning-PyTorch).
 2. [This post](https://hackmd.io/@stefanhofman/rJCJCViOL), and there code can be [viewd on google colab](https://colab.research.google.com/drive/1sWdbt_a3Dya9TQKTB2k5p-kRJWiznGsb#scrollTo=nlFXcKdIBYBA).
@@ -9,7 +9,7 @@ Both of the above only implemented the experiment on MNIST and CIFAR10, no LSTM 
 
 Other code implementation can be found on [this page](https://paperswithcode.com/paper/communication-efficient-learning-of-deep) of the *Paper with Code*.
 
-### Exact CNN models used in the vanilla paper
+### II. Exact CNN models used in the vanilla paper
 
 In the vanilla FL paper, they used two simple CNNs for experimenting with MNIST and CIFAR10. Below is the description of the CNN model for MNIST:
 > A CNN with two 5x5 convolution layers (the first with 32 channels, the second with 64, each followed with 2x2 max pooling), a fully connected layer with 512 units and ReLu activation, and a final softmax output layer (1,663,370 total parameters).
@@ -19,14 +19,14 @@ Below is the description of the CNN model for CIFAR10:
 
 The citation to which they referred in the paper cannot be found as of now. However, official TensorFlow tutorial on implementing a simple CNN can still be found [here](https://www.tensorflow.org/tutorials/images/cnn?hl=zh-cn). Alternatively, one can also refer to [this webpage](https://adventuresinmachinelearning.com/convolutional-neural-networks-tutorial-tensorflow/) for the information and architecture of the example CNN.  
 
-### Implementing the training
+### III. Implementing the training
 
 One need to take care of the training hyper-parameters that had been used in the vannila paper, e.g., batch size, epochs, learning rate and related decaying schemes:
 1. To reproduce the FL training results, follow careflly what are described in the vanilla paper.
 2. To reproduce the baseline training results, follow the paper and also check out how training goes like in other literatures that use MNIST and CIFAR10 (e.g., the paper *Closing the generalization gap of adaptive gradient methods in training deep neural networks*).
 3. Read necessary literatures and see how to select these hyper parameters (e.g., paper *Optimal mini-batch size selection for fast gradient descent*, etc.)
 
-### Differing from the exact results in the vanilla FL paper [IMPORTANT]
+### IV. Differing from the exact results in the vanilla FL paper [IMPORTANT]
 Although we hope to "reproduce" the results reported in [the vanilla FL paper](https://arxiv.org/abs/1602.05629), **due to limited computational power, code resources and timeline**, one may face the following constraints for the time being:
 1. not be able to initilize the model optimally or luckily,
 2. not be able to find optimized hyper parameter e.g., the learning rate, given that grid searches takes time,
@@ -46,17 +46,31 @@ However, since our goal is to evaluate FL vs baseline methods, rather than achie
     * In fact, no existing implementation has ever reproduced CIFAR10 experiments.
 
 
-### Work logs
-#### 27 April 2021
-For baseline training on CIFAR, it is found that both the CNN model created by WY and the one in AshwinRJ's repository cannot produce good test accuracy (both leads to final accuracies below 60%) after 100 epochs when a learning rate of 0.1, vanilla SGD, and a batch size of 100 is applied.
+### V. Work logs
+#### A. On CIFAR10 learning with *torch cnn* model 
+##### 27 April 2021
+For baseline training on CIFAR, it is found that both the torch CNN model created by WY and the one in AshwinRJ's repository cannot produce good test accuracy (both leads to final accuracies below 60%) after 100 epochs when a learning rate of 0.1, vanilla SGD, and a batch size of 100 is applied.
 
 For both models, the training loss keeps reduced and then converges around 50 epochs, while the test accuracies first increase (to approximately 63%) then start to decline gradually below 60% (around 58%) only after about 15 epochs.
 
 It looks like the models **might be overfitted**.
 
-#### 28 April 2021
-A fixed learning rate 0.01 does not show test accuracy drops as was observed in the previous experiment using lr=0.1, for same epoch number 100, batch size 100 and vanilla SGD. 
+##### 28 April 2021
+A fixed learning rate 0.01 does not show drops in test accuracy as was observed in the previous experiment using lr=0.1, for same epoch number 100, batch size 100 and vanilla SGD. After 100 epochs, the training loss keeps declining and test accuracy converges around 60 epochs to an accuracy about 64%.
 
-After 100 epochs, the training loss keeps declining and test accuracy converges around 60 epochs to an accuracy about 64%.
+However, for learning rate 0.01 combined with momentum 0.5/0.9, the test accuracy starts to slightly drop to around 60% after 60 epochs.
 
-However, for learning rate 0.01 combined with momentum 0.5, the test accuracy starts to slightly drop to around 60% after 60 epochs.
+#### B. On CIFAR10 learning with *tf cnn* model 
+
+#### C. On the optimized learning rate
+It seems that, in the vanilla FL paper, for each set of parameter combination, the resulted learning curve shown in the figures or entry in the tables are obtained by optimizing the learning rate such that the best value of test-set accuracy was obtained. As they wrote:
+
+>we construct a learning curve for each combination of parameter settings, optimizing η and then making each curve monotonically improving by **taking the best value of test-set accuracy achieved over all prior rounds**. We then calculate the number of rounds where the curve crosses the target accuracy...
+
+This means that, when doing comparison, they compare the best-possible learning performance which can be obtained for each combination of parameter settings. This requires one to also conduct learning rate optimization for reproducing the exact experiment results.
+
+The author reported that they did **grid searches** for optimizing the learning rate on *a multiplicative grid with an resolution of $10^\frac{1}{3}$ or $10^\frac{1}{6}$*.
+
+This could be done by two stages:
+1. Rough search using a bigger resolution, e.g., a factor of 10 or 0.1, say, start from 1e-4, then 1e-3, 1e-2, 1e-1, and 1.0,
+2. Finer search using a smaller resolution within an interval, i.e., between two best values found in the previous rough search.
