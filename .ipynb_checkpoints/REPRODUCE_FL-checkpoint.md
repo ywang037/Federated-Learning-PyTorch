@@ -29,11 +29,11 @@ One need to take care of the training hyper-parameters that had been used in the
 ### IV. Differing from the exact results in the vanilla FL paper [IMPORTANT]
 Although we hope to "reproduce" the results reported in [the vanilla FL paper](https://arxiv.org/abs/1602.05629), **due to limited computational power, code resources and timeline**, one may face the following constraints for the time being:
 1. not be able to initilize the model optimally or luckily,
-2. not be able to find optimized hyper parameter e.g., the learning rate, given that grid searches takes time,
+2. not be able to find optimized hyper parameter e.g., the learning rate, given that grid searches is very time-consuming, and thus making do with a "suitable" learning rate heuristically found.
 3. have to make do with (too) earlier stopping of the training, e.g., only perform hundreds of communication rounds rather than thousands of rounds.
-4. not be able to perform experiment for LSTM model with language datasets
-5. cannot afford to do the non-iid study for CIFAR10 learning task. In the vanilla FL paper, the author also did not conduct related experiments 
+4. cannot afford to do the non-iid study for CIFAR10 learning task. In the vanilla FL paper, the author also did not conduct related experiments 
     * **you may report that this experiments can be carried out in the future** e.g., how to divide CIFAR10 for balanced/unbalanced non-iid scenarios.
+5. not be able to perform experiment for LSTM model with language datasets
 
 However, since our goal is to evaluate FL vs baseline methods, rather than achieving the best possible accuracy on MNIST/CIFAR10 learning tasks, therefore **simplified and reduced experiments can be acceptable as long as the results can reflect the core conclusions drawn for the comparisons reported in the vanilla paper** among FedAVg, FedSGD, and SGD, on the following aspects:
 1. Increasing parallism by increasing the clients fraction does not lead to significant improvement on speed-up, with smaller batch size (B=10), a small fraction (C=0.1) is sufficient to have significant improvement over the case with C=0 (one client per round).
