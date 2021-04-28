@@ -1,6 +1,13 @@
 # On how to do grid search
 
+Please check out the following resources
+
 Section 19.3.3, around page 449, of the book *Neural Networks: Tricks of the Trade*
+
+Pytorch tutorials:
+1. [Hyperparameter tuning with Ray Tune](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html#hyperparameter-tuning-with-ray-tune)
+2. [Performance Tuning Guide](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
+
 
 The following webpages may be helpful (to view later):
 
