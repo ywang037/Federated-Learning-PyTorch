@@ -129,7 +129,7 @@ if __name__ == '__main__':
         if args.save_record:
             results = [torch.arange(1,args.epochs+1).tolist(), train_loss, test_loss, test_acc]
             export_data = zip_longest(*results, fillvalue = '')
-            record_path_save = f'./lr-val/{args.dataset}-{args.model}/validation-fedavg-{args.dataset}-{args.model}-r{args.epochs}-le{args.local_ep}-lb{args.local_bs}-fr{args.frac}-lr{args.lr}.csv'
+            record_path_save = f'./save-val/{args.dataset}-{args.model}/validation-fedavg-{args.dataset}-{args.model}-r{args.epochs}-le{args.local_ep}-lb{args.local_bs}-fr{args.frac}-lr{args.lr}.csv'
             with open(record_path_save, 'w', newline='') as file:
                 writer = csv.writer(file,delimiter=',')
                 writer.writerow(['Dataset', 'Model', 'Num of rounds', 'E', 'B', 'C', 'Lr', 'Time elapsed'])
