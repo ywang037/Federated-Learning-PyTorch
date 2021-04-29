@@ -39,16 +39,17 @@ Both trianed models might be used for warm start in future training.
 
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
+CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | done
+CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | ing
+CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
+
 ##### Remarks
 1. Set 96%, 98% as targets for CNN, 2NN is to avoid the needed rounds from being too large to complete in time.
 2. For non-IID cases, one may need to use an even lower target to avoid too long running time.
@@ -57,11 +58,12 @@ CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |�
 ##### CNN/non-IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
+CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|N-iid | XXXX%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
@@ -71,30 +73,31 @@ CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |�
 ##### 2NN/IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
+2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 
 ##### 2NN/non-IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
+2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
+
 
 
 #### B. Experiment 2: increase local computation
