@@ -105,10 +105,6 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 * The runs using optimized learning rate will be marked as "0.01-o"
 * T Rnd means the total number of performed rounds
 
-##### Remarks
-1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
-2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
-
 ##### CNN/IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
@@ -117,10 +113,14 @@ CNN   |FedAVg|iid   | 96.92%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 
 CNN   |FedAVg|iid   | 98.22%     |1000  |0.61hrs   | T       | 0.1  |1  |50 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | aborted
 CNN   |FedAVg|iid   | 99.00%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 400 rnds sufficient
+CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | done
+##### Remarks
+1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
+2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
+3. 400-500 rounds should be sufficient for E=5 B=50
 
 ##### CNN/non-IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
