@@ -29,29 +29,10 @@ class LocalUpdate(object):
         self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
         self.trainloader = DataLoader(DatasetSplit(dataset, idxs), batch_size=self.args.local_bs, shuffle=True)
-        self.validloader = self.train_val(dataset, list(idxs))
         # self.criterion = nn.CrossEntropyLoss().to(self.device)
         # # Default criterion set to NLL loss function (WY: WHY???)
         # self.criterion = nn.NLLLoss().to(self.device)
-        # self.trainloader, self.validloader, self.testloader = self.train_val_test(dataset, list(idxs))
-        
-    
-    
-    def train_val(self, dataset, idxs):
-        """
-        This function is only used to build a validation dataset for doing grid searches of learning rate.
-        Returns train, validation and test dataloaders for a given dataset and user indexes.
-        """
-        # split indexes for train, validation (80, 20)
-        idxs_train = idxs[:int(0.8*len(idxs))]
-        idxs_val = idxs[int(0.8*len(idxs)):]
-
-        trainloader = DataLoader(DatasetSplit(dataset, idxs_train),
-                                 batch_size=self.args.local_bs, shuffle=True)
-        validloader = DataLoader(DatasetSplit(dataset, idxs_val),
-                                 batch_size=int(len(idxs_val)/5), shuffle=False)
-        return trainloader, validloader, testloader
-
+        # self.trainloader, self.validloader, self.testloader = self.train_val_test(dataset, list(idxs))    
 
     '''
     # WY's comment: 
@@ -161,7 +142,33 @@ class LocalUpdate(object):
         accuracy = correct/total
         return accuracy, loss/total
     '''
+class LocalUpdateVal(object):
+    '''
+    This class is duplicated from the class LocalUpdate defined above, 
+    the only difference is that this class is used for validation training only
+    '''
+    def __init__(self, args, dataset, idxs, logger):
+        self.args = args
+        self.logger = logger
+        self.device = 'cuda' if args.gpu else 'cpu'        
+        self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
+        _, self.validloader = self.train_val(dataset, list(idxs))
+        # self.trainloader, self.validloader = self.train_val(dataset, list(idxs))    
+    
+    def train_val(self, dataset, idxs):
+        """
+        This function is only used to build a validation dataset for doing grid searches of learning rate.
+        Returns train, validation and test dataloaders for a given dataset and user indexes.
+        """
+        # split indexes for train, validation (80, 20)
+        idxs_train = idxs[:int(0.8*len(idxs))]
+        idxs_val = idxs[int(0.8*len(idxs)):]
 
+        trainloader = DataLoader(DatasetSplit(dataset, idxs_train),
+                                 batch_size=self.args.local_bs, shuffle=True)
+        validloader = DataLoader(DatasetSplit(dataset, idxs_val),
+                                 batch_size=int(len(idxs_val)/5), shuffle=False)
+        return trainloader, validloader
     
     def update_weights_validate(self, model, global_round):
         '''
