@@ -92,15 +92,15 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 ##### CNN/IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|iid   | 97.68%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.08  | SGD   | 
-CNN   |FedAVg|iid   | 98.92%     |1000  |1.70hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 98.93%     |1000  |0.76hrs   | T       | 0.1  |1  |50 | 0.10  | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 99.00%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | 
+CNN   |FedSGD|iid   | xxxxx%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.08  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%     |1000  |1.70hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%     |1000  |0.76hrs   | T       | 0.1  |1  |50 | 0.10  | SGD   | 
+CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.2   | SGD   | ... 
+CNN   |FedAVg|iid   | xxxxx%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.1   | SGD   | ...
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%     |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 ##### Remarks
 1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
 2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
