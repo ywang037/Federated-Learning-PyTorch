@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper - Part B-2: grid search of learning rate
+# Work logs and notes on reproducing vanilla FL paper - Part C-2: grid search of learning rate
 
 ### Approach
 * WY's MLP and CNN models is used instead of original models found in AshwinRJ's repository

@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper
+# Work logs and notes on reproducing vanilla FL paper - Part B: Experimental results
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
 #### Torch cnn only (27 April 2021)
@@ -19,6 +19,7 @@ The *torch cnn* trained using η=0.01 with momentum=0.5/0.9 and the *tf cnn* tra
 Most simples way is the **early stopping**, which refers to the heuristic of stopping the training procedure when the error on the validation set first starts to increase. This requires the logging of test losses.
 
 ### II. Baseline MNIST learning with *2NN* and *CNN* models (28 April 2021)
+*NOTE: all the following results are obtained with **non-optimized** learning rate and AshwinRJ's models*
 Both 2NN and CNN from AshwinRJ's repository are trained using vanilla SGD, η=0.01 without momentum, over 200 epochs. No overfitting ocurred, resulting a performance as below:
 
 Model | Test acc | Time     | Batch size | Epochs | Lr     | Optim
@@ -29,14 +30,13 @@ CNN   | 99.09%   | 2014s    | 100        | 200    | 0.01   | vanilla SGD
 Both trianed models might be used for warm start in future training.
 
 ### III. FedAvg MNIST learning with *2NN* and *CNN* models 
-*NOTE: all the following results are obtained with **non-optimized** learning rate*
+*NOTE: all the following results are obtained with **non-optimized** learning rate and AshwinRJ's models*
 #### A. Experiment 1: increase parallism
 * The runs using optimized learning rate will be marked as "0.01-o"
 * H Rnd means the round number where test acc hit the target, i.e, 98% for CNN, 96% for 2NN
 * T Rnd means the total number of performed rounds
 
 ##### CNN/IID
-
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
 CNN   |FedAVg|iid   | 98.22%   |76    |100   |0.07hrs   | A       | 0.0  |5  |10 | 0.01  | SGD   | done
@@ -122,7 +122,7 @@ CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|iid   | 97.68%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.08  | SGD   | done
-CNN   |FedAVg|iid   | xx.xx%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | 98.92%     |1000  |1.70hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.93%     |1000  |0.76hrs   | T       | 0.1  |1  |50 | 0.10  | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | 99.00%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | done

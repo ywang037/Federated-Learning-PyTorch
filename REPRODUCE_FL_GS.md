@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper - Part B: grid search of learning rate
+# Work logs and notes on reproducing vanilla FL paper - Part C: grid search of learning rate
 
 ### Approach
 The grid search conducted below follows the approach described in Part A section III:
