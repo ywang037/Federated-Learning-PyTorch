@@ -132,7 +132,8 @@ if __name__ == '__main__':
             record_path_save = f'./lr-val/{args.dataset}-{args.model}/validation-fedavg-{args.dataset}-{args.model}-r{args.epochs}-le{args.local_ep}-lb{args.local_bs}-fr{args.frac}-lr{args.lr}.csv'
             with open(record_path_save, 'w', newline='') as file:
                 writer = csv.writer(file,delimiter=',')
-                writer.writerow([args.lr, args.dataset, args.model, args.epochs, args.local_ep, args.local_bs, args.frac])
+                writer.writerow(['Dataset', 'Model', 'Num of rounds', 'E', 'B', 'C', 'Lr'])
+                writer.writerow([args.dataset, args.model, args.epochs, args.local_ep, args.local_bs, args.frac, args.lr])
                 writer.writerow(['Epoch', 'Training loss', 'Test loss', 'Test acc'])
                 writer.writerows(export_data)
         
