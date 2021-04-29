@@ -215,7 +215,7 @@ class LocalUpdateVal(object):
                         global_round+1, 
                         iter+1, 
                         batch_idx * len(images),
-                        len(self.trainloader.dataset),
+                        len(self.validloader.dataset),
                         100. * batch_idx / len(self.trainloader), loss.item()))
                 # self.logger.add_scalar('loss', loss.item())
                 batch_loss.append(loss.item())
