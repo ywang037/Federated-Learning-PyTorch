@@ -111,7 +111,7 @@ CNN   |FedAVg|iid   | 98.66% -200 |5.8mins   | T       | 0.1  |1  |50 | 0.2     
 CNN   |FedAVg|iid   | 98.51% -200 |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.xx     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01     | SGD   | 
-CNN   |FedAVg|iid   | 98.61% -200 |28.1mins  | T       | 0.1  |20 |50 | 0.10     | SGD   | fs done
+CNN   |FedAVg|iid   | 98.61% -200 |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01     | SGD   | 
 
