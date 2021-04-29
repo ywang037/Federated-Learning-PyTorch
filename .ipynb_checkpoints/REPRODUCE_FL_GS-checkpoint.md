@@ -26,8 +26,8 @@ Both trianed models might be used for warm start in future training.
 ### III. FedAvg MNIST learning with *2NN* and *CNN* models 
 #### A. Experiment 1: increase parallism
 * Lr/O means the optimized value of learning rate
-* The learning rate found using coarse search will be marked as "0.01-cs"
-* The learning rate found using further finer search will be marked as "0.01-fs"
+* The learning rate found using coarse search will be marked as "done cs"
+* The learning rate found using further finer search will be marked as "done fs"
 
 ##### CNN/IID
 
@@ -93,8 +93,8 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 
 #### B. Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1
-* The runs using optimized learning rate will be marked as "0.01-o"
-* T Rnd means the total number of performed rounds
+* The learning rate found using coarse search will be marked as "done cs"
+* The learning rate found using further finer search will be marked as "done fs"
 
 ##### Remarks
 N/A
@@ -102,8 +102,8 @@ N/A
 ##### CNN/IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
-CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.08-sf  | SGD   | done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.01     | SGD   | 
+CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.08     | SGD   | fs done
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.08-0.1 | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.01     | SGD   | 
