@@ -106,7 +106,7 @@ CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.08  
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.08-0.1 | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.08-0.1 | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01     | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.08-0.1 | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |50 | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01     | SGD   | 
