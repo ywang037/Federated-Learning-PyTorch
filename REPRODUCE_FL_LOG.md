@@ -117,7 +117,7 @@ CNN   |FedAVg|iid   | 96.92%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 
 CNN   |FedAVg|iid   | 98.22%     |1000  |0.61hrs   | T       | 0.1  |1  |50 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | aborted
 CNN   |FedAVg|iid   | 99.00%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 400 rnds sufficient
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | done
