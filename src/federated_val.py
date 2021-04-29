@@ -71,12 +71,7 @@ if __name__ == '__main__':
     # copy weights
     global_weights = global_model.state_dict()
 
-    # Training
-    # train_loss, train_accuracy = [], []
-    # val_acc_list, net_list = [], []
-    # cv_loss, cv_acc = [], []
-    # print_every = 2
-    # val_loss_pre, counter = 0, 0
+    # Validation training
     train_loss, test_loss, test_acc = [], [], []
 
     start_time = time.time()
@@ -93,7 +88,9 @@ if __name__ == '__main__':
         global_model.train()
         for idx in idxs_users:
             local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
-            w, loss = local_model.update_weights(model=copy.deepcopy(global_model), global_round=epoch)
+
+            # work on validation mode
+            w, loss = local_model.update_weights_validate(model=copy.deepcopy(global_model), global_round=epoch)
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
         
@@ -108,27 +105,6 @@ if __name__ == '__main__':
 
         # decay the learning rate
         args.lr *= args.lr_decay
-        
-        '''
-        # but since training dataset is too large for performing test in reasonable time, 
-        # calculating average training acc over participants is abandoned
-        # calculate average training acc over participated clients at each round
-        global_model.eval()
-        list_acc = []
-        for idx in idxs_users:
-            acc, _ = test_inference(args=args, model=global_model, test_dataset=train_dataset)
-            list_acc.append(acc)
-        train_accuracy.append(sum(list_acc)/len(list_acc))
-
-        # Calculate avg training accuracy over all users at every epoch (WY: why??? shouldn't be averaged over participants?)
-        # list_acc, list_loss = [], [] # WY: seems no point to compute training loss shall be computed by list_loss
-        # for c in range(args.num_users):
-        #     local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
-        #     acc, loss = local_model.inference(model=global_model)
-        #     list_acc.append(acc)
-        #     list_loss.append(loss)
-        # train_accuracy.append(sum(list_acc)/len(list_acc))
-        '''
 
         # test per round
         round_test_acc, round_test_loss = test_inference(args, global_model, test_dataset)
@@ -136,33 +112,16 @@ if __name__ == '__main__':
         test_loss.append(np.around(round_test_loss,4))
 
         # show training performance after each round
-        print('\n| Global Round : {:>4}/{} | Training loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
+        print('\n| Global Round : {:>4}/{} | Validation loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
             epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
-        
-        '''
-        # print global training loss after every 'i' rounds
-        if (epoch+1) % print_every == 0:
-            print(f' \nAvg Training Stats after {epoch+1} global rounds:')
-            print(f'Training Loss : {np.mean(np.array(train_loss))}')
-            print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
-        '''
+
 
     logger.flush()
     logger.close()
     
     # print the wall-clock-time used
     end_time=time.time() 
-    print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
-    # print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
-
-    '''
-    # Test inference after completion of training
-    test_acc, test_loss = test_inference(args, global_model, test_dataset)
-    # print training performance after completion    
-    print(f' \n Results after {args.epochs} global rounds of training:')
-    print("|---- Avg Train Accuracy: {:.2f}%".format(100*train_accuracy[-1]))
-    print("|---- Test Accuracy: {:.2f}%".format(100*test_acc))
-    '''
+    print('\nValidation training completed, time elapsed: {:.2f}s'.format(end_time-start_time))
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
@@ -170,9 +129,10 @@ if __name__ == '__main__':
         if args.save_record:
             results = [torch.arange(1,args.epochs+1).tolist(), train_loss, test_loss, test_acc]
             export_data = zip_longest(*results, fillvalue = '')
-            record_path_save = f'./save/{args.dataset}-{args.model}/results-fedavg-{args.dataset}-{args.model}-r{args.epochs}-le{args.local_ep}-lb{args.local_bs}-fr{args.frac}-lr{args.lr}.csv'
+            record_path_save = f'./lr-val/{args.dataset}-{args.model}/validation-fedavg-{args.dataset}-{args.model}-r{args.epochs}-le{args.local_ep}-lb{args.local_bs}-fr{args.frac}-lr{args.lr}.csv'
             with open(record_path_save, 'w', newline='') as file:
                 writer = csv.writer(file,delimiter=',')
+                writer.writerow([args.lr, args.dataset, args.model, args.epochs, args.local_ep, args.local_bs, args.frac])
                 writer.writerow(['Epoch', 'Training loss', 'Test loss', 'Test acc'])
                 writer.writerows(export_data)
         
@@ -182,28 +142,28 @@ if __name__ == '__main__':
         #     pickle.dump([train_loss, test_loss, test_acc], f)
         #     # pickle.dump([train_loss, train_accuracy], f)
 
-    # visualize the training results
-    if args.plot:
-        matplotlib.use('Agg')
-        # Plot Loss curve
-        plt.figure()
-        plt.title('Training Loss vs Communication rounds')
-        plt.plot(range(len(train_loss)), train_loss, color='r')
-        plt.ylabel('Training loss')
-        plt.xlabel('Communication Rounds')
-        plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_loss.png'.
-                    format(args.dataset, args.model, args.epochs, args.frac,
-                        args.iid, args.local_ep, args.local_bs))
+    # # visualize the training results
+    # if args.plot:
+    #     matplotlib.use('Agg')
+    #     # Plot Loss curve
+    #     plt.figure()
+    #     plt.title('Training Loss vs Communication rounds')
+    #     plt.plot(range(len(train_loss)), train_loss, color='r')
+    #     plt.ylabel('Training loss')
+    #     plt.xlabel('Communication Rounds')
+    #     plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_loss.png'.
+    #                 format(args.dataset, args.model, args.epochs, args.frac,
+    #                     args.iid, args.local_ep, args.local_bs))
         
-        # Plot Average Accuracy vs Communication rounds
-        plt.figure()
-        plt.title('Average Accuracy vs Communication rounds')
-        plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
-        plt.ylabel('Average Accuracy')
-        plt.xlabel('Communication Rounds')
-        plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
-                    format(args.dataset, args.model, args.epochs, args.frac,
-                        args.iid, args.local_ep, args.local_bs))
+    #     # Plot Average Accuracy vs Communication rounds
+    #     plt.figure()
+    #     plt.title('Average Accuracy vs Communication rounds')
+    #     plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
+    #     plt.ylabel('Average Accuracy')
+    #     plt.xlabel('Communication Rounds')
+    #     plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
+    #                 format(args.dataset, args.model, args.epochs, args.frac,
+    #                     args.iid, args.local_ep, args.local_bs))
 
     # PLOTTING (optional)
     # import matplotlib
