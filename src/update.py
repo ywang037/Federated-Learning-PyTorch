@@ -176,8 +176,8 @@ class LocalUpdateVal(object):
         This function performs the same training procedure as the function update_weights, 
         but on the validation dataset using validloader instead of trainloader
         '''
-        # print a message to confirm currently runs validation mode
-        print(f'Working on validation dataset of size {len(self.validloader.dataset)}')
+        # # print a message to confirm currently runs validation mode
+        # print(f'Working on validation dataset of size {len(self.validloader.dataset)}')
 
         # Set mode to train model
         model.train()
