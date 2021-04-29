@@ -1,50 +1,73 @@
-# On reproducing the results in classic FL paper
+# Work logs and notes on reproducing vanilla FL paper
 
-### V. Work logs and notes
-#### A. On CIFAR10 learning with *torch cnn* and *tf cnn* model 
-##### Torch cnn only (27 April 2021)
+### I. On CIFAR10 learning with *torch cnn* and *tf cnn* model 
+#### Torch cnn only (27 April 2021)
 For baseline training on CIFAR, it is found that both the *torch cnn* model created by WY and the one in AshwinRJ's repository cannot produce good test accuracy (both leads to final accuracies below 60%) after 100 epochs when a learning rate of 0.1, vanilla SGD, and a batch size of 100 is applied.
 
 For both models, the training loss keeps reduced and then converges around 50 epochs, while the test accuracies first increase (to approximately 63%) then start to decline gradually below 60% (around 58%) only after about 15 epochs.
 
 It looks like the models **are overfitted**.
 
-##### Torch cnn and tf cnn (28 April 2021)
+#### Torch cnn and tf cnn (28 April 2021)
 For the *torch cnn*, a fixed learning rate 0.01 does not show drops in test accuracy as was observed in the previous experiment using lr=0.1, for same epoch number 100, batch size 100 and vanilla SGD. After 100 epochs, the training loss keeps declining and test accuracy converges around 60 epochs to an accuracy about 64%.
 
 However, for learning rate 0.01 combined with momentum 0.5/0.9, the test accuracy starts to slightly drop to around 60% after 60 epochs.
 
 The *torch cnn* trained using η=0.01 with momentum=0.5/0.9 and the *tf cnn* trained using η=0.1 **both exhibits overfitting** after around 60 epochs, i.e., the test accuracy drops.
 
-##### Avoid overfitting by regularization
+#### Avoid overfitting by regularization
 Most simples way is the **early stopping**, which refers to the heuristic of stopping the training procedure when the error on the validation set first starts to increase. This requires the logging of test losses.
 
-#### B. On MNIST learning with *2NN* and *CNN* models 
-##### Baseline training (28 April 2021)
+### II. MNIST learning with *2NN* and *CNN* models 
+#### A. Baseline training (28 April 2021)
 Both 2NN and CNN from AshwinRJ's repository are trained using vanilla SGD, η=0.01 without momentum, over 200 epochs. No overfitting ocurred, resulting a performance as below:
 
-Model | Test acc | Time elapesed | Batch size | Epochs | Learning rate | Optimizer
-------| -------- | ------------- | ---------- | ------ | ------------- | ---------
-2NN   | 97.12%   | 1765s         | 100        | 200    | 0.01          | vanilla SGD 
-CNN   | 99.09%   | 2014s         | 100        | 200    | 0.01          | vanilla SGD 
+Model | Test acc | Time     | Batch size | Epochs | Lr     | Optim
+------| -------- | -------- | ---------- | ------ | ------ | ---------
+2NN   | 97.12%   | 1765s    | 100        | 200    | 0.01   | vanilla SGD 
+CNN   | 99.09%   | 2014s    | 100        | 200    | 0.01   | vanilla SGD 
 
 Both trianed models might be used for warm start in future training.
 
-##### FedAvg training
+#### B. FedAvg training
+##### Experiment I: parallism effects
+* The runs using optimized learning rate will be marked as "0.01-o"
+* H Rnd means the round number where test acc hit the target, i.e, 98% for CNN, 96% for 2NN
+* T Rnd means the total number of performed rounds
 
-##### *Training results*
+##### *Remarks*
+The time taken for C=1.0 is formidable, even for IID cases. So, one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
-Model | Test acc   | Time elapsed  | Machine | Frac | Local B | Local E | Learning rate | Optimizer
-------| --------   | ------------  |-------- | -----| ------- | ------  | ------------- | ---------
-2NN   | 129.12s    | 3.6hrs        | Acer    | 1.0  | 10      | 5       | 0.01          | SGD 
+Model |Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | -----
+CNN   |M-iid | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD 
 
+
+Model |Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------| -------- |----- |----- |--------  |-------- | -----| - | - | ----- | -----
+2NN   |M-iid |          |      |      |hrs       |         |      |   |   | 0.01  | SGD 
+
+##### Experiment II: local computation effects
+* The runs using optimized learning rate will be marked as "0.01-o"
+* T Rnd means the total number of performed rounds
+
+Model |Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
+CNN   |M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD
+
+Model |Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
+2NN   |M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD 
+
+
+##### Training time summary
+* The runs using optimized learning rate will be marked as "0.01-o"
+
+Model | Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
+------|------|-------- | --------------  |-------- |-----|---|---| ----- | ---------
+CNN   |M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
+CNN   |M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD 
+CNN   |M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
+CNN   |M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
 
 It seems that FedAvg for the IID data is **very slow** even with GPU, not to mention the non-IID cases.
-##### *Training time records*
-
-Model | Time/round | 100-round time  | Machine | Frac | Local B | Local E | Learning rate | Optimizer
-------| --------   | --------------  |-------- | -----| ------- | ------  | ------------- | ---------
-CNN   | 129.12s    | 3.6hrs          | Acer    | 1.0  | 10      | 5       | 0.01          | SGD 
-CNN   | 39.4  s    | 1.1hrs          | Acer    | 0.1  | 10      | 20      | 0.01          | SGD 
-CNN   | 42.34s     | 1.2hrs          | Think   | 0.1  | 10      | 20      | 0.01          | SGD
-CNN   | 2.2s       | 3.7mins/0.06hrs | Think   | 0.1  | ∞       | 1       | 0.01          | SGD
