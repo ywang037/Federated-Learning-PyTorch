@@ -36,7 +36,8 @@ Both trianed models might be used for warm start in future training.
 * T Rnd means the total number of performed rounds
 
 ##### *Remarks*
-The time taken for C=1.0 is formidable, even for IID cases. So, one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
+1. Set 96%, 98% as targets for CNN, 2NN is to avoid the needed rounds from being too large to complete in time.
+2. The time taken for C=1.0 is formidable, even for IID cases. So, one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
 Model |Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
 ------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | -----
