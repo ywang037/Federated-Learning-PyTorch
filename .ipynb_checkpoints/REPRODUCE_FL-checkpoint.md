@@ -79,6 +79,14 @@ Both trianed models might be used for warm start in future training.
 ##### FedAvg training (28 April 2021)
 It seems that using FedAvg on MNIST is **very slow** even with GPU: client fraction C=0.1, local epoch E=20, local batch size B=10, learning rate η=0.01 (vanilla SGD without momentum) leads to a training speed of **~40s per round, 10 rounds took 394s**.
 
+##### *Training time overhead*
+
+Model | Time/round | Machine | Frac | Local B | Local E | Learning rate | Optimizer
+------| --------   |-------- | -----| ------- | ------  | ------------- | ---------
+CNN   | 129.12s    | Acer    | 1.0  | 10      | 5       | 0.01          | vanilla SGD 
+CNN   | 42.34s     | Think   | 0.1  | 10      | 20      | 0.01          | vanilla SGD
+CNN   | 2.2s       | Think   | 0.1  | ∞       | 1       | 0.01          | vanilla SGD
+
 #### C. On the optimized learning rate
 ##### How the vanilla FL paper did
 It seems that, in the vanilla FL paper, for each set of parameter combination, the resulted learning curve shown in the figures or entry in the tables are obtained by optimizing the learning rate such that the best value of test-set accuracy was obtained. As they wrote:
