@@ -42,7 +42,7 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | ing
+CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
@@ -59,7 +59,7 @@ CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |�
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
-CNN   |FedAVg|N-iid | XXXX%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
@@ -113,9 +113,9 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|iid   | 91.99%     |1000  |0.56hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | 96.92%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | done
+CNN   |FedAVg|iid   | 98.22%     |1000  |0.61hrs   | T       | 0.1  |1  |50 | 0.01  | SGD   | done
+CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | ...
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
@@ -126,7 +126,7 @@ CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|N-iid | 91.99%     |1000  |0.56hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD   | done
-CNN   |FedAVg|N-iid | 96.92%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | done
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
@@ -169,8 +169,10 @@ Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    
 CNN   |FedSGD|M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
 CNN   |FedAVg|M-iid | 5.6s    | 9.3mins/0.16hrs | T       |0.1  |5  | ∞ | 0.01  | SGD
 CNN   |FedAvg|M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
-CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD 
+CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD
+CNN   |FedAvg|M-iid | 25.2s   | 42mins/0.7hrs   | A       |0.2  |5  |10 | 0.01  | SGD
 CNN   |FedAvg|M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
+CNN   |FedAvg|M-iid | 2.2s    | 3.6mins/0.06hrs | T       |0.1  |1  |50 | 0.01  | SGD
 
 
 It seems that FedAvg for the IID data is **very slow** even with GPU, not to mention the non-IID cases.
