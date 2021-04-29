@@ -1,10 +1,14 @@
 # Work logs and notes on reproducing vanilla FL paper - Part C-2: grid search of learning rate
 
-### Approach
+### Approach (fundamental principle)
 * WY's MLP and CNN models is used instead of original models found in AshwinRJ's repository
 * The grid search conducted below follows the approach described in Part A section III:
     1. Coarse search using a bigger resolution, a factor of 10 or 0.1, say, start from 1e-5, then 1e-4, 1e-3, 1e-2, 1e-1, and 1.0,
     2. Finer search using a smaller resolution, factor-2, i.e., {2, 4, 8}, between two best values found in the previous coarse search.
+
+### Approach (update)
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}
+* Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
 #### Torch cnn only (27 April 2021)
@@ -101,13 +105,13 @@ N/A
 ##### CNN/IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
-CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.08     | SGD   | fs done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.08-0.1 | SGD   | fs done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.08-0.1 | SGD   | fs done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01     | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.08-0.1 | SGD   | fs done
+CNN   |FedSGD|iid   | 98.53% -200 |5.5mins   | T       | 0.1  |1  |∞  | 0.15     | SGD   | fs done
+CNN   |FedAVg|iid   | 98.68% -200 |10.3mins  | T       | 0.1  |5  |∞  | 0.08     | SGD   | fs done
+CNN   |FedAVg|iid   | 98.66% -200 |5.8mins   | T       | 0.1  |1  |50 | 0.2      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.51% -200 |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.xx     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01     | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |50 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | 98.61% -200 |28.1mins  | T       | 0.1  |20 |50 | 0.10     | SGD   | fs done
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01     | SGD   | 
 CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01     | SGD   | 
 
@@ -161,6 +165,3 @@ CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  
 CNN   |FedAvg|M-iid | 25.2s   | 42mins/0.7hrs   | A       |0.2  |5  |10 | 0.01  | SGD
 CNN   |FedAvg|M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
 CNN   |FedAvg|M-iid | 2.2s    | 3.6mins/0.06hrs | T       |0.1  |1  |50 | 0.01  | SGD
-
-
-It seems that FedAvg for the IID data is **very slow** even with GPU, not to mention the non-IID cases.
