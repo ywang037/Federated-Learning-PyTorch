@@ -29,10 +29,29 @@ class LocalUpdate(object):
         self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
         self.trainloader = DataLoader(DatasetSplit(dataset, idxs), batch_size=self.args.local_bs, shuffle=True)
+        self.validloader = self.train_val(dataset, list(idxs))
         # self.criterion = nn.CrossEntropyLoss().to(self.device)
         # # Default criterion set to NLL loss function (WY: WHY???)
         # self.criterion = nn.NLLLoss().to(self.device)
         # self.trainloader, self.validloader, self.testloader = self.train_val_test(dataset, list(idxs))
+        
+    
+    
+    def train_val(self, dataset, idxs):
+        """
+        This function is only used to build a validation dataset for doing grid searches of learning rate.
+        Returns train, validation and test dataloaders for a given dataset and user indexes.
+        """
+        # split indexes for train, validation (80, 20)
+        idxs_train = idxs[:int(0.8*len(idxs))]
+        idxs_val = idxs[int(0.8*len(idxs)):]
+
+        trainloader = DataLoader(DatasetSplit(dataset, idxs_train),
+                                 batch_size=self.args.local_bs, shuffle=True)
+        validloader = DataLoader(DatasetSplit(dataset, idxs_val),
+                                 batch_size=int(len(idxs_val)/5), shuffle=False)
+        return trainloader, validloader, testloader
+
 
     '''
     # WY's comment: 
@@ -142,6 +161,60 @@ class LocalUpdate(object):
         accuracy = correct/total
         return accuracy, loss/total
     '''
+
+    
+    def update_weights_validate(self, model, global_round):
+        '''
+        This function is used only for doing grid searches of learning rate.
+        This function performs the same training procedure as the function update_weights, 
+        but on the validation dataset using validloader instead of trainloader
+        '''
+        # print a message to confirm currently runs validation mode
+        print(f'Working on validation dataset of size {len(self.validloader.dataset)}')
+
+        # Set mode to train model
+        model.train()
+        epoch_loss = []
+
+        # Below is WY'es edition for optimizer setup
+        if self.args.optimizer == 'sgd':
+            if self.args.nag:
+                # nesterov momentum sgd
+                optimizer = torch.optim.SGD(model.parameters(), 
+                                            lr=self.args.lr, 
+                                            momentum=self.args.momentum, 
+                                            nesterov=True) 
+            else:
+                # vanilla or momentum accelerated sgd
+                optimizer = torch.optim.SGD(model.parameters(), 
+                                            lr=self.args.lr, 
+                                            momentum=self.args.momentum) 
+        elif self.args.optimizer == 'adam':
+            optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lr, weight_decay=1e-4) # adam
+
+        for iter in range(self.args.local_ep):
+            batch_loss = []
+            for batch_idx, (images, labels) in enumerate(self.validloader):
+                images, labels = images.to(self.device), labels.to(self.device)
+
+                model.zero_grad()
+                log_probs = model(images)
+                loss = self.criterion(log_probs, labels)
+                loss.backward()
+                optimizer.step()
+
+                if self.args.verbose and (batch_idx % 10 == 0):
+                    print('| Global Round : {} | Local Epoch : {} | [{}/{} ({:>2.0f}%)]\tLoss: {:.6f}'.format(
+                        global_round+1, 
+                        iter+1, 
+                        batch_idx * len(images),
+                        len(self.trainloader.dataset),
+                        100. * batch_idx / len(self.trainloader), loss.item()))
+                # self.logger.add_scalar('loss', loss.item())
+                batch_loss.append(loss.item())
+            epoch_loss.append(sum(batch_loss)/len(batch_loss))
+
+        return model.state_dict(), sum(epoch_loss) / len(epoch_loss)    
 
 def test_inference(args, model, test_dataset):
     """ Returns the test accuracy and loss.
