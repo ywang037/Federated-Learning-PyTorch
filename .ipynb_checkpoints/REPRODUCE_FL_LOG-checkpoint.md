@@ -44,7 +44,7 @@ CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10
 CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%    |52    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | xxxx%    |xx    |x00   |   mins   | A       | 0.0  |5  |∞  | 0.01  | SGD   | done
+CNN   |FedAVg|iid   | 96.91%   |xx    |1000  |0.52hrs   | A       | 0.0  |5  |∞  | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
@@ -116,7 +116,7 @@ CNN   |FedSGD|iid   | 91.99%     |1000  |0.56hrs   | T       | 0.1  |1  |∞  | 
 CNN   |FedAVg|iid   | 96.92%     |1000  |1.55hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.22%     |1000  |0.61hrs   | T       | 0.1  |1  |50 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | aborted
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | 99.00%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
