@@ -170,7 +170,8 @@ if __name__ == '__main__':
         if args.save_record:
             results = [torch.arange(1,args.epochs+1).tolist(), train_loss, test_loss, test_acc]
             export_data = zip_longest(*results, fillvalue = '')
-            with open('./save/results-fedavg.csv', 'w', newline='') as file:
+            record_path_save = f'./save/{args.dataset}-{args.model}/results-fedavg-{args.dataset}-{args.model}-ep{args.epochs}-bs{args.bs}-lr{args.lr}.csv'
+            with open(record_path_save, 'w', newline='') as file:
                 writer = csv.writer(file,delimiter=',')
                 writer.writerow(['Epoch', 'Training loss', 'Test loss', 'Test acc'])
                 writer.writerows(export_data)
