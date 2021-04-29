@@ -39,7 +39,7 @@ Both trianed models might be used for warm start in future training.
 
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | 98.22%   |76    |100   |0.07hrs   | A       | 0.0  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | done
