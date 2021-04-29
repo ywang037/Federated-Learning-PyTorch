@@ -100,17 +100,17 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 N/A
 
 ##### CNN/IID
-Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
+Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
+------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
+CNN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.08-sf  | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |50 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01     | SGD   | 
 
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
