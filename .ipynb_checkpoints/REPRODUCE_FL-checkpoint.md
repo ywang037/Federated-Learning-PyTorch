@@ -1,4 +1,4 @@
-# On reproducing the results in classic FL paper
+# On reproducing the results in classic FL paper - Part A: General notes
 
 ### I. Off-the-shelf code
 For the vanilla federated learning paper *Communication-Efficient Learning of Deep Networks from Decentralized Data*, there is only few open-source code implementation:

@@ -43,7 +43,7 @@ CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10
 CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | done
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | 98.6%    |52    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   | done
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
@@ -125,7 +125,7 @@ CNN   |FedAVg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.
 ##### CNN/non-IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|N-iid | 91.99%     |1000  |0.56hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD   | done
+CNN   |FedSGD|N-iid | %          |xxxx  |    hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
