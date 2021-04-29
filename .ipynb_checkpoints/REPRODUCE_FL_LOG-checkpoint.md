@@ -40,36 +40,47 @@ Both trianed models might be used for warm start in future training.
 2. For non-IID cases, one may need to use an even lower target to avoid too long running time.
 3. The time taken for C=1.0 is formidable, even for IID cases. So, one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
-Model |Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
-------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | -----
-CNN   |M-iid | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD 
+Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | -----
+CNN   |FedAVg|M-iid | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD 
+CNN   |FedAVg|M-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD 
 
 
-Model |Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
-------|------| -------- |----- |----- |--------  |-------- | -----| - | - | ----- | -----
-2NN   |M-iid |          |      |      |hrs       |         |      |   |   | 0.01  | SGD 
+Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | -----
+2NN   |FedAVg|M-iid |          |      |      |hrs       |         |      |   |   | 0.01  | SGD 
 
 ##### Experiment II: local computation effects
+* The fraction number is fixed at C=0.1
 * The runs using optimized learning rate will be marked as "0.01-o"
 * T Rnd means the total number of performed rounds
 
-Model |Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
-------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
-CNN   |M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD
+##### *Remarks*
+1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
+2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
 
-Model |Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
-------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
-2NN   |M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD 
+Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
+CNN   |FedSGD|M-iid | 91.99%     |1000  |0.56hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD
+CNN   |FedAVg|M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD
+
+
+Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim
+------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ---------
+2NN   |FedSGD|M-iid | %          |      |   hrs    | T       | 0.1  |1  |∞  | 0.01  | SGD 
+2NN   |FedAvg|M-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD 
 
 
 ##### Training time summary
 * The runs using optimized learning rate will be marked as "0.01-o"
 
-Model | Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
-------|------|-------- | --------------  |-------- |-----|---|---| ----- | ---------
-CNN   |M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
-CNN   |M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD 
-CNN   |M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
-CNN   |M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
+Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
+------|------|------|-------- | --------------  |-------- |-----|---|---| ----- | ---------
+CNN   |FedSGD|M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
+CNN   |FedSGD|M-iid | ~6.0s   | mins/       hrs | T       |0.1  |5  | ∞ | 0.01  | SGD
+CNN   |FedAvg|M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
+CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD 
+CNN   |FedAvg|M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
+
 
 It seems that FedAvg for the IID data is **very slow** even with GPU, not to mention the non-IID cases.
