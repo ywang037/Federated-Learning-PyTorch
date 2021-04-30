@@ -129,7 +129,8 @@ if __name__ == '__main__':
     
     # print the wall-clock-time used
     end_time=time.time() 
-    print('\nValidation training completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s'.format(100*max(test_acc),end_time-start_time))
+    time_elapsed = end_time-start_time
+    print('\nValidation training completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f})hrs'.format(100*max(test_acc),time_elapsed,time_elapsed/3600))
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
