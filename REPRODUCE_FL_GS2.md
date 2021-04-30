@@ -5,6 +5,8 @@
 * The grid search conducted below follows the approach described in Part A section III:
     1. Coarse search using a bigger resolution, a factor of 10 or 0.1, say, start from 1e-5, then 1e-4, 1e-3, 1e-2, 1e-1, and 1.0,
     2. Finer search using a smaller resolution, factor-2, i.e., {2, 4, 8}, between two best values found in the previous coarse search.
+* **CAUTION** To decide the optimized learning rate, the vanilla paper took the best values achieved in all prior rounds:
+> optimizing η as described above and then making each curve monotonically improving by taking the best value of test-set accuracy achieved over all prior rounds
 
 ### Approach for IID data
 * Initial coarse searches in a grid {1e-4, 1e-3, 1e-2, 1e-1, 1.0}, best values were found around 1e-2 and 1e-1.
@@ -71,7 +73,7 @@ N/A
     1. 0.01 ties with 0.02, then take 0.02, since the validation loss of 0.02 decreases more smoothly.
     2. 0.02 ties with 0.04, then take 0.02, since 0.04 are closer to instability zone. 
     3. 0.01 ties with 0.04, then take 0.04, since the validation loss of 0.02 decreases more smoothly.
-* Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.02 over 0.04
+* Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.04 over 0.06
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
@@ -142,7 +144,7 @@ CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?    
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|N-iid | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | run on T
+CNN   |FedSGD|N-iid | 97.17%      |0.20      | T       | 0.1  |1  |∞  | 0.04  | SGD   | done
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
