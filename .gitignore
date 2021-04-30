@@ -5,17 +5,10 @@ backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_acc-checkpoin
 logs/events.out.tfevents.1619622536.LAPTOP-H2HF5C5C
 *.ERIAN-NB077A
 *.LAPTOP-H2HF5C5C
-*.pyc
-*.pyc
-*.pyc
-*.pyc
-src/__pycache__/models.cpython-38.pyc
-src/__pycache__/options.cpython-38.pyc
-src/__pycache__/models.cpython-38.pyc
-src/__pycache__/options.cpython-38.pyc
-src/__pycache__/sampling.cpython-38.pyc
-src/__pycache__/utils.cpython-38.pyc
-*.pyc
-*.pyc
-*.pyc
+
 src/__pycache__/
+*.pyc
+
+# Notebook Checkpoints
+.ipynb_checkpoints/
+src/ipynb_checkpoints/
