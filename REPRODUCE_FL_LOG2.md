@@ -95,10 +95,10 @@ Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr
 CNN   |FedSGD|iid   | xxxxx%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.08  | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |1.70hrs   | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |0.76hrs   | T       | 0.1  |1  |50 | 0.10  | SGD   | 
-CNN   |FedAVg|iid   | 99.28%     |1000  |6.04hrs   | T       | 0.1  |20 |∞  | 0.2   | SGD   | done 
+CNN   |FedAVg|iid   | 99.29%     |1000  |6.04hrs   | T       | 0.1  |20 |∞  | 0.2   | SGD   | done 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.1   | SGD   | ...
+CNN   |FedAVg|iid   | 98.95%     |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1   | SGD   | done
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 ##### Remarks
