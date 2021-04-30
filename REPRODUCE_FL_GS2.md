@@ -7,7 +7,8 @@
     2. Finer search using a smaller resolution, factor-2, i.e., {2, 4, 8}, between two best values found in the previous coarse search.
 
 ### Approach (update)
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}.
+* Firstly search in {0.08, 0.1, 0.2}
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
@@ -38,7 +39,7 @@ Both trianed models might be used for warm start in future training.
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | xxxxx%       |xxxxhrs   | A       | 0.0  |5  |10 | xxxx  | SGD   | run on A
+CNN   |FedAVg|iid   | 98.41%       |0.09hrs   | A       | 0.0  |5  |10 | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | xxxx%        |3.6hrs    | A       | 1.0  |5  |10 | xxxx  | SGD   | cancelled
 CNN   |FedAVg|iid   | 98.49%       |0.56hrs   | A       | 0.5  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   | SGD   | fs done
