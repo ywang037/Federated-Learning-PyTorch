@@ -149,7 +149,7 @@ CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?    
     
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O       | Optim | Status
 ------|------|------| --------     |--------  |-------- | -----|---|---| -----      | ------| -----
-CNN   |FedSGD|N-iid | 97.17%       |0.20      | T       | 0.1  |1  |∞  | 0.04       | SGD   | fs done
+CNN   |FedSGD|N-iid | 97.17%       |0.20hrs   | T       | 0.1  |1  |∞  | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.94%/96.04%|0.35hrs   | A       | 0.1  |5  |∞  | 0.04/0.02  | SGD   | fs done
 CNN   |FedAVg|N-iid | 97.15%       |0.19hrs   | T       | 0.1  |1  |50 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.96%       |0.93hrs   | T       | 0.1  |20 |∞  | 0.04       | SGD   | fs done
@@ -157,7 +157,7 @@ CNN   |FedAVg|N-iid | 96.67%       |0.20hrs   | T       | 0.1  |1  |10 | 0.04   
 CNN   |FedAVg|N-iid | 97.04%       |0.35hrs   | A       | 0.1  |5  |50 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | %            |hrs       | T       | 0.1  |20 |50 | 0.01       | SGD   | run on T
 CNN   |FedAVg|N-iid | 96.52%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04       | SGD   | fs done
-CNN   |FedAVg|N-iid | %            |hrs       | T       | 0.1  |20 |10 | 0.01       | SGD   | 
+CNN   |FedAVg|N-iid | %            |hrs       | T       | 0.1  |20 |10 | 0.01       | SGD   | run on A
 ##### Remarks
 1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
 
