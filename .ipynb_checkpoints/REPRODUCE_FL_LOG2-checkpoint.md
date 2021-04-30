@@ -23,7 +23,7 @@ CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD
 ##### CNN/IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | 98.22%   |76    |100   |0.07hrs   | A       | 0.0  |5  |10 | 0.08/o| SGD   | 2B on T
+CNN   |FedAVg|iid   | 98.22%   |76    |100   |0.07hrs   | A       | 0.0  |5  |10 | 0.08/o| SGD   | 
 CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
@@ -94,11 +94,11 @@ Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|iid   | xxxxx%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.15/o| SGD   | 2B on T
 CNN   |FedAVg|iid   | xxxxx%     |1000  |1.70hrs   | T       | 0.1  |5  |∞  | 0.08/o| SGD   | 
-CNN   |FedAVg|iid   | xxxxx%     |1000  |0.76hrs   | T       | 0.1  |1  |50 | 0.2/o | SGD   | 2B on T
-CNN   |FedAVg|iid   | 99.29%     |1000  |6.04hrs   | T       | 0.1  |20 |∞  | 0.2/o | SGD   | done 
+CNN   |FedAVg|iid   | 99.21%     |1000  |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o | SGD   | Done
+CNN   |FedAVg|iid   | xxxxx%     |1000  |xxxxhrs   | T       | 0.1  |20 |∞  | 0.2/o | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.2/o | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.2/o | SGD   | 
-CNN   |FedAVg|iid   | 98.95%     |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o | SGD   | done
+CNN   |FedAVg|iid   | XXXXX%     |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.2/o | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 ##### Remarks
