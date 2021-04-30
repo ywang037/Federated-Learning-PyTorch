@@ -71,14 +71,15 @@ N/A
     1. 0.01 ties with 0.02, then take 0.02, since the validation loss of 0.02 decreases more smoothly.
     2. 0.02 ties with 0.04, then take 0.02, since 0.04 are closer to instability zone. 
     3. 0.01 ties with 0.04, then take 0.04, since the validation loss of 0.02 decreases more smoothly.
+* Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.02 over 0.04
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
 CNN   |FedAVg|N-iid | 95.44%       |0.18hrs   | A       | 0.0  |5  |10 | 0.02? | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.06  | SGD   | fs done
-CNN   |FedAVg|N-iid | 96.90%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04? | SGD   | fs done
+CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.90%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   | 2B run on A
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
