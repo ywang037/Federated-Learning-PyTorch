@@ -11,7 +11,7 @@
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### Approach for Non-IID data
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.005, 0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008 can be checked additionaly.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.005, 0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008, 0.06 can be checked additionaly.
 * It was observed that 0.02 are most likely to be the best learning rate for non-IID cases.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
@@ -72,10 +72,10 @@ N/A
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|N-iid | 95.44%       |0.18hrs   | A       | 0.0  |5  |10 | 0.02  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
+CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04? | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
@@ -97,7 +97,7 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
 
-##### CNN/non-IID
+##### 2NN/non-IID
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
 2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
@@ -134,7 +134,7 @@ CNN   |FedAVg|iid   | 98.51%      |5.8mins   | T       | 0.1  |1  |10 | 0.2     
 CNN   |FedAVg|iid   | 98.48%      |10.5mins  | T       | 0.1  |5  |50 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.61%      |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.50%      |10.5mins  | T       | 0.1  |5  |10 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?     | SGD   | run on T
+CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?     | SGD   | fs done
 
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
