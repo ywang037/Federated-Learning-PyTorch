@@ -68,12 +68,12 @@ N/A
 
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
-* If the test acc at final round differs little, then check the final 20 rounds and choose the one with higher average value.
-* If two lr ties in test acc, 
-    1. 0.01 ties with 0.02, then take 0.02, since the validation loss of 0.02 decreases more smoothly.
-    2. 0.02 ties with 0.04, then take 0.02, since 0.04 are closer to instability zone. 
-    3. 0.01 ties with 0.04, then take 0.04, since the validation loss of 0.02 decreases more smoothly.
-* Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.04 over 0.06
+* Compare the highest test acc achieved in all rounds.
+    1. If two lr ties or differs little in test acc, take the one with smoother test loss and test acc curves.
+    2. If the lr achieve higher maximum test acc, but the test loss and test acc curves exhibits high instablity, then take the one with 2nd highes maximum test acc. 
+
+
+*Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.04 over 0.06*.
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
