@@ -6,7 +6,11 @@
     1. Coarse search using a bigger resolution, a factor of 10 or 0.1, say, start from 1e-5, then 1e-4, 1e-3, 1e-2, 1e-1, and 1.0,
     2. Finer search using a smaller resolution, factor-2, i.e., {2, 4, 8}, between two best values found in the previous coarse search.
 
-### Approach (update)
+### Approach for IID data
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}, and try to search in {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate.
+* Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
+
+### Approach for Non-IID data
 * It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}, and try to search in {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate.
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
