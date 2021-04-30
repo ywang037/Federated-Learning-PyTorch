@@ -36,7 +36,7 @@ Both trianed models might be used for warm start in future training.
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | 98.57% -200  |9.9mins   | A       | 0.0  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | xxxx%        |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
 CNN   |FedAVg|iid   | xxxx%        |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|iid   | xxxx%        |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
