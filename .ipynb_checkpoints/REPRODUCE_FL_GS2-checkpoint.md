@@ -87,6 +87,9 @@ CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01 
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   | 2B run on A
 CNN   |FedAVg|N-iid | 96.76%       |0.35hrs   | A       | 0.1  |5  |∞  | 0.04  | SGD   | fs done
+##### Remarks
+1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
+
 
 ##### 2NN/IID
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
@@ -123,9 +126,6 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
 
-##### Remarks
-N/A
-
 ##### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
 
@@ -142,6 +142,11 @@ CNN   |FedAVg|iid   | 98.50%      |10.5mins  | T       | 0.1  |5  |10 | 0.2     
 CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?     | SGD   | fs done
 
 ##### CNN/non-IID
+* Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
+* Compare the highest test acc achieved in all rounds.
+    1. If two lr ties or differs little in test acc, take the one with smoother test loss and test acc curves.
+    2. If the lr achieve higher maximum test acc, but the test loss and test acc curves exhibits high instablity, then take the one with 2nd highes maximum test acc. 
+    
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|N-iid | 97.17%      |0.20      | T       | 0.1  |1  |∞  | 0.04  | SGD   | done
@@ -153,6 +158,9 @@ CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |50 | 0.01  | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
+##### Remarks
+1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
+
 
 ##### 2NN/IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
