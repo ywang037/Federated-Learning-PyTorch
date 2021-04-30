@@ -38,7 +38,7 @@ Both trianed models might be used for warm start in future training.
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | xxxxx%       |xxxxhrs   | A       | 0.0  |5  |10 | 0.08  | SGD   | fs done
+CNN   |FedAVg|iid   | xxxxx%       |xxxxhrs   | A       | 0.0  |5  |10 | xxxx  | SGD   | run on A
 CNN   |FedAVg|iid   | xxxx%        |3.6hrs    | A       | 1.0  |5  |10 | xxxx  | SGD   | cancelled
 CNN   |FedAVg|iid   | 98.49%       |0.56hrs   | A       | 0.5  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   | SGD   | fs done
@@ -107,7 +107,7 @@ N/A
 ##### CNN/IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
-CNN   |FedSGD|iid   | 98.53% -200 |5.5mins   | T       | 0.1  |1  |∞  | 0.15     | SGD   | fs done
+CNN   |FedSGD|iid   | 98.53% -200 |5.5mins   | T       | 0.1  |1  |∞  | 0.15     | SGD   | ???
 CNN   |FedAVg|iid   | 98.68% -200 |10.3mins  | T       | 0.1  |5  |∞  | 0.08     | SGD   | fs done
 CNN   |FedAVg|iid   | 98.66% -200 |5.8mins   | T       | 0.1  |1  |50 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.51% -200 |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
