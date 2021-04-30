@@ -44,9 +44,9 @@ if __name__ == '__main__':
     # BUILD MODEL
     if args.model == 'cnn':  # Convolutional neural netork
         if args.dataset == 'mnist':
-            global_model = CNNMnist() # use WY's edition, no args are needed
-            global_model = CNNMnistWy() # use WY's cnn for learning mnist
             # global_model = CNNMnist(args=args)
+            # global_model = CNNMnist() # use WY's edition, no args are needed
+            global_model = CNNMnistWy() # use WY's cnn for learning mnist            
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
