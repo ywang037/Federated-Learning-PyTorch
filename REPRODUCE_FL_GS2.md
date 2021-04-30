@@ -53,9 +53,9 @@ CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   |
 CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.36%       |0.09hrs   | A       | 0.0  |5  |∞  | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | %            |xxxhrs    | A       | 1.0  |5  |∞  |       | SGD   | cancelled
-CNN   |FedAVg|iid   | 98.46%       |0.95hrs   | A       | 0.5  |5  |∞  | 0.1   | SGD   | done
+CNN   |FedAVg|iid   | 98.46%       |0.95hrs   | A       | 0.5  |5  |∞  | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | 98.61%       |0.27hrs   | A       | 0.2  |5  |∞  | 0.2   | SGD   | fs done
-CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2   | SGD   | done
+CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2   | SGD   | fs done
 
 ##### Remarks
 N/A
@@ -123,7 +123,7 @@ CNN   |FedAVg|iid   | 98.51% -200 |5.8mins   | T       | 0.1  |1  |10 | 0.2     
 CNN   |FedAVg|iid   | 98.48% -200 |10.5mins  | T       | 0.1  |5  |50 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.61% -200 |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.50% -200 |10.5mins  | T       | 0.1  |5  |10 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01     | SGD   | 
+CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 |          | SGD   | run on T
 
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
