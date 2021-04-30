@@ -32,6 +32,7 @@ Both trianed models might be used for warm start in future training.
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
+* If the test acc at final round differs little, then check the final 10 rounds and choose the one with higher average value.
 * If two lr ties in test acc, 
     1. 0.08 ties with 0.1, then take 0.1, to use larger ones for quicker convergence hopefully 
     2. 0.1 ties with 0.2, then take 0.1, to use smaller ones for better stability hopeflly 
