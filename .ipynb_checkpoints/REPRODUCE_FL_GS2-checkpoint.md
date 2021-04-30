@@ -8,12 +8,12 @@
 
 ### Approach for IID data
 * Initial coarse searches in a grid {1e-4, 1e-3, 1e-2, 1e-1, 1.0}, best values were found around 1e-2 and 1e-1.
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.04, 0.08, 0.1, 0.16, 0.2}. Therefore, one can reduce the search range to {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate. 0.16 can be checked additionaly.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.08, 0.1, 0.16, 0.2}. Therefore, one can reduce the search range to {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate. 0.16 can be checked additionaly.
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### Approach for Non-IID data
 * Initial coarse searches in a grid {1e-5, 1e-4, 1e-3, 1e-2, 1e-1}, best values were found around 1e-3 and 1e-2
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.005, 0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008, 0.06 can be checked additionaly.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008, 0.06 can be checked additionaly.
 * It was observed that 0.02 are most likely to be the best learning rate for non-IID cases.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
@@ -71,14 +71,15 @@ N/A
     1. 0.01 ties with 0.02, then take 0.02, since the validation loss of 0.02 decreases more smoothly.
     2. 0.02 ties with 0.04, then take 0.02, since 0.04 are closer to instability zone. 
     3. 0.01 ties with 0.04, then take 0.04, since the validation loss of 0.02 decreases more smoothly.
+* Watch out the "FAKE NEWS": in {0.02, 0.04, 0.06}, larger lr may give better final stage test acc, but is also more likely to present instability. If the difference between test acc is not significant, then it could be safer to use smaller ones, e.g., 0.02 over 0.04
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | 95.44%       |0.18hrs   | A       | 0.0  |5  |10 | 0.02  | SGD   | fs done
+CNN   |FedAVg|N-iid | 95.44%       |0.18hrs   | A       | 0.0  |5  |10 | 0.02? | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04? | SGD   | fs done
-CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   | run on A
+CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.90%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   | 2B run on A
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
@@ -141,7 +142,7 @@ CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?    
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|N-iid | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
+CNN   |FedSGD|N-iid | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | run on T
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
