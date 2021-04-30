@@ -147,9 +147,10 @@ class LocalUpdateVal(object):
     This class is duplicated from the class LocalUpdate defined above, 
     the only difference is that this class is used for validation training only
     '''
-    def __init__(self, args, dataset, idxs, logger):
-        self.args = args
-        self.logger = logger
+    # def __init__(self, args, dataset, idxs, logger):
+    #     self.logger = logger
+    def __init__(self, args, dataset, idxs):
+        self.args = args        
         self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
         _, self.validloader = self.train_val(dataset, list(idxs))
