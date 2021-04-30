@@ -7,12 +7,12 @@
     2. Finer search using a smaller resolution, factor-2, i.e., {2, 4, 8}, between two best values found in the previous coarse search.
 
 ### Approach for IID data
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}, and try to search in {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.04, 0.08, 0.1, 0.16, 0.2}. Therefore, one can reduce the search range to {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate. 0.16 can be checked additionaly.
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### Approach for Non-IID data
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}, and try to search in {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate.
-* Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.005, 0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008 can be checked additionaly.
+* It was observed that 0.02 are most likely to be the best learning rate for non-IID cases.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
 #### Torch cnn only (27 April 2021)
@@ -35,14 +35,16 @@ Both trianed models might be used for warm start in future training.
 * Lr/O means the optimized value of learning rate
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
+
+
+
+##### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
 * If the test acc at final round differs little, then check the final 10 rounds and choose the one with higher average value.
 * If two lr ties in test acc, 
     1. 0.08 ties with 0.1, then take 0.1, to use larger ones for quicker convergence hopefully 
     2. 0.1 ties with 0.2, then take 0.1, to use smaller ones for better stability hopeflly 
     3. 0.08 ties with 0.2, then take 0.08, to use smaller ones for better stability hopeflly 
-
-##### CNN/IID
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
@@ -53,14 +55,21 @@ CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   |
 CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.36%       |0.09hrs   | A       | 0.0  |5  |∞  | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | %            |xxxhrs    | A       | 1.0  |5  |∞  |       | SGD   | cancelled
-CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   | run on T
+CNN   |FedAVg|iid   | 98.46%       |0.95hrs   | A       | 0.5  |5  |∞  | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | 98.61%       |0.27hrs   | A       | 0.2  |5  |∞  | 0.2   | SGD   | fs done
-CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2   | SGD   | done
+CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2   | SGD   | fs done
 
 ##### Remarks
 N/A
 
 ##### CNN/non-IID
+* Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
+* If the test acc at final round differs little, then check the final 20 rounds and choose the one with higher average value.
+* If two lr ties in test acc, 
+    1. 0.01 ties with 0.02, then take 0.02, since the validation loss of 0.02 decreases more smoothly.
+    2. 0.02 ties with 0.04, then take 0.02, since 0.04 are closer to instability zone. 
+    3. 0.01 ties with 0.04, then take 0.04, since the validation loss of 0.02 decreases more smoothly.
+
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
@@ -113,17 +122,19 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 N/A
 
 ##### CNN/IID
+* Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
+
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
-CNN   |FedSGD|iid   | 98.53% -200 |5.5mins   | T       | 0.1  |1  |∞  | 0.15     | SGD   | ???
-CNN   |FedAVg|iid   | 98.68% -200 |10.3mins  | T       | 0.1  |5  |∞  | 0.08     | SGD   | fs done
-CNN   |FedAVg|iid   | 98.66% -200 |5.8mins   | T       | 0.1  |1  |50 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.51% -200 |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
-CNN   |FedAVg|iid   | 98.51% -200 |5.8mins   | T       | 0.1  |1  |10 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.48% -200 |10.5mins  | T       | 0.1  |5  |50 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.61% -200 |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.50% -200 |10.5mins  | T       | 0.1  |5  |10 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01     | SGD   | 
+CNN   |FedSGD|iid   | 98.53%      |5.5mins   | T       | 0.1  |1  |∞  | 0.15     | SGD   | ???
+CNN   |FedAVg|iid   | 98.68%      |10.3mins  | T       | 0.1  |5  |∞  | 0.08     | SGD   | fs done
+CNN   |FedAVg|iid   | 98.66%      |5.8mins   | T       | 0.1  |1  |50 | 0.2      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.51%      |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
+CNN   |FedAVg|iid   | 98.51%      |5.8mins   | T       | 0.1  |1  |10 | 0.2      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.48%      |10.5mins  | T       | 0.1  |5  |50 | 0.2      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.61%      |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.50%      |10.5mins  | T       | 0.1  |5  |10 | 0.2      | SGD   | fs done
+CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2?     | SGD   | run on T
 
 ##### CNN/non-IID
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
