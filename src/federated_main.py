@@ -69,7 +69,12 @@ if __name__ == '__main__':
     global_model.to(device)
     global_model.train()
     print(global_model,'\n')
-    input("Press Enter to continue...")
+
+    # pause and print message for user to confirm the hyparameter are good to go
+    answer = input("Press n to abort, press any other key to continue, then press ENTER: ")
+    if answer == 'n':
+        exit('\nTraining is aborted by user')
+    print('\nTraining starts...\n')
 
     # copy weights
     global_weights = global_model.state_dict()
