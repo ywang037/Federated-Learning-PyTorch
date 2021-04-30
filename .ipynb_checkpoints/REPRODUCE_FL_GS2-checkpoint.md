@@ -77,16 +77,16 @@ N/A
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | 95.44%       |0.18hrs   | A       | 0.0  |5  |10 | 0.02  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.61%       |0.18hrs   | A       | 0.0  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | 94.69%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
-CNN   |FedAVg|N-iid | 96.90%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.85%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
+CNN   |FedAVg|N-iid | 97.13%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   | 2B run on A
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   | 2B run on A
-CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   | run on A
+CNN   |FedAVg|N-iid | 96.76%       |0.35hrs   | A       | 0.1  |5  |∞  | 0.04  | SGD   | fs done
 
 ##### 2NN/IID
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
@@ -146,9 +146,9 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 ------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|N-iid | 97.17%      |0.20      | T       | 0.1  |1  |∞  | 0.04  | SGD   | done
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | run on T
+CNN   |FedAVg|N-iid | 97.15%      |0.19hrs   | T       | 0.1  |1  |50 | 0.04  | SGD   | done
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
+CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | run on T
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 CNN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
