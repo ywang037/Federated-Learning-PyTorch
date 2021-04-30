@@ -11,7 +11,7 @@
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### Approach for Non-IID data
-* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.08, 0.1, 0.15, 0.2}. Therefore, one can reduce the search range to {0.04, 0.08, 0.1, 0.16, 0.2}, and try to search in {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate.
+* It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appera around {0.005, 0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.008, 0.01, 0.02} firstly, since these three values are most likely to be the best learning rate.
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
@@ -53,7 +53,7 @@ CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   |
 CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.36%       |0.09hrs   | A       | 0.0  |5  |∞  | 0.1   | SGD   | fs done
 CNN   |FedAVg|iid   | %            |xxxhrs    | A       | 1.0  |5  |∞  |       | SGD   | cancelled
-CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   | run on T
+CNN   |FedAVg|iid   | 98.46%       |0.95hrs   | A       | 0.5  |5  |∞  | 0.1   | SGD   | done
 CNN   |FedAVg|iid   | 98.61%       |0.27hrs   | A       | 0.2  |5  |∞  | 0.2   | SGD   | fs done
 CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2   | SGD   | done
 
