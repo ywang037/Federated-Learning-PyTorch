@@ -25,7 +25,7 @@ from itertools import zip_longest
 if __name__ == '__main__':
      # define paths
     path_project = os.path.abspath('..')
-    logger = SummaryWriter('./logs')
+    # logger = SummaryWriter('./logs')
 
     args = args_parser()
     exp_details(args)
@@ -95,7 +95,8 @@ if __name__ == '__main__':
         # perform per-user update, in a round-robin fashion
         global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx])
+            # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
 
             # work on validation mode
             w, loss = local_model.update_weights_validate(model=copy.deepcopy(global_model), global_round=epoch)
@@ -123,9 +124,8 @@ if __name__ == '__main__':
         print('\n| Global Round : {:>4}/{} | Validation loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
             epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
 
-
-    logger.flush()
-    logger.close()
+    # logger.flush()
+    # logger.close()
     
     # print the wall-clock-time used
     end_time=time.time() 
