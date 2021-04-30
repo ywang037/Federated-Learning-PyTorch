@@ -19,7 +19,7 @@ python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --bs=100 --lr
 
 2.1 For MNIST
 
-python src/federated_main.py --gpu=True --model=cnn --dataset=mnist --iid=1 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01 --momentum=0.0 --nag=False
+python src/federated_main.py --gpu=True --model=cnn --dataset=mnist --iid=1  --verbose=0 --save_record=True --frac=0.1 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01
 
 python src/federated_main.py --gpu=True --model=cnn --dataset=mnist --iid=0 --unequal=0 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01 --momentum=0.0 --nag=False
 
@@ -40,7 +40,7 @@ python src/federated_main.py --gpu=True --model=cnn --dataset=cifar --iid=0 --un
 
 3.1 For MNIST
 
-python src/federated_val.py --gpu=True --model=cnn --dataset=mnist --iid=1 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01 --momentum=0.0 --nag=False
+python src/federated_val.py --gpu=True --model=cnn --dataset=mnist --iid=1 --verbose=0 --save_record=True --frac=0.1 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01
 
 python src/federated_valpy --gpu=True --model=cnn --dataset=mnist --iid=0 --unequal=0 --epochs=20 --local_ep=20 --local_bs=10 --lr=0.01 --momentum=0.0 --nag=False
 
