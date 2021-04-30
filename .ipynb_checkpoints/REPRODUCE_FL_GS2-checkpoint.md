@@ -31,16 +31,17 @@ Both trianed models might be used for warm start in future training.
 * Lr/O means the optimized value of learning rate
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
+* Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
 
 ##### CNN/IID
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | 98.57% -200  |9.9mins   | A       | 0.0  |5  |10 | 0.08  | SGD   | fs done
+CNN   |FedAVg|iid   | 98.57%       |9.9mins   | A       | 0.0  |5  |10 | 0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | xxxx%        |3.6hrs    | A       | 1.0  |5  |10 | xxxx  | SGD   | cancelled
-CNN   |FedAVg|iid   | 98.49% -200  |0.56hrs   | A       | 0.5  |5  |10 | 0.08  | SGD   | fs done
-CNN   |FedAVg|iid   | xxxx%        |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | run on A
-CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
+CNN   |FedAVg|iid   | 98.49%       |0.56hrs   | A       | 0.5  |5  |10 | 0.08  | SGD   | fs done
+CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2   | SGD   | fs done
+CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   | run on A
 CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
 CNN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
