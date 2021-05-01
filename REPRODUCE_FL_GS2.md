@@ -155,9 +155,9 @@ CNN   |FedAVg|N-iid | 97.15%       |0.19hrs   | T       | 0.1  |1  |50 | 0.04   
 CNN   |FedAVg|N-iid | 96.96%       |0.93hrs   | T       | 0.1  |20 |∞  | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.67%       |0.20hrs   | T       | 0.1  |1  |10 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 97.04%       |0.35hrs   | A       | 0.1  |5  |50 | 0.04       | SGD   | fs done
-CNN   |FedAVg|N-iid | %            |hrs       | T       | 0.1  |20 |50 | 0.01       | SGD   | run on T
+CNN   |FedAVg|N-iid | 97.34%       |0.95hrs   | T       | 0.1  |20 |50 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.52%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04       | SGD   | fs done
-CNN   |FedAVg|N-iid | %            |hrs       | T       | 0.1  |20 |10 | 0.01       | SGD   | run on A
+CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04       | SGD   | fs done
 ##### Remarks
 1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
 
