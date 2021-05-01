@@ -121,7 +121,7 @@ CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1 
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
 CNN   |FedAVg|N-iid | %                |      |600   |~4hrs     | T       | 0.1  |20 |50 | 0.04/o | SGD   | run on T
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |600   |hrs       | A       | 0.1  |5  |10 | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | %                |      |600   |~8hrs     | T       | 0.1  |20 |10 | 0.04/o | SGD   | run on T
 
 ##### 2NN/IID
