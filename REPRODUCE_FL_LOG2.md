@@ -55,9 +55,9 @@ CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0 
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01   | SGD   |
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 98.92%,99.07%    |323   |1500  |3.08hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
-
 ##### Remarks
 1. Non-IID, {E=5, B=∞}  across 98% earlier than 500 rounds, and may not be albe to reach 99%
+2. The larger the fraction, the quicker the convergence, since the learning rate are almost the same, so that for C=0.5, one may use fewer rounds, e.g., 500-1000 
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
