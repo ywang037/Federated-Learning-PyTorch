@@ -31,7 +31,7 @@ CNN   |FedAVg|iid   | 99.35%,99.36%    |5     |100   |0.69hrs   | A       | 0.2 
 CNN   |FedAVg|iid   | 99.36%,99.36%    |6     |100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 98.19%,98.45%    |88    |100   |0.05hrs   | A       | 0.0  |5  |∞  | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   |                  |      |100   |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
-CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.2/o  | SGD   | run on T
+CNN   |FedAVg|iid   | 98.48%,98.52%    |55    |100   |0.78hrs   | A       | 0.5  |5  |∞  | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | 98.66%,98.70%    |54    |100   |0.32hrs   | T       | 0.2  |5  |∞  | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | 98.36%,98.37%    |67    |100   |0.18hrs   | T       | 0.1  |5  |∞  | 0.2/o  | SGD   | done
 
