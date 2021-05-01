@@ -22,10 +22,12 @@
 Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximately leads to multiplicative factors {1,2,5,10}
 1. So for IID, since after coarse search the best values appears in 0.01-1.0, finer searches could be done within {0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0} according to the above resolution. 
     * According to the previous search trials, reasonable finer searches can be narrowed to **{0.05, 0.1, 0.2}**.
-    * Since candidate lr=0.08 no longer exists and lr=0.05 is very likely not better than 0.08, so existing search results will be updated by comparison between 0.01 and 0.02.
+    * Since candidate lr=0.08 no longer exists and lr=0.05 is very likely not better than 0.08, so existing search results will be updated by comparison between 0.1 and 0.2.
+    * (Update) lr=0.2 is likely to cause instability in real test runs. Instead, finer search in {0.07, 0.1, 0.15} can be used, which is calculated as per multiplicative factors {6.8, 10, 1.5} obtained from resolution $10^(1/6)$.
 2. Similarly for non-IID, best values are likely to appear around 0.001-0.1, so that finer searches could be done witin {0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1}. 
     * According to the previous search trials, reasonable finer searches can be narrowed done to **{0.01, 0.02, 0.05}**.
     * Since candidate lr=0.04 no longer exists and lr=0.06 is better than 0.04 according to existing trials, so existing search results indicating lr=0.04 can be replaced by 0.05. However, there may not be significant differences.
+    * Multiplicative factors {1.5, 2.2, 3.2, 4.6, 6.8} obtained from resolution $10^(1/6)$ may also be used to generates alternative finer searches lr={0.007, 0.01, 0.015, 0.022, 0.032, 0.046}. Then, according to pervious search trials, {0.022, 0.032} can be used instead of 0.04 if instability is observed in real test run.
 
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
@@ -49,8 +51,6 @@ Both trianed models might be used for warm start in future training.
 * Lr/O means the optimized value of learning rate
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
-
-
 
 ##### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
@@ -96,7 +96,7 @@ CNN   |FedAVg|N-iid | 97.13%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04  |
 CNN   |FedAVg|N-iid | 95.83%       |xxxhrs    | T       | 0.0  |5  |∞  | 0.02  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | xxxx  | SGD   | cancelled
 CNN   |FedAVg|N-iid | 96.98%       |0.99hrs   | T       | 0.5  |5  |∞  | 0.04  | SGD   | fs done
-CNN   |FedAVg|N-iid | 96.47%       |0.56hrs   | T       | 0.2  |5  |∞  | 0.01  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.47%       |0.56hrs   | T       | 0.2  |5  |∞  | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.76%       |0.35hrs   | A       | 0.1  |5  |∞  | 0.04  | SGD   | fs done
 ##### Remarks
 1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
