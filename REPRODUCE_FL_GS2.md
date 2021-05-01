@@ -88,7 +88,7 @@ CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2  
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | 96.61%       |0.18hrs   | A       | 0.0  |5  |10 | 0.04  | SGD   | fs done  ???
+CNN   |FedAVg|N-iid | 96.61%       |0.18hrs   | A       | 0.0  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | xxxx  | SGD   | cancelled
 CNN   |FedAVg|N-iid | 96.93%       |xxxhrs    | T       | 0.5  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.85%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
