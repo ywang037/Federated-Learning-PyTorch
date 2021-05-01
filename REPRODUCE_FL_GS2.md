@@ -65,7 +65,7 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O   
 CNN   |FedAVg|iid   | 98.41%       |0.09hrs   | A       | 0.0  |5  |10 | 0.1/0.08  | SGD   | fs done
 CNN   |FedAVg|iid   | %            |3.6hrs    | A       | 1.0  |5  |10 |           | SGD   | cancelled
 CNN   |FedAVg|iid   | 98.49%       |0.56hrs   | A       | 0.5  |5  |10 | 0.1       | SGD   | fs done
-CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2       | SGD   | fs done
+CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.1       | SGD   | fs done
 CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08/0.1  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.36%       |0.09hrs   | A       | 0.0  |5  |∞  | 0.1       | SGD   | fs done
 CNN   |FedAVg|iid   | %            |xxxhrs    | A       | 1.0  |5  |∞  |           | SGD   | cancelled
@@ -75,7 +75,7 @@ CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2  
 
 ##### Remarks
 * For {E=5,B=10,C=0.1}, lr=0.2 is unstable in real test after about 190 rounds, so lr=0.2 is discarded.
-* For {E=5,B=10,C=0.2}, lr=0.2 is sometimes unstable in real test even at the beginning round, so lr=0.1 is recommended over lr=0.2.
+* For {E=5,B=10,C=0.2}, lr=0.2 leads to best performance in validation run. But it is sometimes unstable in real test even at the beginning round. lr=0.15 is validated, the results differs little with that of lr=0.1. Considering the stability boundary, so lr=0.1 is recommended over lr=0.2, 0.15.
 
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
@@ -88,7 +88,7 @@ CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2  
 
 Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
 ------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|N-iid | 96.61%       |0.18hrs   | A       | 0.0  |5  |10 | 0.04  | SGD   | fs done
+CNN   |FedAVg|N-iid | 96.61%       |0.18hrs   | A       | 0.0  |5  |10 | 0.04  | SGD   | fs done  ???
 CNN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | xxxx  | SGD   | cancelled
 CNN   |FedAVg|N-iid | 96.93%       |xxxhrs    | T       | 0.5  |5  |10 | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.85%       |0.55hrs   | A       | 0.2  |5  |10 | 0.04  | SGD   | fs done
