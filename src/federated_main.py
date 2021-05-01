@@ -31,8 +31,9 @@ if __name__ == '__main__':
     args = args_parser()
 
     # start the tensorboard writer
-    logger_path = f'runs/fedavg-{args.dataset}-{args.model}-{args.iid}/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
-    logger = SummaryWriter(logger_path)
+    logger_path_iid = f'runs/fedavg-{args.dataset}-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
+    logger_path_noniid = f'runs/fedavg-{args.dataset}-non-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
+    logger = SummaryWriter(logger_path_iid) if args.iid else SummaryWriter(logger_path_noniid)
     # logger = SummaryWriter('./logs')
 
     # show the training configurations
