@@ -56,7 +56,7 @@ CNN   |FedAVg|iid   | 98.41%       |0.09hrs   | A       | 0.0  |5  |10 | 0.1/0.0
 CNN   |FedAVg|iid   | %            |3.6hrs    | A       | 1.0  |5  |10 |           | SGD   | cancelled
 CNN   |FedAVg|iid   | 98.49%       |0.56hrs   | A       | 0.5  |5  |10 | 0.1       | SGD   | fs done
 CNN   |FedAVg|iid   | 98.50%       |0.27hrs   | A       | 0.2  |5  |10 | 0.2       | SGD   | fs done
-CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08/0.2  | SGD   | fs done
+CNN   |FedAVg|iid   | 98.43%       |0.17hrs   | A       | 0.1  |5  |10 | 0.08/0.1  | SGD   | fs done
 CNN   |FedAVg|iid   | 98.36%       |0.09hrs   | A       | 0.0  |5  |∞  | 0.1       | SGD   | fs done
 CNN   |FedAVg|iid   | %            |xxxhrs    | A       | 1.0  |5  |∞  |           | SGD   | cancelled
 CNN   |FedAVg|iid   | 98.46%       |0.95hrs   | A       | 0.5  |5  |∞  | 0.1/0.2   | SGD   | fs done
@@ -64,7 +64,7 @@ CNN   |FedAVg|iid   | 98.61%       |0.27hrs   | A       | 0.2  |5  |∞  | 0.2  
 CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2       | SGD   | fs done
 
 ##### Remarks
-N/A
+* For {E=5,B=10,C=0.1}, lr=0.2 is unstable in real test after about 190 rounds, so lr=0.2 is discarded.
 
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
