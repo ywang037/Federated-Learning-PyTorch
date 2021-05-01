@@ -23,9 +23,11 @@ class DatasetSplit(Dataset):
 
 
 class LocalUpdate(object):
-    def __init__(self, args, dataset, idxs, logger):
+    # def __init__(self, args, dataset, idxs, logger):
+    #     self.args = args
+    #     self.logger = logger
+    def __init__(self, args, datase, idxs):
         self.args = args
-        self.logger = logger
         self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
         self.trainloader = DataLoader(DatasetSplit(dataset, idxs), batch_size=self.args.local_bs, shuffle=True)
@@ -104,7 +106,7 @@ class LocalUpdate(object):
                         batch_idx * len(images),
                         len(self.trainloader.dataset),
                         100. * batch_idx / len(self.trainloader), loss.item()))
-                self.logger.add_scalar('loss', loss.item())
+                # self.logger.add_scalar('loss', loss.item())
                 batch_loss.append(loss.item())
             epoch_loss.append(sum(batch_loss)/len(batch_loss))
 
