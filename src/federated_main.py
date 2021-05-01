@@ -156,7 +156,6 @@ if __name__ == '__main__':
         print('\n| Global Round : {:>4}/{} | Training loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
             epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
         
-        
         # # print global training loss after every 'i' rounds
         # if (epoch+1) % print_every == 0:
         #     print(f' \nAvg Training Stats after {epoch+1} global rounds:')
@@ -169,8 +168,10 @@ if __name__ == '__main__':
         logger.add_scalar('Test acc', round_test_acc, epoch+1)
     
     # print the wall-clock-time used
-    end_time=time.time() 
-    print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
+    end_time=time.time()
+    time_elapsed = end_time-start_time 
+    print('\nTraining completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(test_acc),time_elapsed,time_elapsed/3600))
+    # print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
     # print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
 
     # flush the event and close the tensoarboard writer
