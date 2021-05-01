@@ -27,12 +27,15 @@ if __name__ == '__main__':
      # define paths
     path_project = os.path.abspath('..')
 
+    # pass the argument from terminal
+    args = args_parser()
+
     # start the tensorboard writer
     logger_path = f'runs/fedavg-{args.dataset}-{args.model}-{args.iid}/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
     logger = SummaryWriter(logger_path)
     # logger = SummaryWriter('./logs')
 
-    args = args_parser()
+    # show the training configurations
     exp_details(args)
 
     if args.gpu:
