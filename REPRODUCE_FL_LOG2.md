@@ -27,7 +27,7 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 CNN   |FedAVg|iid   | 99.23%,98.58%    |20    |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 98.6%            |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01   | SGD   | 
 CNN   |FedAVg|iid   | 98.6%            |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01   | SGD   | 
-CNN   |FedAVg|iid   | 98.7%            |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.2/o  | SGD   | run on A
+CNN   |FedAVg|iid   | 98.7%            |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.1/o  | SGD   | run on A
 CNN   |FedAVg|iid   | 99.36%,99.36%    |6     |100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 96.91%           |xx    |1000  |0.52hrs   | A       | 0.0  |5  |∞  | 0.01   | SGD   | 
 CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01   | SGD   |
