@@ -112,17 +112,17 @@ CNN   |FedAVg|iid   | xxxxx%     |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.
 3. 400-500 rounds should be sufficient for E=5 B=50
 
 ##### CNN/non-IID
-Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
-------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|N-iid | %          |xxxx  |    hrs   | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|N-iid | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | done
+Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------   |----  |--------  |-------- | -----|---|---| -----  | ------| -----
+CNN   |FedSGD|N-iid | %          |xxxx  |    hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %          |1000  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Stauts
