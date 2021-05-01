@@ -17,22 +17,23 @@ CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD
 ### III. FedAvg MNIST learning with *2NN* and *CNN* models 
 #### A. Experiment 1: increase parallism
 * The runs using optimized learning rate will be marked as "0.01/o"
-* H Rnd means the round number where test acc hit the target, i.e, 98% for CNN, 96% for 2NN
+* R-98 means the number of round where test acc hit 98%, similar for R-XX
 * T Rnd means the total number of performed rounds
+* Test acc (f,max) means final value and max value 
 
 ##### CNN/IID
-Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
-------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-CNN   |FedAVg|iid   | 98.22%   |76    |100   |0.07hrs   | A       | 0.0  |5  |10 | 0.1/o | SGD   | run on A
-CNN   |FedAVg|iid   | 98.6%    |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 98.6%    |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 98.7%    |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 98.6%    |52    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | 96.91%   |xx    |1000  |0.52hrs   | A       | 0.0  |5  |∞  | 0.01  | SGD   | 
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
+------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
+CNN   |FedAVg|iid   | 99.23%,98.58%    |20    |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o | SGD   | done
+CNN   |FedAVg|iid   | 98.6%            |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | 98.6%            |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | 98.7%            |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.2/o | SGD   | run on A
+CNN   |FedAVg|iid   | 98.6%            |52    |500   |xxxhrs    | A       | 0.1  |5  |10 | 0.2/o | SGD   | run on A
+CNN   |FedAVg|iid   | 96.91%           |xx    |1000  |0.52hrs   | A       | 0.0  |5  |∞  | 0.01  | SGD   | 
+CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
+CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
+CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
+CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
 
 ##### Remarks
 1. Set 96%, 98% as targets for CNN, 2NN is to avoid the needed rounds from being too large to complete in time.
@@ -40,9 +41,6 @@ CNN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |�
 3. The time taken for C=1.0 is formidable, even for IID cases. So, one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
 ##### CNN/non-IID
-* R-98 means the number of round where test acc hit 98%, similar for R-XX
-* Test acc (f,max) means final value and max value 
-
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|N-iid | 99.27%,99.38%    |416   |100   |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
@@ -92,7 +90,9 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 #### B. Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1
 * The runs using optimized learning rate will be marked as "0.01/o"
+* R-98 means the number of round where test acc hit 98%, similar for R-XX
 * T Rnd means the total number of performed rounds
+* Test acc (f,max) means final value and max value
 
 ##### CNN/IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
