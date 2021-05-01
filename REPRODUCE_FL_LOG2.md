@@ -45,12 +45,12 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 ------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|N-iid | 99.27%,99.38%    |416   |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid |                  |      |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
-CNN   |FedAVg|N-iid | xxxx%            |xx    |250   |xxxhrs    | A       | 0.5  |5  |10 | 0.04/o | SGD   | to run on A
-CNN   |FedAVg|N-iid | xxxx%            |40    |250   |xxxhrs    | A       | 0.2  |5  |10 | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | xxxx%            |xx    |200   |xxxhrs    | A       | 0.5  |5  |10 | 0.04/o | SGD   | to run on A
+CNN   |FedAVg|N-iid | 99.11%,99.19%    |40    |250   |1.67hrs   | A       | 0.2  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.21%,99.30%    |75    |1500  |6.25hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.62%,98.98%    |778   |1500  |1.00hrs   | A       | 0.0  |5  |∞  | 0.02/o | SGD   | done
 CNN   |FedAVg|N-iid |                  |      |      |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
-CNN   |FedAVg|N-iid | xxxx%            |xx    |250   |xxxhrs    | A       | 0.5  |5  |∞  | 0.04/o | SGD   | to run on A
+CNN   |FedAVg|N-iid | xxxx%            |xx    |200   |xxxhrs    | A       | 0.5  |5  |∞  | 0.04/o | SGD   | to run on A
 CNN   |FedAVg|N-iid | 98.99%,99.08%    |319   |1500  |5.54rs    | A       | 0.2  |5  |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.92%,99.07%    |323   |1500  |3.08hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
 ##### Remarks
@@ -156,6 +156,8 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 ##### Fixed federated setting VS FedSGD and SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
+* Decay means the learning-rate decay
+* Since E, B are fixed then total number of mini-batch updates $n=R\times250$
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  |------ | ----- | ------
@@ -170,8 +172,10 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 
 ##### Varying federated setting VS SGD
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper
+* Each setting runs same number of mini-batch updates $n=?$
+* Totoal number of rounds of each setting is $R=n/(E\timesB)$
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |        | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |1  |50 |        | SGD   | 
