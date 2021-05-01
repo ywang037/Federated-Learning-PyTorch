@@ -12,7 +12,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 import torch
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
+# from tensorboardX import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, test_inference
@@ -25,7 +26,11 @@ from itertools import zip_longest
 if __name__ == '__main__':
      # define paths
     path_project = os.path.abspath('..')
-    logger = SummaryWriter('./logs')
+
+    # start the tensorboard writer
+    logger_path = f'runs/fedavg-{args.dataset}-{args.model}-{args.iid}/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
+    logger = SummaryWriter(logger_path)
+    # logger = SummaryWriter('./logs')
 
     args = args_parser()
     exp_details(args)
@@ -93,14 +98,15 @@ if __name__ == '__main__':
         print('\n')
         print('\n| Global Round : {:>4}/{} | Learning rate : {:.6f}'.format(epoch+1, args.epochs, args.lr))
 
-        # randomly pick m clients from num_users
+        # randomly pick m participants from num_users clients
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
 
         # perform per-user update, in a round-robin fashion
         global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            # local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx])
             w, loss = local_model.update_weights(model=copy.deepcopy(global_model), global_round=epoch)
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
@@ -111,34 +117,33 @@ if __name__ == '__main__':
         # update global weights
         global_model.load_state_dict(global_weights)
 
-        loss_avg = sum(local_losses) / len(local_losses)
-        train_loss.append(np.around(loss_avg,4))
-
         # decay the learning rate
         args.lr *= args.lr_decay
-        
-        '''
-        # but since training dataset is too large for performing test in reasonable time, 
-        # calculating average training acc over participants is abandoned
-        # calculate average training acc over participated clients at each round
-        global_model.eval()
-        list_acc = []
-        for idx in idxs_users:
-            acc, _ = test_inference(args=args, model=global_model, test_dataset=train_dataset)
-            list_acc.append(acc)
-        train_accuracy.append(sum(list_acc)/len(list_acc))
 
-        # Calculate avg training accuracy over all users at every epoch (WY: why??? shouldn't be averaged over participants?)
-        # list_acc, list_loss = [], [] # WY: seems no point to compute training loss shall be computed by list_loss
+        # calculate train loss averaged over participants
+        loss_avg = sum(local_losses) / len(local_losses)
+        train_loss.append(np.around(loss_avg,4))
+        
+        # # but since training dataset is too large for performing test in reasonable time, 
+        # # calculating average training acc over participants is abandoned
+        # # calculate average training acc over participated clients at each round
+        # global_model.eval()
+        # list_acc = []
+        # for idx in idxs_users:
+        #     acc, _ = test_inference(args=args, model=global_model, test_dataset=train_dataset)
+        #     list_acc.append(acc)
+        # train_accuracy.append(sum(list_acc)/len(list_acc))
+
+        # # Calculate avg training accuracy over all users at every epoch (WY: why??? shouldn't be averaged over participants?)
+        # # list_acc, list_loss = [], [] # WY: seems no point to compute training loss shall be computed by list_loss
         # for c in range(args.num_users):
         #     local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
         #     acc, loss = local_model.inference(model=global_model)
         #     list_acc.append(acc)
         #     list_loss.append(loss)
         # train_accuracy.append(sum(list_acc)/len(list_acc))
-        '''
 
-        # test per round
+        # test the global model per round
         round_test_acc, round_test_loss = test_inference(args, global_model, test_dataset)
         test_acc.append(np.around(round_test_acc,4)) 
         test_loss.append(np.around(round_test_loss,4))
@@ -147,30 +152,34 @@ if __name__ == '__main__':
         print('\n| Global Round : {:>4}/{} | Training loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
             epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
         
-        '''
-        # print global training loss after every 'i' rounds
-        if (epoch+1) % print_every == 0:
-            print(f' \nAvg Training Stats after {epoch+1} global rounds:')
-            print(f'Training Loss : {np.mean(np.array(train_loss))}')
-            print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
-        '''
+        
+        # # print global training loss after every 'i' rounds
+        # if (epoch+1) % print_every == 0:
+        #     print(f' \nAvg Training Stats after {epoch+1} global rounds:')
+        #     print(f'Training Loss : {np.mean(np.array(train_loss))}')
+        #     print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))
 
-    logger.flush()
-    logger.close()
+        # write training loss, test loss, and test acc to tensorboard writer
+        logger.add_scalar('Train loss', loss_avg, epoch+1)
+        logger.add_scalar('Test loss', round_test_loss, epoch+1)
+        logger.add_scalar('Test acc', round_test_acc, epoch+1)
     
     # print the wall-clock-time used
     end_time=time.time() 
     print('\nTraining completed, time elapsed: {:.2f}s'.format(end_time-start_time))
     # print('\n Total Run Time: {0:0.4f}'.format(time.time()-start_time))
 
-    '''
-    # Test inference after completion of training
-    test_acc, test_loss = test_inference(args, global_model, test_dataset)
-    # print training performance after completion    
-    print(f' \n Results after {args.epochs} global rounds of training:')
-    print("|---- Avg Train Accuracy: {:.2f}%".format(100*train_accuracy[-1]))
-    print("|---- Test Accuracy: {:.2f}%".format(100*test_acc))
-    '''
+    # flush the event and close the tensoarboard writer
+    logger.flush()
+    logger.close()
+    
+    # # Test inference after completion of training
+    # test_acc, test_loss = test_inference(args, global_model, test_dataset)
+    # # print training performance after completion    
+    # print(f' \n Results after {args.epochs} global rounds of training:')
+    # print("|---- Avg Train Accuracy: {:.2f}%".format(100*train_accuracy[-1]))
+    # print("|---- Test Accuracy: {:.2f}%".format(100*test_acc))
+   
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
