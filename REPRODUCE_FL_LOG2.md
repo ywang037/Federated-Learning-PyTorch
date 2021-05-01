@@ -50,9 +50,11 @@ CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
+CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   | run on A
+CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   | run on A
 CNN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
+##### Remarks
+1. Non-IID, {E=5, B=∞}  across 98% earlier than 500 rounds, and may not be albe to reach 99%
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
@@ -130,7 +132,7 @@ Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr
 2NN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |10 |50 | 0.01  | SGD   | 
 2NN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
 2NN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |10 |10 | 0.01  | SGD   | 
-2NN   |FedAvg|iid   | 96.4%      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.01  | SGD   | done
+2NN   |FedAvg|iid   | %          |1000  |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 
 ##### 2NN/non-IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Stauts
