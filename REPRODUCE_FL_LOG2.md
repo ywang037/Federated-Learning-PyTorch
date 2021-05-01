@@ -24,13 +24,13 @@ CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD
 ##### CNN/IID
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
-CNN   |FedAVg|iid   | 99.23%,98.58%    |20    |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 98.6%            |40    |100   |3.6hrs    | A       | 1.0  |5  |10 | 0.01   | SGD   | 
-CNN   |FedAVg|iid   | 98.6%            |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01   | SGD   | 
-CNN   |FedAVg|iid   | 98.7%            |44    |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.1/o  | SGD   | run on A
+CNN   |FedAVg|iid   | 98.58%,99.23%    |20    |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
+CNN   |FedAVg|iid   |                  |      |      |          | A       | 1.0  |5  |10 | 0.01   | SGD   | cancelled
+CNN   |FedAVg|iid   | xxxx%            |47    |100   |1.7hrs    | A       | 0.5  |5  |10 | 0.01   | SGD   | 
+CNN   |FedAVg|iid   | xxxx%            |5     |100   |0.7hrs    | A       | 0.2  |5  |10 | 0.1/o  | SGD   | run on A
 CNN   |FedAVg|iid   | 99.36%,99.36%    |6     |100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 96.91%           |xx    |1000  |0.52hrs   | A       | 0.0  |5  |∞  | 0.01   | SGD   | 
-CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01   | SGD   |
+CNN   |FedAVg|iid   |                  |      |100   |          | A       | 1.0  |5  |∞  | 0.01   | SGD   | cancelled
 CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01   | SGD   |
 CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01   | SGD   |
 CNN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01   | SGD   |
@@ -46,8 +46,8 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 CNN   |FedAVg|N-iid | 99.27%,99.38%    |416   |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01   | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01   | SGD   |
-CNN   |FedAVg|N-iid | xxxx%            |xx    |200   |xxxhrs    | A       | 0.2  |5  |10 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | xxxx%            |xx    |250   |xxxhrs    | A       | 0.2  |5  |10 | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | 99.21%,99.30%    |75    |1500  |6.25hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.62%,98.98%    |778   |1500  |1.00hrs   | A       | 0.0  |5  |∞  | 0.02/o | SGD   | done
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01   | SGD   | cancelled
 CNN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01   | SGD   |
