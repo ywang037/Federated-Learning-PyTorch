@@ -26,7 +26,7 @@ class LocalUpdate(object):
     # def __init__(self, args, dataset, idxs, logger):
     #     self.args = args
     #     self.logger = logger
-    def __init__(self, args, datase, idxs):
+    def __init__(self, args, dataset, idxs):
         self.args = args
         self.device = 'cuda' if args.gpu else 'cpu'        
         self.criterion = nn.CrossEntropyLoss().to(self.device) if args.loss == 'ce' else nn.NLLLoss().to(self.device)
