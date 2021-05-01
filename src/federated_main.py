@@ -30,12 +30,6 @@ if __name__ == '__main__':
     # pass the argument from terminal
     args = args_parser()
 
-    # start the tensorboard writer
-    logger_path_iid = f'runs/fedavg-{args.dataset}-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
-    logger_path_noniid = f'runs/fedavg-{args.dataset}-non-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
-    logger = SummaryWriter(logger_path_iid) if args.iid else SummaryWriter(logger_path_noniid)
-    # logger = SummaryWriter('./logs')
-
     # show the training configurations
     exp_details(args)
 
@@ -84,6 +78,12 @@ if __name__ == '__main__':
     if answer == 'n':
         exit('\nTraining is aborted by user')
     print('\nTraining starts...\n')
+
+    # start the tensorboard writer
+    logger_path_iid = f'runs/fedavg-{args.dataset}-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
+    logger_path_noniid = f'runs/fedavg-{args.dataset}-non-IID/R{args.epochs}-E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}'
+    logger = SummaryWriter(logger_path_iid) if args.iid else SummaryWriter(logger_path_noniid)
+    # logger = SummaryWriter('./logs')
 
     # copy weights
     global_weights = global_model.state_dict()
