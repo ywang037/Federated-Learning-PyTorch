@@ -75,6 +75,7 @@ CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2  
 
 ##### Remarks
 * For {E=5,B=10,C=0.1}, lr=0.2 is unstable in real test after about 190 rounds, so lr=0.2 is discarded.
+* For {E=5,B=10,C=0.2}, lr=0.2 is sometimes unstable in real test even at the beginning round, so lr=0.1 is recommended over lr=0.2.
 
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
