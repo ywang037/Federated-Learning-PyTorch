@@ -271,3 +271,30 @@ class CNNMnistWy(nn.Module):
         x=x.view(-1,1024)
         logits = self.fc_layer(x)
         return F.log_softmax(logits,dim=1)
+
+# the CNN model describted in the vanilla FL paper for experiments with MNIST
+class CNNMnistWyBnDp(nn.Module):
+    def __init__(self):
+        super(CNNMnistWyBnDp,self).__init__()
+        self.conv_layer = nn.Sequential(
+            nn.Conv2d(in_channels=1, out_channels=32, kernel_size=5),
+            nn.BatchNorm2d(32),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2),
+            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=5),
+            nn.Dropout2d(),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2)
+        )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(in_features=1024,out_features=512),
+            nn.ReLU(),
+            nn.Linear(in_features=512,out_features=10),
+        )
+    
+    def forward(self,x):
+        x=self.conv_layer(x)
+        x=x.view(-1,1024)
+        logits = self.fc_layer(x)
+        return F.log_softmax(logits,dim=1)
