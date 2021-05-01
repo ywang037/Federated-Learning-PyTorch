@@ -98,9 +98,9 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
 ------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
 CNN   |FedSGD|iid   | xxxxx%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.15/o| SGD   | 
-CNN   |FedAVg|iid   | 99.17%     |1000  |1.81hrs   | T       | 0.1  |5  |∞  | 0.08/o| SGD   | done
-CNN   |FedAVg|iid   | 99.21%     |1000  |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o | SGD   | Done
-CNN   |FedAVg|iid   | xxxxx%     |1000  |xxxxhrs   | T       | 0.1  |20 |∞  | 0.2/o | SGD   | 
+CNN   |FedAVg|iid   | 99.17%     |1000  |1.81hrs   | T       | 0.1  |5  |∞  | 0.08/o| SGD   | done ???
+CNN   |FedAVg|iid   | 99.21%     |1000  |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o | SGD   | done ???
+CNN   |FedAVg|iid   | xxxxx%     |1000  |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o| SGD   | 
 CNN   |FedAVg|iid   | xxxxx%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.2/o | SGD   | 
 CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.2/o | SGD   | 
 CNN   |FedAVg|iid   | XXXXX%     |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o | SGD   | 
