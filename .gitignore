@@ -10,5 +10,6 @@ src/__pycache__/
 *.pyc
 
 # Notebook Checkpoints
-.ipynb_checkpoints/
 src/ipynb_checkpoints/
+
+.ipynb_checkpoints/
