@@ -26,7 +26,7 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 ------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|iid   | 98.58%,99.23%    |20    |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   |                  |      |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
-CNN   |FedAVg|iid   | xxxx%            |5     |100   |xxxxhrs   | A       | 0.5  |5  |10 | 0.1/o  | SGD   | run on T
+CNN   |FedAVg|iid   | 99.29%,99.32%    |5     |100   |1.54hrs   | A       | 0.5  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.35%,99.36%    |5     |100   |0.69hrs   | A       | 0.2  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.36%,99.36%    |6     |100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 98.19%,98.45%    |88    |100   |0.05hrs   | A       | 0.0  |5  |∞  | 0.1/o  | SGD   | done
@@ -120,9 +120,9 @@ CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1 
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | to run on T
 CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | to run on T
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
