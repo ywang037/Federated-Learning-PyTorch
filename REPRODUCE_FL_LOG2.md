@@ -152,21 +152,34 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 
 
 #### C. Experiment 3: CIFAR10 learning performance
+
+##### Fixed federated setting VS FedSGD and SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 
-##### 2NN/IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     |Decay  | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  |------ | ----- | ------
+CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |        |       | SGD   | 
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
+
+##### Varying federated setting VS SGD
+* The learning rates of every setting are seem to be fixed at the vanilla FL paper
+
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |        | SGD   | 
-CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        | SGD   |
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |1  |50 |        | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |        | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |        | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |        | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-
 #### Appendix: Training time summary
 * The runs using optimized learning rate will be marked as "0.01-o"
 
