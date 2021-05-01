@@ -58,32 +58,32 @@ CNN   |FedAVg|N-iid | 98.92%,99.07%    |323   |1500  |3.08hrs   | A       | 0.1 
 2. The larger the fraction, the quicker the convergence, since the learning rate are almost the same, so that for C=0.5, one may use fewer rounds, e.g., 500-1000 
 
 ##### 2NN/IID
-Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
-------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 |        | SGD   | 
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  |        | SGD   |
+2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  |        | SGD   |
 
 ##### 2NN/non-IID
-Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
-------|------|------| -------- |----- |----- |--------  |-------- | -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%    |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 |        | SGD   | 
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  |        | SGD   |
+2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  |        | SGD   |
 
 
 
@@ -95,34 +95,34 @@ Model |Method|Data  | Test acc |H Rnd |T Rnd |Time      | Machine | Frac | E | B
 * Test acc (f,max) means final value and max value
 
 ##### CNN/IID
-Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Status
-------|------|------| --------   |----  |--------  |-------- | -----|---|---| ----- | ------| -----
-CNN   |FedSGD|iid   | xxxxx%     |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.15/o| SGD   | 
-CNN   |FedAVg|iid   | 99.17%     |1000  |1.81hrs   | T       | 0.1  |5  |∞  | 0.08/o| SGD   | done ???
-CNN   |FedAVg|iid   | 99.21%     |1000  |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o | SGD   | done ???
-CNN   |FedAVg|iid   | xxxxx%     |1000  |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o| SGD   | 
-CNN   |FedAVg|iid   | xxxxx%     |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.2/o | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.2/o | SGD   | 
-CNN   |FedAVg|iid   | XXXXX%     |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o | SGD   | 
-CNN   |FedAVg|iid   | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.2/o | SGD   | 
-CNN   |FedAVg|iid   | xxxxx%     |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o | SGD   | 
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+CNN   |FedSGD|iid   | xxxxx%           |      |1000  |0.65hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | 
+CNN   |FedAVg|iid   | 99.17%           |      |1000  |1.81hrs   | T       | 0.1  |5  |∞  | 0.08/o | SGD   | done ???
+CNN   |FedAVg|iid   | 99.21%           |      |1000  |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done ???
+CNN   |FedAVg|iid   | xxxxx%           |      |1000  |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |1000  |0.88hrs   | T       | 0.1  |1  |10 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | XXXXX%           |      |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
 ##### Remarks
 1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
 2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
 3. 400-500 rounds should be sufficient for E=5 B=50
 
 ##### CNN/non-IID
-Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------   |----  |--------  |-------- | -----|---|---| -----  | ------| -----
-CNN   |FedSGD|N-iid | %          |xxxx  |    hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %          |1000  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+CNN   |FedSGD|N-iid | %                |      |xxxx  |    hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |1000  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc   |T Rnd |Time      | Machine | Frac | E | B | Lr    | Optim | Stauts
