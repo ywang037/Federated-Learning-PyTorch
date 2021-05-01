@@ -142,10 +142,10 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 
 Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------    |--------  |-------- | -----|---|---| -----    | ------| -----
-CNN   |FedSGD|iid   | 98.54%      |5.5mins   | T       | 0.1  |1  |∞  | 0.2      | SGD   | fs done
+CNN   |FedSGD|iid   | 98.54%      |5.5mins   | T       | 0.1  |1  |∞  | 0.2/0.15 | SGD   | fs done
 CNN   |FedAVg|iid   | 98.68%      |10.3mins  | T       | 0.1  |5  |∞  | 0.08/0.1 | SGD   | fs done
 CNN   |FedAVg|iid   | 98.66%      |5.8mins   | T       | 0.1  |1  |50 | 0.2      | SGD   | fs done
-CNN   |FedAVg|iid   | 98.51%      |28.2mins  | T       | 0.1  |20 |∞  | 0.16/0.2 | SGD   | fs done
+CNN   |FedAVg|iid   | 98.51%      |28.2mins  | T       | 0.1  |20 |∞  | 0.15/0.2 | SGD   | fs done
 CNN   |FedAVg|iid   | 98.51%      |5.8mins   | T       | 0.1  |1  |10 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.48%      |10.5mins  | T       | 0.1  |5  |50 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.61%      |28.1mins  | T       | 0.1  |20 |50 | 0.1      | SGD   | fs done
