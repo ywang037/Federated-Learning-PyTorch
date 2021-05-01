@@ -13,3 +13,6 @@ src/__pycache__/
 src/ipynb_checkpoints/
 
 .ipynb_checkpoints/
+
+# tensorboard logs
+runs/
