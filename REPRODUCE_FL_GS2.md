@@ -219,7 +219,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
 
 ##### Varying federated setting VS SGD
-* The learning rates of every setting are seem to be fixed at the vanilla FL paper
+* The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization
 * Each setting runs same number of mini-batch updates $n=?$
 * Totoal number of rounds of each setting is $R=n/(E\timesB)$
 
