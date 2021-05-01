@@ -45,12 +45,12 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 ------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|N-iid | 99.27%,99.38%    |416   |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid |                  |      |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
-CNN   |FedAVg|N-iid | xxxx%            |42    |200   |xxxhrs    | A       | 0.5  |5  |10 | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | 98.95%,99.07%    |42    |200   |3.97hrs   | A       | 0.5  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.11%,99.19%    |40    |250   |1.67hrs   | A       | 0.2  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.21%,99.30%    |75    |1500  |6.25hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.62%,98.98%    |778   |1500  |1.00hrs   | A       | 0.0  |5  |∞  | 0.02/o | SGD   | done
 CNN   |FedAVg|N-iid |                  |      |      |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
-CNN   |FedAVg|N-iid | 97.21%,97.44%    |N/A   |200   |1.66hrs   | A       | 0.5  |5  |∞  | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | xxxxx%,xxxxx%    |N/A   |400   |1.66hrs   | A       | 0.5  |5  |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 98.99%,99.08%    |319   |1500  |5.54rs    | A       | 0.2  |5  |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.92%,99.07%    |323   |1500  |3.08hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
 ##### Remarks
@@ -105,7 +105,7 @@ CNN   |FedAVg|iid   | xxxxx%           |      |1000  |0.88hrs   | T       | 0.1 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.2/o  | SGD   | 
 CNN   |FedAVg|iid   | XXXXX%           |      |xxxx  |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
-CNN   |FedAVg|iid   | xxxxx%           |      |1000  |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
 ##### Remarks
 1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
 2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
