@@ -97,7 +97,6 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 
 
 
-
 #### B. Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1.
 * The runs using optimized learning rate will be marked as "0.01/o".
@@ -130,7 +129,7 @@ CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |8.0hrs    | T      
 
 ##### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |      |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+------|------|------| --------         |----- |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | %                |      |      |1500  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264  |      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 97.65%,98.15%    | 567  |      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | done/d
