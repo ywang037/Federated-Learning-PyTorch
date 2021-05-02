@@ -103,22 +103,22 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 * R-98 means the number of round where test acc hit 98%, similar for R-XX.
 * T Rnd means the total number of performed rounds.
 * Test acc (f,max) means final value and max value.
-* Status marked as "done/d" indicate discarded results.
+* Status marked as "bm" indicate the benchmark runs, and "bm/d" indicate discarded benchmark runs.
 
 ##### CNN/IID
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | done/d
-CNN   |FedSGD|iid   | 16.34%,99.08%    | 210       | 603  |1000  |0.66hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | done/d
+CNN   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | bm/d
+CNN   |FedSGD|iid   | 16.34%,99.08%    | 210       | 603  |1000  |0.66hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | bm/d
 CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614  |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.02%,99.09%    | 57  (x.xx)| 253  |600   |1.10hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | done 
-CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |1.xxhrs   | T       | 0.1  |5  |∞  | 0.15/o | SGD   | ??? on T 
+CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |1.xxhrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm run on A 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.18%,99.10%    | 20  (x.xx)| 253  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |3.xxhrs   | T       | 0.1  |20 |∞  | 0.2/o  | SGD   | ??? on A
+CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |3.xxhrs   | A       | 0.1  |20 |∞  | 0.2/o  | SGD   | bm run on A
 CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | xxxxx%,xxxxx%    | x   (x.xx)| xx   |600   |1.xxhrs   | T       | 0.1  |5  |50 | 0.1/o  | SGD   | ??? on A
+CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
 CNN   |FedAVg|iid   | XXXXX%           |     (x.xx)|      |600   |7.45hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | 
 CNN   |FedAVg|iid   | %                |     (x.xx)|      |600   |hrs       | T       | 0.1  |5  |10 | 0.15/o | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
@@ -127,6 +127,7 @@ CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |8.0hrs    | T 
 1. For {E=1, B=inf}, lr=0.2 and lr=0.15 produce similar results in 600 rounds; lr=0.15 become unstable at last few rounds near 1000, so would the even larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
 2. For {E=1, B=10}, lr=0.2 and 0.15 is unstable in real test run, try {0.1, 0.07} instead. The other parameter combinations can follow similar approach for dealing instability under large lr.
 3. For {E=5, B=50}, lr=0.2 is unstable in real test run after 297 rounds, try {0.15, 0.1, 0.07} instead.
+    * Compared with lr=0.1, lr=0.15 leads to slightly faster convergence at the expense of a little bit of test acc. 
 4. It can observed that the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds). 
 5. Larger learning rates in general lead to quicker convergence or higher test acc in a given number of rounds, at the expense of being prone to instability. 
 6. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
@@ -136,17 +137,17 @@ CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |8.0hrs    | T 
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 97.65%,98.15%    | 567 (    )|      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | done/d
+CNN   |FedAVg|N-iid | 97.65%,98.15%    | 567 (    )|      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | bm/d
 CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done/d
+CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | bm/d
 CNN   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | ??? on A
+CNN   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | to bm
 
 ##### Remarks
 1. It can observed that, in general, the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds). This is why parameter combinations have fewer local computations cannot reach 99% in same number of rounds (600 rounds).
