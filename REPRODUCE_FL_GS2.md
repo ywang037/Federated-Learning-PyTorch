@@ -23,7 +23,7 @@ Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximate
 1. So for IID, since after coarse search the best values appears in 0.01-1.0, finer searches could be done within {0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0} according to the above resolution. 
     * According to the previous search trials, reasonable finer searches can be narrowed to **{0.05, 0.1, 0.2}**.
     * Since candidate lr=0.08 no longer exists and lr=0.05 is very likely not better than 0.08, so existing search results will be updated by comparison between 0.1 and 0.2.
-    * (Update) lr=0.2 is likely to cause instability in real test runs. Instead, finer search in {0.07, 0.1, 0.15} can be used, which is calculated as per multiplicative factors {6.8, 10, 1.5} obtained from resolution $10^(1/6)$.
+    * (Update) lr=0.2 is likely to cause instability in real test runs. If so, finer search in {0.07, 0.1, 0.15} can be used, which is calculated as per multiplicative factors {6.8, 10, 1.5} obtained from resolution $10^(1/6)$.
 2. Similarly for non-IID, best values are likely to appear around 0.001-0.1, so that finer searches could be done witin {0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1}. 
     * According to the previous search trials, reasonable finer searches can be narrowed done to **{0.01, 0.02, 0.05}**.
     * Since candidate lr=0.04 no longer exists and lr=0.06 is better than 0.04 according to existing trials, so existing search results indicating lr=0.04 can be replaced by 0.05. However, there may not be significant differences.
@@ -156,7 +156,8 @@ CNN   |FedAVg|iid   | 98.50%      |10.5mins  | T       | 0.1  |5  |10 | 0.2     
 CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2      | SGD   | fs done
 
 ##### Remarks
-1. For {E=1, B=10}, lr=0.2 is unstable in real test run, try {0.15, 0.1, 0.07} instead.
+1. For {E=1, B=10}, lr=0.2 and 0.15 is unstable in real test run, try {0.1, 0.07} instead.
+2. For {E=5, B=50}, lr=0.2 is unstable in real test run after 297 rounds, try {0.15, 0.1, 0.07} instead.
 
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
@@ -213,10 +214,18 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 * Decay means the learning-rate decay
 * Since E, B are fixed then total number of mini-batch updates $n=R\times250$
 * Grid searches of initial learning rate is conducted prior to the learning rate decay. The searches of best initial lr are conducted using the entire original MNIST training set, then train the model over a relatively shorter rounds, say XXX rounds, and compare the test acc to determine the best values.
+* Learning rate of SGD,FedSGD, FedAvg are first seachred in {1e-5, ..., 1.0}, 
+    * then do finer search with resolution factor {1, 1.5, 2.2, 3.2, 4.6, 6.8, 10}
+    * if the above finer search does not produce good enough performance, 
+
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  |------ | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |        |       | SGD   | 
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
 CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |        |       | SGD   |
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        |       | SGD   | 
