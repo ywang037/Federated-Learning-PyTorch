@@ -115,7 +115,7 @@ CNN   |FedAVg|iid   | 99.02%,99.09%    | 57  (x.xx)| 253  |600   |1.10hrs   | T 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | run on T
 CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | %                |     (x.xx)|      |600   |hrs       | T       | 0.1  |5  |50 | 0.15/o  | SGD   | run on T
+CNN   |FedAVg|iid   | %                |     (x.xx)|      |600   |hrs       | T       | 0.1  |5  |50 | 0.15/o | SGD   | run on T
 CNN   |FedAVg|iid   | XXXXX%           |     (x.xx)|      |600   |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
 CNN   |FedAVg|iid   | %                |     (x.xx)|      |600   |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
@@ -138,8 +138,8 @@ CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A 
 CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid |      %,     %    | ??? (   x)| xxx  |600   |1.xxhrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done/d
+CNN   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
