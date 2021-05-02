@@ -102,7 +102,7 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 ##### CNN/IID
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|iid   | 98.94%,99.01%    | 200  | 573? |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | done
+CNN   |FedSGD|iid   | 98.94%,99.01%    | 200  | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | done/0.15?
 CNN   |FedAVg|iid   | %                |      |      |600   |1.81hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | run on T 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19   | 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | 
@@ -119,7 +119,7 @@ CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |8.0hrs    | T      
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |      |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264  |      |600   |1.25hrs   | T       | 0.1  |5  |∞  | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264  |      |600   |1.25hrs   | T       | 0.1  |5  |∞  | 0.04/o | SGD   | done/0.02?
 CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152  |      |600   |0.65hrs   | T       | 0.1  |1  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid |                  |      |      |600   |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79   | 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
