@@ -15,6 +15,11 @@ Model | Test acc | Time     | Batch size | Epochs | Lr     | Optim
 CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD 
 
 ### III. FedAvg MNIST learning with *2NN* and *CNN* models 
+##### Generic remarks
+1. Some test runs are unstable under searched learning rate, this is
+    * either because the learning rate is too close to instability region
+    * or due to the limited memory and computational power of the machine 
+
 #### A. Experiment 1: increase parallism
 * The runs using optimized learning rate will be marked as "0.01/o"
 * R-98 means the number of round where test acc hit 98%, similar for R-XX
@@ -95,29 +100,28 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 * Test acc (f,max) means final value and max value
 
 ##### CNN/IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|iid   | xxxxx%           |      |1500  |0.65hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | run on T 
-CNN   |FedAVg|iid   | 99.17%           |      |600   |1.81hrs   | T       | 0.1  |5  |∞  | 0.08/o | SGD   |  
-CNN   |FedAVg|iid   | 99.21%           |      |600   |~0.76hrs  | T       | 0.1  |1  |50 | 0.2/o  | SGD   | run on T
-CNN   |FedAVg|iid   | xxxxx%           |      |600   |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | 
-CNN   |FedAVg|iid   | xxxxx%           |      |600   |0.88hrs   | T       | 0.1  |1  |10 | 0.2/o  | SGD   | run on T
-CNN   |FedAVg|iid   | %                |      |600   |hrs       | T       | 0.1  |5  |50 | 0.2/o  | SGD   | 
-CNN   |FedAVg|iid   | XXXXX%           |      |600   |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
-CNN   |FedAVg|iid   | %                |      |600   |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
-CNN   |FedAVg|iid   | xxxxx%           |      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
+Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+CNN   |FedSGD|iid   | xxxxx%           |      |      |1500  |0.65hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | run on T 
+CNN   |FedAVg|iid   | %                |      |      |600   |1.81hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | run on T 
+CNN   |FedAVg|iid   | 99.26%,99.41%    | 19   | 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
+CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |0.88hrs   | T       | 0.1  |1  |10 | ???/o  | SGD   | 
+CNN   |FedAVg|iid   | %                |      |      |600   |hrs       | T       | 0.1  |5  |50 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | XXXXX%           |      |      |600   |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
+CNN   |FedAVg|iid   | %                |      |      |600   |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
 ##### Remarks
 1. For E=1, B=inf, after 1000 rounds, the test acc can still be improve much, the training loss can also be further reduced. It seems that either 1000 rounds is not enough or the learning rate needs optimized.
-2. An make-do approach under the limited computational power, is to **use the same, non-optimized lr, with a lower target (e.g., 91%) for benchmarking the speed up for ever set of parameter combinations against the FedSGD**.
-3. 400-500 rounds should be sufficient for E=5 B=50
+2. 
 
 ##### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |      |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   | run on A
-CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | run on A
-CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264  |      |600   |1.25hrs   | T       | 0.1  |5  |∞  | 0.02/o | SGD   | done
+CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152  |      |600   |0.65hrs   | T       | 0.1  |1  |50 | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid |                  |      |      |600   |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79   | 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109  | 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73   | 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
