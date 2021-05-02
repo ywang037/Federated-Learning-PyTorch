@@ -15,7 +15,7 @@ import torch
 from tensorboardX import SummaryWriter
 
 from options import args_parser
-from update import LocalUpdateVal, test_inference
+from update import LocalUpdate, LocalUpdateVal, test_inference
 from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
 from utils import get_dataset, average_weights, exp_details
 
@@ -92,14 +92,19 @@ if __name__ == '__main__':
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
 
+        # work on validation mode
         # perform per-user update, in a round-robin fashion
         global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx])
-            # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            # to use the entire training set for grid search of lr, toggle the following line
+            local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx])
+            w, loss = local_model.update_weights(model=copy.deepcopy(global_model), global_round=epoch)
 
-            # work on validation mode
-            w, loss = local_model.update_weights_validate(model=copy.deepcopy(global_model), global_round=epoch)
+            # # to use the validation set, i.e., 20% training data, toggle the following line
+            # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx])
+            # # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            # w, loss = local_model.update_weights_validate(model=copy.deepcopy(global_model), global_round=epoch)
+            
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
         
