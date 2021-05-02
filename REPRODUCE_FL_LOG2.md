@@ -112,17 +112,17 @@ CNN   |FedAVg|iid   | xxxxx%           |      |600   |8.0hrs    | T       | 0.1 
 3. 400-500 rounds should be sufficient for E=5 B=50
 
 ##### CNN/non-IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
-CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79   |xxxx  |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | run on T
-CNN   |FedAVg|N-iid | 98.91%,99.06%    | 117  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.04%,99.16%    | 88   |600   |4.124hrs  | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42   |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.15%,99.23%    | 56   |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
+Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |----- |      |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+CNN   |FedSGD|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
+CNN   |FedAVg|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
+CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79   | 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109  | 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73   | 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42   | 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
+CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55   | 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
 
 ##### 2NN/IID
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
