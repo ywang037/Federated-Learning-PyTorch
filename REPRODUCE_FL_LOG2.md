@@ -116,12 +116,12 @@ CNN   |FedAVg|iid   | 99.16%,99.12%    | 49  (x.xx)| 163  |600   |1.16hrs   | A 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.18%,99.10%    | 20  (x.xx)| 253  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | done/redo on A
 CNN   |FedAVg|iid   | 99.19%,97.73%    | 17  (x.xx)| 121  |600   |3.89hrs   | A       | 0.1  |20 |∞  | 0.2/o  | SGD   | bm/d
-CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |3.xxhrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | to bm
+CNN   |FedAVg|iid   | 99.xx%,99.xx%    | xx  (x.xx)| xxx  |600   |3.xxhrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm on A
 CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
 CNN   |FedAVg|iid   | XXXXX%           |     (x.xx)|      |600   |xxxxhrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | run on T
-CNN   |FedAVg|iid   | %                |     (x.xx)|      |600   |xxxhrs    | T       | 0.1  |5  |10 | 0.15/o | SGD   | run on T
+CNN   |FedAVg|iid   | 99.41%,99.38     |     (x.xx)|      |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | run on T
 CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxhrs    | T       | 0.1  |20 |10 | 0.1/o  | SGD   | 
 
 ##### Remarks
