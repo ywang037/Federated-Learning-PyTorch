@@ -121,6 +121,7 @@ CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T 
 CNN   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
 CNN   |FedAVg|iid   | 99.28%,99.23%    | 8   (x.xx)| 37   |600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
+CNN   |FedAVg|iid   | 99.xx%,99.xx%    | x   (x.xx)| xx   |600   |4.xxhrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | bm on T
 CNN   |FedAVg|iid   | 99.41%,99.38     | 5   (x.xx)| 16   |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxhrs    | T       | 0.1  |20 |10 | 0.1/o  | SGD   | 
 
@@ -130,6 +131,7 @@ CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxhrs    | T 
 3. For {E=5, B=50}, lr=0.2 is unstable in real test run after 297 rounds, try {0.15, 0.1, 0.07} instead.
     * Compared with lr=0.1, lr=0.15 leads to slightly faster convergence at the expense of a little bit of test acc. 
 4. For {E=20, B=inf}, lr=0.2 accelearates the speed for reaching 99% test acc, but also become unstable around 422 rounds, and leads to lower error floor in the end. 
+5. For {E=20, B=50}, lr=0.15 leads to unstable pike around 800 rounds; so bm tries lr=0.1.
 5. It can observed that the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds). 
 6. Larger learning rates in general lead to quicker convergence or higher test acc in a given number of rounds, at the expense of being prone to instability. 
 7. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
