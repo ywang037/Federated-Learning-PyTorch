@@ -131,7 +131,8 @@ if __name__ == '__main__':
         epoch_acc_test.append(test_acc)
         epoch_loss_test.append(test_loss)
 
-        print('\nEpoch: {:>4}/{} | Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(epoch+1, args.epochs, loss_avg, test_loss, 100*test_acc))
+        print('\nEpoch: {:>4}/{} | Learning rate: {:.6f}| Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(
+            epoch+1, args.lr, args.epochs, loss_avg, test_loss, 100*test_acc))
         # print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')       
         # print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
         # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
