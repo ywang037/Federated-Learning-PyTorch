@@ -110,7 +110,7 @@ Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Ma
 ------|------|------| --------         |-----      |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | done/d
 CNN   |FedSGD|iid   | 16.34%,99.08%    | 210       | 603  |1000  |0.66hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | done/d
-CNN   |FedSGD|iid   | %,%              |           |      |1000  |hrs       | T       | 0.1  |1  |∞  | 0.1/o  | SGD   | run on A
+CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614  |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.02%,99.09%    | 57  (x.xx)| 253  |600   |1.10hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | done 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | 99.18%,99.10%    | 20  (x.xx)| 253  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | done
