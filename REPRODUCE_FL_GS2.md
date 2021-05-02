@@ -152,6 +152,9 @@ CNN   |FedAVg|iid   | 98.61%      |28.1mins  | T       | 0.1  |20 |50 | 0.1     
 CNN   |FedAVg|iid   | 98.50%      |10.5mins  | T       | 0.1  |5  |10 | 0.2      | SGD   | fs done
 CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.2      | SGD   | fs done
 
+##### Remarks
+1. For {E=1, B=10}, lr=0.2 is unstable in real test run
+
 ##### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
 * Compare the highest test acc achieved in all rounds.
