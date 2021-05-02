@@ -123,7 +123,7 @@ CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A 
 CNN   |FedAVg|iid   | 99.28%,99.23%    | 8   (x.xx)| 37   |600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.xx%,99.xx%    | x   (x.xx)| xx   |600   |4.xxhrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | bm on T
 CNN   |FedAVg|iid   | 99.41%,99.38     | 5   (x.xx)| 16   |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxhrs    | T       | 0.1  |20 |10 | 0.1/o  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |     (x.xx)|      |600   |xxxhrs    | T       | 0.1  |20 |10 | 0.1/o  | SGD   | run on T
 
 ##### Remarks
 1. For {E=1, B=inf}, lr=0.2 and lr=0.15 produce similar results in 600 rounds; lr=0.15 become unstable at last few rounds near 1000, so would the even larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
