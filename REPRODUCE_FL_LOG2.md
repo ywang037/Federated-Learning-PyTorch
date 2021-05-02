@@ -117,7 +117,7 @@ Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine
 CNN   |FedSGD|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
 CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   | run on A
 CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | run on A
-CNN   |FedAVg|N-iid | %                |      |      |600   |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | run on A
+CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152  |      |600   |0.65hrs   | T       | 0.1  |20 |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79   | 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109  | 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73   | 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
