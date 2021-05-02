@@ -2,9 +2,10 @@
 data/cifar/cifar-10-python.tar.gz
 backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_loss-checkpoint.png
 backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_acc-checkpoint.png
-logs/events.out.tfevents.1619622536.LAPTOP-H2HF5C5C
-*.ERIAN-NB077A
-*.LAPTOP-H2HF5C5C
+
+# old tensorboard runs
+logs/
+
 
 src/__pycache__/
 *.pyc
@@ -15,4 +16,4 @@ src/ipynb_checkpoints/
 .ipynb_checkpoints/
 
 # tensorboard logs
-runs/
+# runs/
