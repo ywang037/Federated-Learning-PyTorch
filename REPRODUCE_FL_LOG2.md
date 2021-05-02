@@ -109,14 +109,14 @@ CNN   |FedSGD|iid   | %,%              |      |      |1000  |hrs       | T      
 CNN   |FedAVg|iid   | 99.02%,99.09%    | 57   | 253  |600   |1.10hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | done 
 CNN   |FedAVg|iid   | 99.26%,99.41%    | 19   | 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |xxxxhrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | 
-CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |0.88hrs   | T       | 0.1  |1  |10 | ???/o  | SGD   | 
+CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |0.88hrs   | T       | 0.1  |1  |10 | 0.15/o | SGD   | 
 CNN   |FedAVg|iid   | %                |      |      |600   |hrs       | T       | 0.1  |5  |50 | 0.2/o  | SGD   | 
 CNN   |FedAVg|iid   | XXXXX%           |      |      |600   |7.45hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | 
 CNN   |FedAVg|iid   | %                |      |      |600   |hrs       | T       | 0.1  |5  |10 | 0.2/o  | SGD   | 
 CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |8.0hrs    | T       | 0.1  |20 |10 | 0.2/o  | SGD   | 
 ##### Remarks
-1. For E=1, B=inf, lr=0.2 and lr=0.15 produce similar results in 600 rounds, but lr=0.15 become unstable at last few rounds near 1000, so would the larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
-2. 
+1. For {E=1, B=inf}, lr=0.2 and lr=0.15 produce similar results in 600 rounds, but lr=0.15 become unstable at last few rounds near 1000, so would the larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
+2. For {E=1, B=10}, lr=0.2 is unstable in real test run, try {0.15, 0.1, 0.07} instead. The other parameter combinations can follow similar approach for dealing instability under large lr.
 
 ##### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
