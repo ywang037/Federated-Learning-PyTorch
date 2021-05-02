@@ -92,6 +92,12 @@ if __name__ == '__main__':
     print('{:<18}: {}-{}'.format('Model to train',args.dataset,args.model))  
     print('{:<18}: {}'.format('Parameter amount',get_count_params(global_model)))
 
+    # pause and print message for user to confirm the hyparameter are good to go
+    answer = input("Press n to abort, press any other key to continue, then press ENTER: ")
+    if answer == 'n':
+        exit('\nTraining is aborted by user')
+    print('\nTraining starts...\n')
+
     # start training
     trainloader = DataLoader(train_dataset, batch_size=args.bs, shuffle=True)
     epoch_loss = []
@@ -133,7 +139,9 @@ if __name__ == '__main__':
     
     # print the wall-clock-time used
     end=time.time() 
-    print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
+    time_elapsed = end_time-start_time
+    # print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
+    print('\nTraining completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(test_acc),time_elapsed,time_elapsed/3600))
 
     # write results to csv file
     if args.save_record:
