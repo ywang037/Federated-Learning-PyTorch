@@ -118,7 +118,7 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
 
-            if batch_idx % 100 == 0:
+            if args.verbose and (batch_idx % 100 == 0):
                 print('Train Epoch: {} [{:>5}/{} ({:>2.0f}%)]\tLoss: {:.6f}'.format(
                     epoch+1, batch_idx * len(images), len(trainloader.dataset),
                     100. * batch_idx / len(trainloader), loss.item()))
@@ -139,9 +139,9 @@ if __name__ == '__main__':
     
     # print the wall-clock-time used
     end=time.time() 
-    time_elapsed = end_time-start_time
+    time_elapsed = end-start
     # print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
-    print('\nTraining completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(test_acc),time_elapsed,time_elapsed/3600))
+    print('\nTraining completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(epoch_acc_test),time_elapsed,time_elapsed/3600))
 
     # write results to csv file
     if args.save_record:
