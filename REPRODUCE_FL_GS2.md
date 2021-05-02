@@ -51,6 +51,7 @@ Both trianed models might be used for warm start in future training.
 * Lr/O means the optimized value of learning rate
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
+* Grid searches are conducted using a validation dataset which is 20% of the original MNIST training set, then train the model over 200 or 400 rounds and compare the test acc to determine the best values.
 
 ##### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
@@ -137,6 +138,7 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 * The fraction number is fixed at C=0.1
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
+* Grid searches are conducted using a validation dataset which is 20% of the original MNIST training set, then train the model over 200 or 400 rounds and compare the test acc to determine the best values.
 
 ##### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
@@ -210,6 +212,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * Decay means the learning-rate decay
 * Since E, B are fixed then total number of mini-batch updates $n=R\times250$
+* Grid searches of initial learning rate is conducted prior to the learning rate decay. The searches of best initial lr are conducted using the entire original MNIST training set, then train the model over a relatively shorter rounds, say XXX rounds, and compare the test acc to determine the best values.
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  |------ | ----- | ------
