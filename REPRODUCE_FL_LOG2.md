@@ -117,11 +117,12 @@ CNN   |FedAVg|iid   | xxxxx%           |      |      |600   |8.0hrs    | T      
 ##### Remarks
 1. For {E=1, B=inf}, lr=0.2 and lr=0.15 produce similar results in 600 rounds, but lr=0.15 become unstable at last few rounds near 1000, so would the larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
 2. For {E=1, B=10}, lr=0.2 is unstable in real test run, try {0.15, 0.1, 0.07} instead. The other parameter combinations can follow similar approach for dealing instability under large lr.
+3. It can observed that the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds)
 
 ##### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98  |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |----- |      |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|N-iid | %                |      |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
+CNN   |FedSGD|N-iid | %                |      |      |1500  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | run on A
 CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264  |      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
 CNN   |FedAVg|N-iid | 97.65%,98.15%    | 567  |      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | done/d
 CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152  |      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
