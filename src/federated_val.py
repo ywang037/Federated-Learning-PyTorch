@@ -95,8 +95,12 @@ if __name__ == '__main__':
         # perform per-user update, in a round-robin fashion
         global_model.train()
         for idx in idxs_users:
-            local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx])
-            # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
+            # to use the entire training set for grid search of lr, toggle the following line
+            local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx])
+
+            # # to use the validation set, i.e., 20% training data, toggle the following line
+            # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx])
+            # # local_model = LocalUpdateVal(args=args, dataset=train_dataset, idxs=user_groups[idx], logger=logger)
 
             # work on validation mode
             w, loss = local_model.update_weights_validate(model=copy.deepcopy(global_model), global_round=epoch)
