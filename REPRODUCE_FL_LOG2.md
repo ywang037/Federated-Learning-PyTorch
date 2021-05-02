@@ -15,6 +15,11 @@ Model | Test acc | Time     | Batch size | Epochs | Lr     | Optim
 CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD 
 
 ### III. FedAvg MNIST learning with *2NN* and *CNN* models 
+##### Generic remarks
+1. Some test runs are unstable under searched learning rate, this is
+    * either because the learning rate is too close to instability region
+    * or due to the limited memory and computational power of the machine 
+
 #### A. Experiment 1: increase parallism
 * The runs using optimized learning rate will be marked as "0.01/o"
 * R-98 means the number of round where test acc hit 98%, similar for R-XX
