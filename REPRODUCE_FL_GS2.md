@@ -234,8 +234,6 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 
-
-
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 | 0.05/0.07 |       | SGD   | 
@@ -250,6 +248,18 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |           |       | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |           |       | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |           |       | SGD   | 
+
+##### Remarks
+1. Using "dropout" for *tf cnn*, 
+    * FedAvg with lr=0.03, 0.05 effectively reduced overfitting within 200 rounds, reaching a maximum test acc around 72%
+    * SGD with lr=0.07 and 0.1 also exhibits effectiveness of handling overfitting within 100 rounds.
+    * However, SGD with lr=0.03, 0.05 still suffer from severe overfitting in 200 rounds, there is no improvement over the curves obtained without dropout layer.
+    * It is not clear whether some error occurred in the above SGD runs with lr=0.03 and 0.05.TO-DO: run 300-400 rounds, and
+        1. check FedAvg with lr=0.03, 0.05, 0.07, and 0.1, 
+        2. check SGD with lr=0.03, 0.05, 0.07, and 0.1
+        3. check FedSGD with lr=0.03, 0.05,0.07, and 0.1
+2. 
+
 
 ##### Varying federated setting VS SGD
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around at most 100,000 mini-batch updates, which is equivalent to
