@@ -251,8 +251,8 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 
 ##### Varying federated setting VS SGD
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around at most 100,000 mini-batch updates, which is equivalent to
-    1. 2000 rounds for SGD,
-    2. 1000 rounds for FedAvg
+    1. 600 rounds (B=100) or for 300 rounds (B=50) SGD ,
+    2. 600 rounds for FedAvg
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization
 * Each setting runs same number of mini-batch updates ?
 * Totoal number of rounds of each setting is ?
