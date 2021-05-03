@@ -298,3 +298,30 @@ class CNNMnistWyBnDp(nn.Module):
         x=x.view(-1,1024)
         logits = self.fc_layer(x)
         return F.log_softmax(logits,dim=1)
+
+# WY's edition of cnn model shown on TF tutorial
+class CNNCifarTfDp(nn.Module):
+    def __init__(self):
+        super(CNNCifarTfDp,self).__init__()
+        self.conv_layer = nn.Sequential(
+            nn.Conv2d(in_channels=3,out_channels=32, kernel_size=3), # output size 30*30, i.e., (32, 30 ,30)
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2), # output size 15*15, i.e., (32, 15 ,15)
+            nn.Conv2d(in_channels=32,out_channels=64,kernel_size=3), # output size 13*13, i.e., (64, 13 ,13)
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2,stride=2), # output size 6*6, i.e., (64, 6, 6)
+            nn.Conv2d(in_channels=64,out_channels=64,kernel_size=3), # output size 4*4, i.e., (64, 4, 4)
+            nn.Dropout2d(), # this is WY's added layer to postpone overfitting, allowing for larger number of rounds for experiments
+            nn.ReLU()
+        )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(in_features=1024,out_features=64),
+            nn.ReLU(),
+            nn.Linear(in_features=64,out_features=10),
+        )
+
+    def forward(self,x):
+        x=self.conv_layer(x)
+        x=x.view(-1,1024)
+        logits=self.fc_layer(x)
+        return F.log_softmax(logits,dim=1)        

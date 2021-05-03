@@ -17,7 +17,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf, CNNCifarTfDp
 from utils import get_dataset, average_weights, exp_details
 
 import time, csv
@@ -48,22 +48,30 @@ if __name__ == '__main__':
     if args.model == 'cnn':  # Convolutional neural netork
         if args.dataset == 'mnist':
             # global_model = CNNMnist(args=args)
-            # global_model = CNNMnist() # use WY's edition, no args are needed
-            global_model = CNNMnistWy() # use WY's cnn for learning mnist            
+            global_model = CNNMnist() # use WY's modification no args are needed          
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifarTf() # cnn from current TF tutorial
+            global_model = CNNCifarTf() # cnn borrowed from current TF tutorial
             # global_model = CNNCifarTorch() # use WY's edition, no args are needed
             # global_model = CNNCifar(args=args)
+    elif args.model == 'wycnn':
+        if args.dataset == 'mnist':
+            global_model = CNNMnistWy() # use WY's cnn for learning mnist
+        elif args.dataset == 'cifar':
+            global_model = CNNCifarTfDp() # cnn from current TF tutorial
     elif args.model == 'mlp':  # Multi-layer preceptron
+        if args.dataset == 'mnist':            
+            img_size = train_dataset[0][0].shape
+            len_in = 1
+            for x in img_size:
+                len_in *= x
+                global_model = MLP(dim_in=len_in, dim_hidden=64,dim_out=args.num_classes)
+        else:
+            exit('Error: MLP/2NN can only be trained with MNIST dataset')
+    elif args.model == 'wymlp':
         if args.dataset == 'mnist':
             global_model = TwoNN() # WY's mlp for learning mnist        
-            # img_size = train_dataset[0][0].shape
-            # len_in = 1
-            # for x in img_size:
-            #     len_in *= x
-            #     global_model = MLP(dim_in=len_in, dim_hidden=64,dim_out=args.num_classes)
         else:
             exit('Error: MLP/2NN can only be trained with MNIST dataset')
     else:
