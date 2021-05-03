@@ -39,8 +39,8 @@ if __name__ == '__main__':
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifarTf() # cnn borrowed from current TF tutorial
-            # global_model = CNNCifarTorch() # use WY's edition, no args are needed
+            # global_model = CNNCifarTf() # cnn borrowed from current TF tutorial
+            global_model = CNNCifarTorch() # use WY's edition, no args are needed
             # global_model = CNNCifar(args=args)
     elif args.model == 'wycnn':
         if args.dataset == 'mnist':
