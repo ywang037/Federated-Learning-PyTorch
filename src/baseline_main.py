@@ -13,7 +13,7 @@ from torch.utils.tensorboard import SummaryWriter
 from utils import get_dataset, get_count_params
 from options import args_parser
 from update import test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf
 
 import time, csv
 from itertools import zip_longest
@@ -39,7 +39,8 @@ if __name__ == '__main__':
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifarTorch() # use WY's edition, no args are needed
+            global_model = CNNCifarTf() # cnn from current TF tutorial
+            # global_model = CNNCifarTorch() # use WY's edition, no args are needed
             # global_model = CNNCifar(args=args)
     elif args.model == 'mlp':
         # Multi-layer preceptron
