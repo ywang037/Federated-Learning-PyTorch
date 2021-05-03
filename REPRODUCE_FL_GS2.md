@@ -35,6 +35,8 @@ Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximate
 * Learning rate of SGD, FedSGD, FedAvg are first seachred in {1e-5, ..., 1.0}, 
     * For SGD, it was found that best values are around {0.01, 0.1}, 
     * Then finer search in {0.01, 0.15, 0.02, 0.03, 0.05, 0.07, 0.1 ,0.15, 0.22} obtained from resolution factors {1, 1.5, 2.2, 3.2, 4.6, 6.8, 10} show that the best initial lr values are likely be within {0.01, 0.015, 0.02, 0.03}
+* Adopting the similar grid-search multiplicative factors, the learning-rate decay can be searched in {0.9910, .9915, .9922, .9932, .9946, .9968,} with smaller resolution or {.991, 992, 995} with larger resolution.
+
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
 #### Torch cnn only (27 April 2021)
