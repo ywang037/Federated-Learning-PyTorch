@@ -240,9 +240,9 @@ CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |     
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |        | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 |        | SGD   | 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |        | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |        | SGD   | 
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |        | SGD   | cancelled
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |        | SGD   | cancelled
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |        | SGD   | cancelled
 
 #### Appendix: Training time summary
 
