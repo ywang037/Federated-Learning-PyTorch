@@ -9,7 +9,7 @@ python src/baseline_main.py --gpu=True --model=mlp --dataset=mnist --bs=100 --lr
 
 1.2 For CIFAR10
 
-python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --bs=100 --lr=0.1 --epochs=10
+python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --verbose=0 --save_record=False --epochs=5 --bs=100 --lr=0.01 
 
 python src/baseline_main.py --gpu=True --model=cnn --dataset=cifar --bs=100 --lr=0.1 --momentum=0.9 --nag=False --epochs=10
 
