@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 import torch
 from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
 
 from utils import get_dataset, get_count_params
 from options import args_parser
@@ -98,6 +99,10 @@ if __name__ == '__main__':
         exit('\nTraining is aborted by user')
     print('\nTraining starts...\n')
 
+    # start the tensorboard writer
+    logger_path = f'runs/fedavg-{args.dataset}-SGD/R{args.epochs}-B{args.local_bs}-Lr{args.lr}'
+    logger = SummaryWriter(logger_path)
+
     # start training
     trainloader = DataLoader(train_dataset, batch_size=args.bs, shuffle=True)
     epoch_loss = []
@@ -138,11 +143,20 @@ if __name__ == '__main__':
         # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
         print(f'Tested on {len(test_dataset)} samples\n')
     
+        # write training loss, test loss, and test acc to tensorboard writer
+        logger.add_scalar('Train loss', loss_avg, epoch+1)
+        logger.add_scalar('Test loss', test_loss, epoch+1)
+        logger.add_scalar('Test acc', test_acc, epoch+1)
+
     # print the wall-clock-time used
     end=time.time() 
     time_elapsed = end-start
     # print('\nTraining completed, time elapsed: {:.2f}s'.format(end-start))
     print('\nTraining completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(epoch_acc_test),time_elapsed,time_elapsed/3600))
+
+    # flush the event and close the tensoarboard writer
+    logger.flush()
+    logger.close()
 
     # write results to csv file
     if args.save_record:
