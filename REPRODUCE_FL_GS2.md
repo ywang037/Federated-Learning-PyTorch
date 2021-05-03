@@ -214,15 +214,15 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 ##### Fixed federated setting VS FedSGD and SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
-* For SGD, batch size is fixed at B=100, so number of mini-batch updates is also $50R$ since N=50,000 so mini-batch update per round is N/B=50.
-* Since E, B are fixed then total number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=100R$, where N=50,000 is the total amount of data.
-* FedSGD do only one mini-batch update per local epoch which means 5 mini-batch udpates per comm. rounds, so that total mini-batch updates per participant is $5R$
+* For SGD, batch size is fixed at B=100, so number of mini-batch updates is also $500R$ since N=50,000 so mini-batch update per round is N/B=500.
+* Since E, B are fixed then total number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=50R$, where N=50,000 is the total amount of data.
+* FedSGD do only one mini-batch update per local epoch which means the total mini-batch updates is $5R$ per participant.
 * Therefore, every 100,000 rounds mini-batch updates means 
-    1. 2000 epochs for SGD, 
-    2. 1000 comm. rounds for FedAvg, 
-    3. 20,000 comm. rounds for FedSGD.
-* One cannot afford to perform that many rounds for FedSGD, a reasonable approach is to let FedAvg and FedSGD perform identical rounds of learning, as what are performed in the previous two experiments, e.g., 500-1000 rounds.
-    * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform $1000\times\frac{100}{2000}=50$ rounds FedAvg/FedSGD
+    1. 200 epochs for SGD, 
+    2. 200 comm. rounds for FedAvg, since each round there are 10 clients each making 50 mini-batch update 
+    3. 20,00 comm. rounds for FedSGD, since each round there are 10 clients each making 5 mini-batch udpate
+* One cannot afford to perform that many rounds for FedSGD, a reasonable approach is to let FedAvg and FedSGD perform identical rounds of learning, as what are performed in the previous two experiments, e.g., 100-200 rounds.
+    * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 * Grid searches of initial learning rate is conducted prior to the learning rate decay. The searches of best initial lr are conducted using the entire original MNIST training set, then train the model over a relatively shorter rounds, say XXX rounds, and compare the test acc to determine the best values.
