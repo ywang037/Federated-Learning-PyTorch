@@ -112,6 +112,9 @@ if __name__ == '__main__':
 
     start = time.time()
     for epoch in tqdm(range(args.epochs)):
+        # set a learning rate scheduler
+        scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=args.lr_decay, verbose=True)
+        
         batch_loss = []
         print('\n')
 
@@ -137,8 +140,11 @@ if __name__ == '__main__':
         epoch_acc_test.append(test_acc)
         epoch_loss_test.append(test_loss)
 
+        # update the learning rate
+        scheduler.step()
+
         print('\nEpoch: {:>4}/{} | Learning rate: {:.6f}| Training Loss: {:.2f} | Test Loss: {:.2f} | Test accuracy = {:.2f}%'.format(
-            epoch+1, args.lr, args.epochs, loss_avg, test_loss, 100*test_acc))
+            epoch+1, args.epochs, args.lr, loss_avg, test_loss, 100*test_acc))
         # print(f'\nTrain loss after Epoch {epoch+1}:\t{loss_avg}')       
         # print('Test loss after Epoch{}:\t{:.2f}'.format(epoch+1,test_loss))
         # print("Test accuracy after Epoch{}:\t{:.2f}%".format(epoch+1,100*test_acc))
