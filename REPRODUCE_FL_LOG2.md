@@ -122,7 +122,7 @@ CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T 
 CNN   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
 CNN   |FedAVg|iid   | 99.28%,99.23%    | 8   (x.xx)| 37   |600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.26%,99.18%    | 10  (x.xx)| 46   |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | done
+CNN   |FedAVg|iid   | 99.26%,99.18%    | 10  (x.xx)| 46   |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | bm
 CNN   |FedAVg|iid   | 99.41%,99.38%    | 5   (x.xx)| 16   |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
 
@@ -136,6 +136,19 @@ CNN   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T 
 5. It can observed that the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds). 
 6. Larger learning rates in general lead to quicker convergence or higher test acc in a given number of rounds, at the expense of being prone to instability. 
 7. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
+
+##### CNN/IID (selected edition)
+Model |Method|Data  | Test acc (f,max) |R-98       |R-99        |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+------|------|------| --------         |-----      |-----       |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614        |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
+CNN   |FedAVg|iid   | 99.16%,99.12%    | 49  (4.7x)| 163  (1.4x)|600   |1.16hrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm 
+CNN   |FedAVg|iid   | 99.26%,99.41%    | 19 (12.1x)| 55   (4.2x)|600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
+CNN   |FedAVg|iid   | 99.16%,99.11%    | 21 (11.0x)| 122  (1.9x)|600   |3.86hrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm 
+CNN   |FedAVg|iid   | 99.31%,99.41%    | 10 (23.0x)| 32   (7.2x)|600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
+CNN   |FedAVg|iid   | 99.28%,99.21%    | 8  (28.8x)| 39   (5.9x)|600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
+CNN   |FedAVg|iid   | 99.28%,99.23%    | 8  (28.8x)| 37   (6.2x)|600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
+CNN   |FedAVg|iid   | 99.41%,99.38%    | 5  (46.0x)| 16  (14.4x)|600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
+CNN   |FedAVg|iid   | 99.38%,99.31%    | 5  (46.0x)| 18  (12.8x)|600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
 
 
 ##### CNN/non-IID
