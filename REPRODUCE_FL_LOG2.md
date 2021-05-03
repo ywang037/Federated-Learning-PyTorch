@@ -231,6 +231,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper
 * Each setting runs same number of mini-batch updates $n=?$
 * Totoal number of rounds of each setting is $R=n/(E\timesB)$
+* The last three experiment can be skipped for the time being since theier convergence per minibatch coudl be too slow to make meaningful comparison
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
