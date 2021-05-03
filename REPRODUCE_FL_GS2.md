@@ -8,17 +8,17 @@
 * **CAUTION** To decide the optimized learning rate, the vanilla paper took the best values achieved in all prior rounds:
 > optimizing η as described above and then making each curve monotonically improving by taking the best value of test-set accuracy achieved over all prior rounds
 
-### Approach for IID data
+### Approach for MNIST IID data
 * Initial coarse searches in a grid {1e-4, 1e-3, 1e-2, 1e-1, 1.0}, best values were found around 1e-2 and 1e-1.
 * It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.08, 0.1, 0.16, 0.2}. Therefore, one can reduce the search range to {0.08, 0.1, 0.2} firstly, since these three values are most likely to be the best learning rate. 0.16 can be checked additionaly.
 * Most of the completed search show that WY's CNN model of learning MNIST leads to monototically increased test accuracy. Therefore, one may use 100 rounds instead of 200 rounds for searching the learning rate.
 
-### Approach for Non-IID data
+### Approach for MNIST non-IID data
 * Initial coarse searches in a grid {1e-5, 1e-4, 1e-3, 1e-2, 1e-1}, best values were found around 1e-3 and 1e-2
 * It is found that, for WY's CNN model of learning MNIST, best learning rate are most likely to appear around {0.008, 0.01, 0.02, 0.04}. Therefore, one can reduce the search range to {0.01, 0.02, 0.04} firstly, since these three values are most likely to be the best learning rate. 0.008, 0.06 can be checked additionaly.
 * It was observed that 0.02 are most likely to be the best learning rate for non-IID cases.
 
-### Updated approach for IID/Non-IID data
+### Updated approach for MNIST IID/Non-IID data
 Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximately leads to multiplicative factors {1,2,5,10}
 1. So for IID, since after coarse search the best values appears in 0.01-1.0, finer searches could be done within {0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0} according to the above resolution. 
     * According to the previous search trials, reasonable finer searches can be narrowed to **{0.05, 0.1, 0.2}**.
@@ -29,6 +29,12 @@ Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximate
     * Since candidate lr=0.04 no longer exists and lr=0.06 is better than 0.04 according to existing trials, so existing search results indicating lr=0.04 can be replaced by 0.05. However, there may not be significant differences.
     * Multiplicative factors {1.5, 2.2, 3.2, 4.6, 6.8} obtained from resolution $10^(1/6)$ may also be used to generates alternative finer searches lr={0.007, 0.01, 0.015, 0.022, 0.032, 0.046}. Then, according to pervious search trials, {0.022, 0.032} can be used instead of 0.04 if instability is observed in real test run.
 
+### Approach for CIFAR fixed E,B (tf cnn)
+* Grid searches of initial learning rate is conducted prior to the learning rate decay. 
+* The searches of best initial lr are conducted using the entire original CIFAR10 training set, then train the model over a relatively shorter rounds, say 100-500 rounds, and compare the test acc to determine the best values.
+* Learning rate of SGD, FedSGD, FedAvg are first seachred in {1e-5, ..., 1.0}, 
+    * For SGD, it was found that best values are around {0.01, 0.1}, 
+    * Then finer search in {0.01, 0.15, 0.02, 0.03, 0.05, 0.07, 0.1 ,0.15, 0.22} obtained from resolution factors {1, 1.5, 2.2, 3.2, 4.6, 6.8, 10} show that the best initial lr values are likely be within {0.01, 0.015, 0.02, 0.03}
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
 #### Torch cnn only (27 April 2021)
@@ -225,10 +231,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
-* Grid searches of initial learning rate is conducted prior to the learning rate decay. The searches of best initial lr are conducted using the entire original MNIST training set, then train the model over a relatively shorter rounds, say XXX rounds, and compare the test acc to determine the best values.
-* Learning rate of SGD,FedSGD, FedAvg are first seachred in {1e-5, ..., 1.0}, 
-    * For SGD, it was found that best values are around {0.01, 0.1}, 
-    * Then do finer search with resolution factor {1, 1.5, 2.2, 3.2, 4.6, 6.8, 10} for {0.02, 0.03, 0.05, 0.07, 0.1 ,0.15, 0.22}
+
 
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
