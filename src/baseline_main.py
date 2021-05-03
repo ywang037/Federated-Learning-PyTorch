@@ -113,7 +113,7 @@ if __name__ == '__main__':
     start = time.time()
     for epoch in tqdm(range(args.epochs)):
         # set a learning rate scheduler
-        scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=args.lr_decay, verbose=True)
+        scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=args.lr_decay, verbose=False)
         
         batch_loss = []
         print('\n')
