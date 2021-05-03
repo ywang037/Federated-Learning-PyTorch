@@ -13,7 +13,7 @@ from torch.utils.tensorboard import SummaryWriter
 from utils import get_dataset, get_count_params
 from options import args_parser
 from update import test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf, CNNCifarTfDp
 
 import time, csv
 from itertools import zip_longest
