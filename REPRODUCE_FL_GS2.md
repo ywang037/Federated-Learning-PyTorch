@@ -253,11 +253,10 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 
 ##### Varying federated setting VS SGD
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around at most 100,000 mini-batch updates, which is equivalent to
-    1. 600 rounds (B=100) or for 300 rounds (B=50) SGD ,
-    2. 600 rounds for FedAvg
-* The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization
-* Each setting runs same number of mini-batch updates ?
-* Totoal number of rounds of each setting is ?
+    1. 600 rounds (B=100) or for 300 rounds (B=50) SGD,
+    2. 600 rounds for FedAvg (E=5, B=50)
+* The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
+* The last three experiment can be skipped for the time being since theier convergence per minibatch could be too slow to make meaningful comparison
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
