@@ -101,7 +101,7 @@ if __name__ == '__main__':
     print('\nTraining starts...\n')
 
     # start the tensorboard writer
-    logger_path = f'runs/fedavg-{args.dataset}-SGD/R{args.epochs}-B{args.local_bs}-Lr{args.lr}'
+    logger_path = f'runs/fedavg-{args.dataset}-SGD/R{args.epochs}-B{args.bs}-Lr{args.lr}'
     logger = SummaryWriter(logger_path)
 
     # start training
