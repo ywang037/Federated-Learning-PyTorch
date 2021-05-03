@@ -261,7 +261,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     * Experiments show that, within 200 rounds/epochs:
         1. For FedAvg, best lr could be 0.1, larger values do not improve
         2. For SGD, lr=0.01 looks best. However, for each lr value, the learning curve is similar to that generated without dropout, i.e, overfitting still exists. It is suspected that the learning rate should be tuned even smaller, like 0.001
-        3. For FedSGD, the largest value of lr performs the best, for lr in {0.01, ..., 0.5}
+        3. For FedSGD, the largest value of lr performs the best, for lr in {0.01, ..., 0.5}, lr that is even larger than 0.5 does not improve any more.
         
 
 
