@@ -209,6 +209,8 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 
 
+#### C. Experiment 3: CIFAR10 learning performance
+
 ##### Fixed federated setting VS FedSGD and SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
@@ -238,9 +240,12 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 |           |       | SGD   | 
 
 ##### Varying federated setting VS SGD
+* 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around at most 100,000 mini-batch updates, which is equivalent to
+    1. 2000 rounds for SGD,
+    2. 1000 rounds for FedAvg
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization
-* Each setting runs same number of mini-batch updates $n=?$
-* Totoal number of rounds of each setting is $R=n/(E\timesB)$
+* Each setting runs same number of mini-batch updates ?
+* Totoal number of rounds of each setting is ?
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
