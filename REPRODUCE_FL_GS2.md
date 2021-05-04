@@ -267,8 +267,13 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
         2. For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2}, larger lr reach a higher test acc in shorter time, but tends to overfit and needs ealier stopping.
         3. For FedSGD, smaller lr like 0.05, 0.1 lead to higher test acc
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
-    * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup
+    * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
+    * Limited computational power and project timeline does not allow for
+        1. Finer searches of best learning rate (and decay scheme) for each algorithm
+        2. Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.7, 0.72, 0.74
+    * TO-DO on 4-th May:
+        1. 
 
 
 ##### Varying federated setting VS SGD
