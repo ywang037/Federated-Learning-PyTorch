@@ -16,4 +16,7 @@ src/ipynb_checkpoints/
 .ipynb_checkpoints/
 
 # tensorboard logs
-# runs/
+runs/arxiv/
+runs/fedavg-cifar-IID/
+runs/fedavg-cifar-SGD/
+runs/fedavg-mnist-IID/
