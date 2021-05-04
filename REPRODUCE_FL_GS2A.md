@@ -237,7 +237,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       |
-CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | A       | 0.1  |5  |∞  | 0.1@dp    |       | SGD   | needs bm
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | needs bm
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.05@dp   |       | SGD   | needs bm
 
 ##### Remarks
@@ -252,11 +252,11 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     * **Experiments with 200 rounds/epochs show that**:
         1. For FedAvg, best lr could be 0.1, larger values do not improve further.
         2. For SGD, lr=0.01 looks best. However, for each lr candidate, the resulted learning curve is similar to that generated without dropout, i.e, overfitting still exists. It is suspected that the learning rate should be tuned even smaller, like 0.001.
-        3. For FedSGD, the largest value of lr performs the best, for lr in {0.05, ..., 0.5}. lr that is even larger than 0.5 does not improve any more.
+        3. (WRONG) *For FedSGD, the largest value of lr performs the best, for lr in {0.05, ..., 0.5}. lr that is even larger than 0.5 does not improve any more.*
     * However, when running over 2000 rounds:
         1. For FedAvg, for lr={0.05,0.07,0.1}, larger lr converge quicker before 200 rounds, **however, lr=0.05 become better afterwards and converges to 0.72 quicker**.
         2. For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1.5e-2, 2e-2, 3e-2}, larger lr converge to 72% test acc in shorter time, but tends to overfit earlier and needs the "ealier stopping". **Among all lrs, lr=0.01 reach 72 around 45 rounds and achieve a maximum test acc around 74%**. Futher test using 0.99 learning-rate decay for 200 rounds does not show any improvement for SGD with lr=0.01.
-        3. For FedSGD, lr around {0.05, 0.1, 0.2} can achieve higher test acc, among which lr=0.2 converges quickest for the target test acc 0.7/0.72 around 700-800 rounds, but cannot improve further after 1000 rounds, **whereas lr=0.1 keeps increasing within 2000 rounds** (may be the quickest to reach 0.74).
+        3. (WRONG) *For FedSGD, lr around {0.05, 0.1, 0.2} can achieve higher test acc, among which lr=0.2 converges quickest for the target test acc 0.7/0.72 around 700-800 rounds, but cannot improve further after 1000 rounds, **whereas lr=0.1 keeps increasing within 2000 rounds** (may be the quickest to reach 0.74).*
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
     * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
     * Limited computational power and project timeline does not allow for
@@ -265,7 +265,9 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
     * **TO-DO on 4-th May**:
         1. For FedAvg, *try lr={0.03, 0.05} in 2000-4000 rounds (to run on T over night).*
-        2. For FedSGD, to verify if lr=0.1 is the best for FedSGD in this experiment, *try lr={0.03, 0.05, 0.1} for 4000 rounds (to run on A overnight).*
+        2. For FedSGD, to verify 
+            * Do coarse search in lr={0.02, 0.05, 0.1, 0.2, 0.5}, 
+            * then perform 4000 rounds verification (to run on A overnight).*
     * TO-DO on 5-th May:
         1. Test SGD with lr={5e-5, 1e-4} for 5000/10000 rounds if time permits.
 
