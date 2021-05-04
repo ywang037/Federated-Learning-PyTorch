@@ -171,6 +171,9 @@ CNN   |FedAVg|iid   | 99.28%,99.23%    | 8  (28.8x)| 37   (6.2x)|600   |4.23hrs 
 CNN   |FedAVg|iid   | 99.41%,99.38%    | 5  (46.0x)| 16  (14.4x)|600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
 CNN   |FedAVg|iid   | 99.38%,99.31%    | 5  (46.0x)| 18  (12.8x)|600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
 
+##### Remarks
+1. Learning curve of {E=5, B=50} is very noisy and unstable, may need a re-run
+
 ##### CNN/non-IID (selected edition)
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
