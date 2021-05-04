@@ -284,15 +284,16 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 * TO-DO on 5-th May:
     1. test *FedAvg E=5, B=50, C=0 for 1000 rounds with parameter using lr={0.05, 0.1}* (since it is learned from exp 1 that different C does not vary the best lr significantly).
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O    | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----   | ----- | ------
-CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 | 0.01@dp | SGD   | run on A
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |         | SGD   | to run on T
-CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp  | SGD   | done
-CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp  | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |         | SGD   | cancelled
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |         | SGD   | cancelled
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |         | SGD   | cancelled
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
+CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.01@dp  | SGD   | run on A
+CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.005@dp | SGD   | run on A
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | to run on T
+CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp   | SGD   | done
+CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp   | SGD   | done
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |          | SGD   | cancelled
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |          | SGD   | cancelled
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |          | SGD   | cancelled
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
