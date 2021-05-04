@@ -233,11 +233,11 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr       |Decay  | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    |------ | ----- | ------
-CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100|          |       | SGD   | 
-CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |          |       | SGD   |
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o |       | SGD   | run on T
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr        |Decay  | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
+CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | 
+CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  |           |       | SGD   |
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.05@dp/o |       | SGD   | to run 0.03 on T
 
 
 
@@ -248,14 +248,14 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     3. 1000 rounds for FedAvg E=1, B=50
     4. 1000 rounds for FedAvg E=5, B=50, C=0
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
-* The last three experiment can be skipped for the time being since theier convergence per minibatch could be too slow to make meaningful comparison
+* The **last three experiment can be skipped for the time being** since their convergence per mini batch could be too slow to make meaningful comparison
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |          | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | needs grid search
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 |          | SGD   | needs grid search
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o | SGD   | run on T
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | 
+CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o | SGD   | to bm with 0.2
+CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o | SGD   | done
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100.
