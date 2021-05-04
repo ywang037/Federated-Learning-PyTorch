@@ -248,13 +248,13 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     3. 1000 rounds for FedAvg E=1, B=50
     4. 1000 rounds for FedAvg E=5, B=50, C=0
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
-* The last three experiment can be skipped for the time being since theier convergence per minibatch could be too slow to make meaningful comparison
+* The **last three experiment can be skipped for the time being** since their convergence per mini batch could be too slow to make meaningful comparison
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 |          | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | needs grid search
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 |          | SGD   | needs grid search
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 | 0.1@dp/o | SGD   | done
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o | SGD   | done
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o | SGD   | run on T
 
 ##### Remarks
