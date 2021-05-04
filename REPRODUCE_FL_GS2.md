@@ -262,7 +262,13 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
         1. For FedAvg, best lr could be 0.1, larger values do not improve
         2. For SGD, lr=0.01 looks best. However, for each lr value, the learning curve is similar to that generated without dropout, i.e, overfitting still exists. It is suspected that the learning rate should be tuned even smaller, like 0.001
         3. For FedSGD, the largest value of lr performs the best, for lr in {0.01, ..., 0.5}, lr that is even larger than 0.5 does not improve any more.
-        
+    * However, when using 2000 rounds:
+        1. For FedAvg
+        2. For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2}, larger lr reach a higher test acc in shorter time, but tends to overfit and needs ealier stopping.
+        3. For FedSGD, smaller lr like 0.05, 0.1 lead to higher test acc
+2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
+    * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup
+    * The convergence objective can be set to 0.7, 0.72, 0.74
 
 
 ##### Varying federated setting VS SGD
