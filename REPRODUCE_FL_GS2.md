@@ -286,8 +286,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
-CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.01@dp  | SGD   | run on A
-CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.005@dp | SGD   | run on A
+CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.005@dp | SGD   | done
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | to run on T
 CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp   | SGD   | done
 CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp   | SGD   | done
@@ -299,6 +298,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0 
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
 2. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
 3. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 and 0.2 within 1000 rounds.
+4. For SGD with B=50, lr=0.005 converges to 72% test acc slower than lr=0.01, but to a higher maximum test acc of 73.8% around 70 rounds.
 
 #### C. Training time summary
 Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
