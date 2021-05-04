@@ -278,10 +278,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
     4. 1000 rounds for FedAvg E=5, B=50, C=0
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
 * The last three experiment can be skipped for the time being since their convergence per minibatch could be too slow to make meaningful comparison
-* **TO-DO on 4-th May**: 
-    1. test FedAvg E=1, B=50, C=0.1 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2} *(testing 0.2 on T)*.
-    2. test *SGD with B=50 lr={0.005, 0.01} to verify if lr=0.01 is most suitable*. Or just simply run lr=0.01 to get this task done.
-* TO-DO on 5-th May:
+* **TO-DO on 5-th May**:
     1. test *FedAvg E=5, B=50, C=0 for 1000 rounds with parameter using lr={0.05, 0.1}* (since it is learned from exp 1 that different C does not vary the best lr significantly).
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
