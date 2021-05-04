@@ -263,7 +263,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
         2. For SGD, lr=0.01 looks best. However, for each lr candidate, the resulted learning curve is similar to that generated without dropout, i.e, overfitting still exists. It is suspected that the learning rate should be tuned even smaller, like 0.001.
         3. For FedSGD, the largest value of lr performs the best, for lr in {0.05, ..., 0.5}. lr that is even larger than 0.5 does not improve any more.
     * However, when running over 2000 rounds:
-        1. For FedAvg, for lr={0.03,0.05,0.07,0.1}, the higher the quicker within 200 or 500 rounds.
+        1. For FedAvg, for lr={0.05,0.07,0.1}, larger lr converge quicker before 200 rounds, *however, lr=0.05 become better afterwards and converges to 0.72 quicker*.
         2. For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1.5e-2, 2e-2, 3e-2}, larger lr converge to 72% test acc in shorter time, but tends to overfit earlier and needs the "ealier stopping". Among all lrs, lr=0.01 reach 72 around 45 rounds and achieve a maximum test acc around 74%. Futher test using 0.99 learning-rate decay for 200 rounds does not show any improvement for SGD with lr=0.1
         3. For FedSGD, lr around {0.05, 0.1, 0.2} can achieve higher test acc, among which lr=0.2 converges quickest for the target test acc 0.7/0.72 around 700-800 rounds, but cannot improve further after 1000 rounds, whereas lr=0.1 keeps increasing within 2000 rounds (may be the quickest to reach 0.74)
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
@@ -273,8 +273,8 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
         2. Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
     * **TO-DO on 4-th May**:
-        1. For FedAvg, try lr={0.1, 0.05, 0.07, 0.03} in 2000 rounds (0.1, 0.05, 0.07 has been running on A).
-        2. For FedSGD, try lr={0.03, 0.05, 0.1} for 4000 rounds.
+        1. For FedAvg, try lr=0.03 in 2000 rounds.
+        2. For FedSGD, try lr={0.03, 0.05, 0.1} for 4000 rounds (to run overnight).
 
 
 ##### Varying federated setting VS SGD
@@ -287,7 +287,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 * The last three experiment can be skipped for the time being since theier convergence per minibatch could be too slow to make meaningful comparison
 * **TO-DO**: 
     1. test FedAvg E=5, B=50, C=0 for 1000 rounds with parameter using lr=0.1 (since it is learned from exp 1 that different C does not vary the best lr significantly).
-    2. test FedAvg E=1, B=50, C=0.1 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2} (0.1, 0.2 has been running on T).
+    2. test FedAvg E=1, B=50, C=0.1 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2} (0.05, 0.1, has been running on T).
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O   | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
