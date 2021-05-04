@@ -263,7 +263,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
         2. For SGD, lr=0.01 looks best. However, for each lr candidate, the resulted learning curve is similar to that generated without dropout, i.e, overfitting still exists. It is suspected that the learning rate should be tuned even smaller, like 0.001.
         3. For FedSGD, the largest value of lr performs the best, for lr in {0.05, ..., 0.5}. lr that is even larger than 0.5 does not improve any more.
     * However, when running over 2000 rounds:
-        1. For FedAvg, for lr={0.05,0.07,0.1}, larger lr converge quicker before 400 rounds, *however, lr=0.05 become better afterwards and converges to 0.72 quicker*.
+        1. For FedAvg, for lr={0.05,0.07,0.1}, larger lr converge quicker before 200 rounds, *however, lr=0.05 become better afterwards and converges to 0.72 quicker*.
         2. For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1.5e-2, 2e-2, 3e-2}, larger lr converge to 72% test acc in shorter time, but tends to overfit earlier and needs the "ealier stopping". Among all lrs, lr=0.01 reach 72 around 45 rounds and achieve a maximum test acc around 74%. Futher test using 0.99 learning-rate decay for 200 rounds does not show any improvement for SGD with lr=0.1
         3. For FedSGD, lr around {0.05, 0.1, 0.2} can achieve higher test acc, among which lr=0.2 converges quickest for the target test acc 0.7/0.72 around 700-800 rounds, but cannot improve further after 1000 rounds, whereas lr=0.1 keeps increasing within 2000 rounds (may be the quickest to reach 0.74)
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
