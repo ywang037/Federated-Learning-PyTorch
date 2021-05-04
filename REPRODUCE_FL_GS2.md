@@ -279,14 +279,15 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
 * The last three experiment can be skipped for the time being since their convergence per minibatch could be too slow to make meaningful comparison
 * **TO-DO on 4-th May**: 
+    1. test FedAvg E=1, B=50, C=0.1 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2} *(testing 0.2 on T)*.
+    2. test *SGD with B=50 lr={0.005, 0.01} to verify if lr=0.01 is most suitable*. Or just simply run lr=0.01 to get this task done.
+* TO-DO on 5-th May:
     1. test *FedAvg E=5, B=50, C=0 for 1000 rounds with parameter using lr={0.05, 0.1}* (since it is learned from exp 1 that different C does not vary the best lr significantly).
-    2. test FedAvg E=1, B=50, C=0.1 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2} *(testing 0.2 on T)*.
-    3. test *SGD with B=50 lr={0.005, 0.01} to verify if lr=0.01 is most suitable*. Or just simply run lr=0.01 to get this task done.
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O    | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----   | ----- | ------
-CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 | 0.01@dp | SGD   | 
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |         | SGD   | 
+CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 | 0.01@dp | SGD   | run on A
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |         | SGD   | to run on 5 May 
 CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp  | SGD   | to bm with 0.2
 CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp  | SGD   | done
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |         | SGD   | cancelled
