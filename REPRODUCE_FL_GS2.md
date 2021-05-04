@@ -287,8 +287,8 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O    | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----   | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |50 | 0.01@dp | SGD   | run on A
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |         | SGD   | to run on 5 May 
-CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp  | SGD   | to bm with 0.2
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |         | SGD   | to run on T
+CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp  | SGD   | done
 CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp  | SGD   | done
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |         | SGD   | cancelled
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |         | SGD   | cancelled
@@ -297,7 +297,7 @@ CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
 2. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
-3. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 within 1000 rounds *(needs benchmark with 0.2, testing on T)*.
+3. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 and 0.2 within 1000 rounds.
 
 #### C. Training time summary
 Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
