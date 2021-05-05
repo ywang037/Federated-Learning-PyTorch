@@ -272,20 +272,9 @@ CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0 
 6. For FedAvg E=20, B=50, C=0.1, tests over 50 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.05, 0.1, 0.2, 0.5, 0.7}.
 
 
-#### C. Experiment 4: FedAvg with very large E
-***Consider to do these experiment over MNIST if time permits***
-
-#### Appendix: Training time summary
-
-Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
-------|------|------|-------- | --------------  |-------- |-----|---|---| ----- | ---------
-CNN   |FedSGD|M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
-CNN   |FedAVg|M-iid | 5.6s    | 9.3mins/0.16hrs | T       |0.1  |5  | ∞ | 0.01  | SGD
-CNN   |FedAvg|M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
-CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 25.2s   | 42mins/0.7hrs   | A       |0.2  |5  |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 2.2s    | 3.6mins/0.06hrs | T       |0.1  |1  |50 | 0.01  | SGD
+#### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
+Consider these additional experiment over MNIST if time permits (on 5/6-th May):
+- [ ] test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation.
+- [ ] test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
 
 
-It seems that FedAvg for the IID data is **very slow** even with GPU, not to mention the non-IID cases.
