@@ -279,15 +279,15 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
         * lr=0.032 is done on T (1.2hrs), lr={0.05, 0.1, 0.2} is done on A (1.6hrs).
 
-Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      | Optim | Status
-------|------|------| ----  |--------  | -----   |---   |---| - | -----     | ----- | ------
-CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp | SGD   | 
-CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 |           | SGD   | run on A
-CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp    | SGD   | done
-CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp    | SGD   | done
-CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp    | SGD   | done
-CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp    | SGD   | done
-CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp   | SGD   | done
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----        | ----- | ------
+CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp    | SGD   | 
+CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02/0.32@dp | SGD   | done
+CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
+CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
+CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
+CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp       | SGD   | done
+CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      | SGD   | done
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
@@ -295,7 +295,7 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp   | SG
     * lr=0.01 with early stopping @40 rounds; or
     * lr=0.005 with early stopping @80 rounds; or
     * lr=0.0032 with 100-round full run
-3. For FedAvg E=5, B=50, C=0.0, ...
+3. For FedAvg E=5, B=50, C=0.0, among lr={0.01, 0.02, 0.032, 0.05, 0.1, 0.2}, lr=0.02 and lr=0.32 outperform the others, one can choose to show between these two runs.
 4. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 and 0.2 within 1000 rounds.
 5. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
 6. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.1, 0.2, 0.32, 0.5, 0.7}.
