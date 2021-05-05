@@ -238,11 +238,11 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     - [ ] Test SGD with lr={5e-5, 1e-4, 1e-3} for 5000/10000 rounds if time permits (to run on A over night).
 
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       |
-CNN   |FedSGD|iid   | %                |      |8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
-CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
+CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       |
+CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
+CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
 ##### Remarks
 1. Using "dropout" for *tf cnn* model, 
@@ -277,17 +277,17 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
 * **TO-DO on 5-th May**:
     - [ ] Test *FedAvg E=5, B=50, C=0 using lr={0.032, 0.05, 0.1, 0.2}*. 
         * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
-        * lr=0.032 is running on T..., lr={0.05, 0.1, 0.2} is running on A...
+        * lr=0.032 is done on T (1.2hrs), lr={0.05, 0.1, 0.2} is done on A (1.6hrs).
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     | ----- | ------
-CNN   |SGD   |iid   | %                |      |100   |hrs       | T       |      |   |50 | 0.0032@dp | SGD   | 
-CNN   |FedAVg|iid   | %                |      |10000 |hrs       | T       | 0.0  |5  |50 |           | SGD   | run on A w 1k rnds
-CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp   | SGD   | done
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----     | ----- | ------
+CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp | SGD   | 
+CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 |           | SGD   | run on A
+CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp    | SGD   | done
+CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp    | SGD   | done
+CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp    | SGD   | done
+CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp    | SGD   | done
+CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp   | SGD   | done
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
