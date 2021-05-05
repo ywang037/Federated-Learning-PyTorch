@@ -236,8 +236,8 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr        |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | 
-CNN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |∞  |           |       | SGD   |
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.05@dp/o |       | SGD   | to run 0.03 on T
+CNN   |FedSGD|iid   | %                |      |8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
+CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
 
 
