@@ -233,6 +233,10 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
+* **TO-DO on 5-th May**:
+    - [ ] Consider to test lr={0.01, 0.02} for FedAvg (E=5 B=50 C=0.1) over 4k rounds. As lr=0.03 looks good, it would be interesting to see if lr=0.01/0.02 can outperform lr=0.03 in 4k rounds (to run on T).
+    - [ ] Test SGD with lr={5e-5, 1e-4, 1e-3} for 5000/10000 rounds if time permits (to run on A over night).
+
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
@@ -254,9 +258,6 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
     * Tests over 4000/8000 rounds show that:
         1. For FedAvg, tests of lr={0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc*** while lr=0.05 converges a little bit quicker *(how about 0.01 and 0.02?)*.
         2. For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
-    * **TO-DO on 5-th May**:
-        - [ ] Consider to test lr={0.01, 0.02} for FedAvg (E=5 B=50 C=0.1) over 4k rounds. As lr=0.03 looks good, it would be interesting to see if lr=0.01/0.02 can outperform lr=0.03 in 4k rounds (to run on T).
-        - [ ] Test SGD with lr={5e-5, 1e-4, 1e-3} for 5000/10000 rounds if time permits (to run on A over night).
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
     * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
     * Limited computational power and project timeline does not allow for
@@ -271,13 +272,13 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
     2. 200 rounds for FedAvg E=5, B=50, C=0.1
     3. 100 rounds for FedAvg E=10, B=50, C=0.1, 50 rounds E=20, B=50, C=0.1, 20 rounds for E=5, B=50, C=1.0
     4. 1000 rounds for FedAvg E=1, B=50, C=0.1
-    5. 10000 rounds for FedAvg E=5, B=50, C=0
-* The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
-* The last three experiment can be skipped for the time being since their convergence per minibatch could be too slow to make meaningful comparison
+    5. 2000 rounds for FedAvg E=5, B=50, C=0.0
+* The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
+* For FedAvg E=5, B=50, C=0 
 * **TO-DO on 5-th May**:
     - [ ] On may opt to suspend the test *FedAvg E=5, B=50, C=0 using lr={0.032, 0.05, 0.1, 0.2}* since it requires 10,000 rounds which may not be affordable in allowed time.
         * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
-        * 
+        * lr=0.032 is running on T..., lr={0.05, 0.1, 0.2} is running on A...
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O      | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     | ----- | ------
@@ -300,6 +301,8 @@ CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0 
 5. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
 6. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.1, 0.2, 0.32, 0.5, 0.7}.
 7. For FedAvg E=20, B=50, C=0.1, tests over 50 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.05, 0.1, 0.2, 0.5, 0.7}.
+
+
 
 #### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 Consider these additional experiment over MNIST if time permits (on 5/6-th May):
