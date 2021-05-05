@@ -274,7 +274,6 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
     4. 1000 rounds for FedAvg E=1, B=50, C=0.1
     5. 2000 rounds for FedAvg E=5, B=50, C=0.0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
-* For FedAvg E=5, B=50, C=0 
 * **TO-DO on 5-th May**:
     - [ ] On may opt to suspend the test *FedAvg E=5, B=50, C=0 using lr={0.032, 0.05, 0.1, 0.2}* since it requires 10,000 rounds which may not be affordable in allowed time.
         * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
