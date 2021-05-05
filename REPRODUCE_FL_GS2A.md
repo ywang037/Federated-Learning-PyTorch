@@ -274,15 +274,12 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
     4. 1000 rounds for FedAvg E=1, B=50, C=0.1
     5. 2000 rounds for FedAvg E=5, B=50, C=0.0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
-* **TO-DO on 5-th May**:
-    - [ ] Test *FedAvg E=5, B=50, C=0 using lr={0.032, 0.05, 0.1, 0.2}*. 
-        * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
-        * lr=0.032 is done on T (1.2hrs), lr={0.05, 0.1, 0.2} is done on A (1.6hrs).
+
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----        | ----- | ------
 CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp    | SGD   | 
-CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02/0.32@dp | SGD   | done
+CNN   |FedAVg|iid   | 2000  |1.2-1.6hrs| T       | 0.0  |5  |50 | 0.02/0.32@dp | SGD   | done
 CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
 CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
 CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
