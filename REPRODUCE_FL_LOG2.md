@@ -243,15 +243,16 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 
 ##### Varying federated setting VS SGD
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
-    1. 200 rounds (B=100) or for 300 rounds (B=50) SGD,
-    2. 200 rounds for FedAvg E=5, B=50
-    3. 1000 rounds for FedAvg E=1, B=50
-    4. 1000 rounds for FedAvg E=5, B=50, C=0
+    1. 200 rounds (B=100) or for **100 rounds (B=50) SGD**,
+    2. 200 rounds for FedAvg E=5, B=50, C=0.1
+    3. 100 rounds for FedAvg E=10, B=50, C=0.1, 50 rounds E=20, B=50, C=0.1, 20 rounds for E=5, B=50, C=1.0
+    4. 1000 rounds for FedAvg E=1, B=50, C=0.1
+    5. 2000 rounds for FedAvg E=5, B=50, C=0.0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----        | ----- | ------
-CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
+CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
 CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02/0.32@dp | SGD   | done
 CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
 CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
