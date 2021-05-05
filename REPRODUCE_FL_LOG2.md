@@ -247,8 +247,7 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
     2. 200 rounds for FedAvg E=5, B=50
     3. 1000 rounds for FedAvg E=1, B=50
     4. 1000 rounds for FedAvg E=5, B=50, C=0
-* The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
-* The **last three experiment can be skipped for the time being** since their convergence per mini batch could be too slow to make meaningful comparison
+* The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O        | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----       | ----- | ------
