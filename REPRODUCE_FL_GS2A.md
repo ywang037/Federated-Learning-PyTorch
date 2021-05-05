@@ -235,7 +235,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 * Decay means the learning-rate decay
 * **TO-DO on 5-th May**:
     - [ ] Consider to test lr={0.01, 0.02} for FedAvg (E=5 B=50 C=0.1) over 4k rounds. As lr=0.03 looks good, it would be interesting to see if lr=0.01/0.02 can outperform lr=0.03 in 4k rounds (to run on T).
-    - [ ] Test SGD with lr={5e-5, 1e-4, 1e-3} for 5000/10000 rounds if time permits (to run on A over night).
+    - [ ] Test SGD with lr={2e-5, 5e-5, 1e-4} for 5000/10000 rounds if time permits (to run on A over night).
 
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
