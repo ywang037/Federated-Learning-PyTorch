@@ -242,7 +242,7 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
 
 
 ##### Varying federated setting VS SGD
-* 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around at most 100,000 mini-batch updates, which is equivalent to
+* 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
     1. 200 rounds (B=100) or for 300 rounds (B=50) SGD,
     2. 200 rounds for FedAvg E=5, B=50
     3. 1000 rounds for FedAvg E=1, B=50
