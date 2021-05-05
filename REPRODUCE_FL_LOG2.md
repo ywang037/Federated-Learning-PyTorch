@@ -235,7 +235,7 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       |
+CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
 CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
 CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
@@ -253,7 +253,7 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----        | ----- | ------
 CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
-CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02/0.32@dp | SGD   | done
+CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02@dp/o    | SGD   | done
 CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
 CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
 CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
@@ -261,6 +261,7 @@ CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp       |
 CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      | SGD   | done
 
 ##### Remarks
+0. In the above table, the learning rate of each run is selected from all conducted grid searches so as to produce highest possible test acc within 100,000 mini-batch update.
 1. For SGD with B=50, among lr={0.002, 0.0032, 0.0046, 0.005, 0.01, 0.02}, lr=0.1 converge to 73% test acc quickest (within 40 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
     * lr=0.01 with early stopping @40 rounds; or
     * lr=0.005 with early stopping @80 rounds; or
