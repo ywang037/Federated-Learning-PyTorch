@@ -256,15 +256,16 @@ CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |     
 CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | suspend
 CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o | SGD   | done
 CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 | 0.2@dp   | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |          | SGD   | run on A
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |          | SGD   | 
+CNN   |FedAVg|iid   | %                |      |100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp   | SGD   | done
+CNN   |FedAVg|iid   | %                |      |50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp   | SGD   | done
+CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0  |5  |50 |          | SGD   | 
 
 ##### Remarks
-1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, *awaiting test results*.
-2. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
-3. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 within 1000 rounds.
-4. For SGD with B=50, lr=0.005 converges to 72% test acc slower than lr=0.01, but to a higher maximum test acc of 73.8% around 70 rounds. The learning curve of SGd with B=50 lr=0.005 is similar to that is generated from SGD with B=100 lr=0.01.
+1. For SGD with B=50, among lr={0.01, 0.005, 0.046, 0.032}, lr=0.1 converge to 72% test acc quickest (within 30 rounds), but smaller lrs reach a slightly higher maximum test acc.
+    * One can choose to show lr=0.01 with early stopping @40 rounds, lr=0.05 with early stopping @80 rounds, and lr=0.032 with 100 rounds
+2. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 within 1000 rounds.
+3. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
+4. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.05, 0.1, 0.2, 0.5, 0.7}.
 
 
 #### C. Experiment 4: FedAvg with very large E
