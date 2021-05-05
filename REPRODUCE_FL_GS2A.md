@@ -292,10 +292,10 @@ CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0 
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
-2. For SGD with B=50, among lr={0.01, 0.005, 0.046, 0.032}, lr=0.1 converge to 72% test acc quickest (within 30 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
+2. For SGD with B=50, among lr={0.002, 0.0032, 0.0046, 0.005, 0.01, 0.02}, lr=0.1 converge to 73% test acc quickest (within 40 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
     * lr=0.01 with early stopping @40 rounds; or
-    * lr=0.05 with early stopping @80 rounds; or
-    * lr=0.032 with 100-round full run
+    * lr=0.005 with early stopping @80 rounds; or
+    * lr=0.0032 with 100-round full run
 3. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
 4. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 and 0.2 within 1000 rounds.
 5. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.1, 0.2, 0.32, 0.5, 0.7}.
