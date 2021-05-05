@@ -277,26 +277,28 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is formidable, here we have to make do with ealier stopping around **at most 100,000 mini-batch updates**, which is equivalent to
     1. 200 rounds (B=100) or for **100 rounds (B=50) SGD**,
     2. 200 rounds for FedAvg E=5, B=50, C=0.1
-    3. 100 rounds for FedAvg E=10, B=50, C=0.1, and 50 rounds E=10, B=50, C=0.1
+    3. 100 rounds for FedAvg E=10, B=50, C=0.1, 50 rounds E=20, B=50, C=0.1, 20 rounds for E=5, B=50, C=1.0
     4. 1000 rounds for FedAvg E=1, B=50, C=0.1
     5. 10000 rounds for FedAvg E=5, B=50, C=0
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
 * The last three experiment can be skipped for the time being since their convergence per minibatch could be too slow to make meaningful comparison
 * **TO-DO on 5-th May**:
-    1. test *FedAvg E=5, B=50, C=0 for 1000 rounds with parameter using lr={0.05, 0.1, 0.2}* (since it is learned from exp 1 that different C does not vary the best lr significantly).
-    2. test *FedAvg E=10, B=50, C=0.1 for 100 rounds with parameter using lr={0.01, 0.02, 0.05, 0.1, 0.2}* (running on T...).
-    3. test *FedAvg E=20, B=50, C=0.1 for 50 rounds with parameter using lr={0.001, 0.01, 0.02, 0.05, 0.1, 0.2}* (running on A...).
+    1. test *FedAvg E=10, B=50, C=0.1 for 100 rounds with parameter using lr={0.01, 0.02, 0.05, 0.1, 0.2}* (running on T...).
+    2. test *FedAvg E=20, B=50, C=0.1 for 50 rounds with parameter using lr={0.01, 0.02, 0.05, 0.1, 0.2}* (running on A...).
+    3. test *FedAvg E=5, B=50, C=1.0 for 20 rounds with parameter using lr={0.01, 0.02, 0.05, 0.1, 0.2}* (running on ???).
     4. test *SGD with B=50, lr=0.002* in 100 rounds (running on A...)
+    5. On may opt to suspend the test *FedAvg E=5, B=50, C=0 using lr={0.05, 0.1, 0.2}* since it requires 10,000 rounds which may not be affordable in allowed time.
+        * lr={0.05, 0.1, 0.2} is chosen to test since it is learned from exp 1 that different C does not vary the best lr significantly.
 
 Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
 ------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
 CNN   |SGD   |iid   | %                |      |100   |hrs       | T       |      |   |50 | 0.005@dp | SGD   | 
-CNN   |FedAVg|iid   | %                |      |10000 |hrs       | T       | 0.0  |5  |50 |          | SGD   | to run on T
+CNN   |FedAVg|iid   | %                |      |10000 |hrs       | T       | 0.0  |5  |50 |          | SGD   | suspend
 CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp   | SGD   | done
 CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp   | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |          | SGD   | cancelled
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |          | SGD   | cancelled
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |          | SGD   | cancelled
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |10 |50 |          | SGD   | run on T
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 |          | SGD   | run on A
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 1.0  |5  |50 |          | SGD   | 
 
 ##### Remarks
 1. It has been tested that for SGD, learning curve with B=50 varies little compared with that obtained with B=100, so learning rate for SGD in this test could be same as the one in the previous experiment.
