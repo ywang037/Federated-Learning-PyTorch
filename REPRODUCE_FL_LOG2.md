@@ -250,21 +250,21 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
 * The learning rates of every setting are seem to be fixed at the vanilla FL paper, so that only lr needs optimization.
 * The **last three experiment can be skipped for the time being** since their convergence per mini batch could be too slow to make meaningful comparison
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O     | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----    | ----- | ------
-CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.005@dp | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |          | SGD   | suspend
-CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o | SGD   | done
-CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o | SGD   | done
-CNN   |FedAVg|iid   | %                |      |100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp   | SGD   | done
-CNN   |FedAVg|iid   | %                |      |50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp   | SGD   | done
-CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0  |5  |50 |          | SGD   | 
+Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O        | Optim | Status
+------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----       | ----- | ------
+CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.0032@dp/o | SGD   | done
+CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |             | SGD   | suspend
+CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | %                |      |100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp      | SGD   | done
+CNN   |FedAVg|iid   | %                |      |50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp      | SGD   | done
+CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0  |5  |50 |             | SGD   | 
 
 ##### Remarks
-1. For SGD with B=50, among lr={0.01, 0.005, 0.046, 0.032}, lr=0.1 converge to 72% test acc quickest (within 30 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
+1. For SGD with B=50, among lr={0.002, 0.0032, 0.0046, 0.005, 0.01, 0.02}, lr=0.1 converge to 73% test acc quickest (within 40 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
     * lr=0.01 with early stopping @40 rounds; or
-    * lr=0.05 with early stopping @80 rounds; or
-    * lr=0.032 with 100-round full run
+    * lr=0.005 with early stopping @80 rounds; or
+    * lr=0.0032 with 100-round full run
 2. For FedAvg E=1, B=50, C=0.1, lr=0.1 works better than 0.05 within 1000 rounds.
 3. For FedAvg E=5, B=50, C=0.1, lr=0.1 works better than 0.05 within 200 rounds (number of rounds that this parameter combination needs to do for 100,000 mini-batch updates for this experiment).
 4. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.05, 0.1, 0.2, 0.5, 0.7}.
