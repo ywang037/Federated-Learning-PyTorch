@@ -233,11 +233,11 @@ Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr        |Decay  | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | %                |      |xxxx  |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | 
-CNN   |FedSGD|iid   | %                |      |8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
-CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
+CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       |
+CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
+CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
 
 
@@ -249,15 +249,15 @@ CNN   |FedAVg|iid   | %                |      |4000  |9.18hrs   | T       | 0.1 
     4. 1000 rounds for FedAvg E=5, B=50, C=0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
 
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr/O        | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----       | ----- | ------
-CNN   |SGD   |iid   | %                |      |200   |hrs       | T       |      |   |50 | 0.0032@dp/o | SGD   | done
-CNN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.0  |5  |50 |             | SGD   | run on A/T
-CNN   |FedAVg|iid   | %                |      |1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | %                |      |20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp/o   | SGD   | done
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O        | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----       | ----- | ------
+CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |50 | 0.0032@dp/o | SGD   | done
+CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 |             | SGD   | run on A/T
+CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp/o   | SGD   | done
 
 ##### Remarks
 1. For SGD with B=50, among lr={0.002, 0.0032, 0.0046, 0.005, 0.01, 0.02}, lr=0.1 converge to 73% test acc quickest (within 40 rounds), but smaller lrs reach a slightly higher maximum test acc. One can choose to show 
