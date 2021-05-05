@@ -20,3 +20,6 @@ runs/arxiv/
 runs/fedavg-cifar-IID/
 runs/fedavg-cifar-SGD/
 runs/fedavg-mnist-IID/
+
+# arxived files
+arxiv/
