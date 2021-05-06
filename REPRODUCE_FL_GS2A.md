@@ -219,7 +219,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
 
 #### C. Experiment 3: CIFAR10 learning performance
 
-##### Fixed federated setting VS FedSGD and SGD
+##### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * For SGD, batch size is fixed at B=100, so number of mini-batch updates is also $500R$ since N=50,000 so mini-batch update per round is N/B=500.
@@ -266,7 +266,7 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
 
-##### Varying federated setting VS SGD
+##### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
     1. 200 rounds (B=100) or for **100 rounds (B=50) SGD**,
     2. 200 rounds for FedAvg E=5, B=50, C=0.1
