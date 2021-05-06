@@ -234,7 +234,6 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 * **TO-DO on 5-th May**:
-    - [ ] Consider to test lr={0.005, 0.01, 0.02} for FedAvg (E=5 B=50 C=0.1) over 4k rounds. As lr=0.03 looks good, it would be interesting to see if lr=0.01/0.02 can outperform lr=0.03 in 4k rounds (lr=0.005, 0.01 running on T...).
     - [ ] Test SGD with lr={2e-5, 5e-5, 1e-4} for 10000 rounds (running on A ... ).
 
 
