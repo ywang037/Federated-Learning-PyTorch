@@ -67,35 +67,6 @@ CNN   |FedAVg|N-iid |                  |          |      |          | A       | 
 2. Similar to IID cases, increasing the fraction paramter C from 0.1 to 0.5 does not necessarily improve or improves little the speed up, which is in line with the vanilla FL results.
 
 
-##### 2NN/IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 |        | SGD   | 
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  |        | SGD   |
-2NN   |FedAVg|iid   | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  |        | SGD   |
-
-##### 2NN/non-IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |10 |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |10 |        | SGD   | 
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |10 |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |10 |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |10 |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.0  |5  |∞  |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 1.0  |5  |∞  |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.5  |5  |∞  |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.2  |5  |∞  |        | SGD   |
-2NN   |FedAVg|N-iid | xxxx%            |xx    |100   |xxxhrs    | A       | 0.1  |5  |∞  |        | SGD   |
-
-
 
 #### B. Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1.
@@ -189,49 +160,14 @@ CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T 
 
 
 
-##### 2NN/IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-2NN   |FedSGD|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
-2NN   |FedAVg|iid   | %                |      |xxxx  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
-
-##### 2NN/non-IID
-Model |Method|Data  | Test acc (f,max) |R-98  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-2NN   |FedSGD|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |∞  | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |∞  | 0.02/o | SGD   |
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |∞  | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |1  |10 | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |50 | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |5  |10 | 0.04/o | SGD   | 
-2NN   |FedAVg|N-iid | %                |      |xxxx  |hrs       | T       | 0.1  |20 |10 | 0.04/o | SGD   | 
-
-
 #### C. Experiment 3: CIFAR10 learning performance
 
-##### Fixed federated setting VS FedSGD and SGD
-* Fraction of users is fixed at C=0.1
-* FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
-* For SGD, batch size is fixed at B=100, so number of mini-batch updates is also $500R$ since N=50,000 so mini-batch update per round is N/B=500.
-* Since E, B are fixed then total number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=50R$, where N=50,000 is the total amount of data.
-* FedSGD do only one mini-batch update per local epoch which means the total mini-batch updates is $5R$ per participant.
-* Therefore, every 100,000 rounds mini-batch updates means 
-    1. 200 epochs for SGD, 
-    2. 200 comm. rounds for FedAvg, since each round there are 10 clients each making 50 mini-batch update 
-    3. 20,00 comm. rounds for FedSGD, since each round there are 10 clients each making 5 mini-batch udpate
+##### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
+* Fraction of users is fixed at C=0.1, FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * One cannot afford to perform that many rounds for FedSGD, a reasonable approach is to let FedAvg and FedSGD perform identical rounds of learning, as what are performed in the previous two experiments, e.g., 100-200 rounds.
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
-* Decay means the learning-rate decay
+* Decay means the learning-rate decay. No decay is tuned and applied
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
@@ -239,9 +175,25 @@ CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SG
 CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
 CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
+##### Remarks
+0. In the above table, the learning rate of each run is selected from all conducted grid searches so as to produce highest possible test acc within allowed time.
+1. Experiments with 2000 rounds show that:
+    * For SGD, for lr in {2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1.5e-2, 2e-2, 3e-2}, larger lr converge to 72% test acc quicker but tends to overfit earlier and needs the "ealier stopping". ***Among all lr, lr=0.01 reaches 72% around 45 rounds and achieves a maximum test acc about 74%***. Futher tests using learning-rate decay of 0.99 does not show any improvement for SGD with lr=0.01 in 200 rounds. The above observations suggest that even smaller lr like {5e-5, 1e-4, ..., 1e-3} may reach a higer test acc in long-term runs over, say, 10000 rounds.
+    * For FedAvg, larger lr in {0.05,0.07,0.1} converge quicker before 200 rounds, ***however, lr=0.05 outperforms and converges to 0.72 quicker afterwards***.
+    * For FedSGD, coarse searches in {0.05, 0.1, 0.2} find that lr=0.2 keeps increasing in test acc in 4000 rounds (3.8 hrs), and is better than smaller lr=0.1,0.05. So, next searches could be within {0.1, 0.2, 0.5} over 8000 rounds.
+2. Tests over 4000/8000 rounds show that:
+    * For FedAvg, tests of lr={0.005, 0.01, 0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc***. Both lr=0.05 and lr=0.01 converge in slower speed and to lower test acc, lr=0.05 converges a little bit quicker than lr=0.03 but it converges to a similar test acc as lr=0.01. None of {0.005,0.01,0.05} reach 74%. 
+    * For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
+3. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
+    * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
+    * Limited computational power and project timeline does not allow for
+        - Finer searches of best learning rate (and decay scheme) for each algorithm.
+        - Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
+    * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
-
-##### Varying federated setting VS SGD
+##### 3-B: Per mini-batch update convergence FedAvg vs SGD 
+* For SGD, batch size is fixed at B=100, so number of mini-batch updates is $500R$ since N=50,000 so mini-batch update per round is N/B=500.
+* For FedAvg, since E, B are fixed, so number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=50R$, and the total number of mini-batch updates conducted by all participant clients is $50R/C$, C is the fraction parameter.
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
     1. 200 rounds (B=100) or for **100 rounds (B=50) SGD**,
     2. 200 rounds for FedAvg E=5, B=50, C=0.1
@@ -250,15 +202,15 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
     5. 2000 rounds for FedAvg E=5, B=50, C=0.0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
 
-Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
-------|------|------| ----  |--------  | -----   |---   |---| - | -----        | ----- | ------
-CNN   |SGD   |iid   | 100   |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
-CNN   |FedAVg|iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | 1000  |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
-CNN   |FedAVg|iid   | 200   |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
-CNN   |FedAVg|iid   | 100   |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
-CNN   |FedAVg|iid   | 50    |hrs       | T       | 0.1  |20 |50 | 0.2@dp       | SGD   | done
-CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      | SGD   | done
+Model |Method|Data  | T Rnd |Updata per R|Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
+------|------|------| ----  |--------    |--------  | -----   |---   |---| - | -----        | ----- | ------
+CNN   |SGD   |iid   | 100   |1000        |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
+CNN   |FedAVg|iid   | 2000  |50          |hrs       | T       | 0.0  |5  |50 | 0.02@dp/o    | SGD   | done
+CNN   |FedAVg|iid   | 1000  |100         |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
+CNN   |FedAVg|iid   | 200   |500         |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
+CNN   |FedAVg|iid   | 100   |1000        |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
+CNN   |FedAVg|iid   | 50    |2000        |hrs       | T       | 0.1  |20 |50 | 0.2@dp       | SGD   | done
+CNN   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0.32@dp      | SGD   | done
 
 ##### Remarks
 0. In the above table, the learning rate of each run is selected from all conducted grid searches so as to produce highest possible test acc within 100,000 mini-batch update.
