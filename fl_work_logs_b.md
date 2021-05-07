@@ -37,31 +37,18 @@ Following the vanilla FL paper, grid search resolution of $10^{1/3}$ approximate
     * Then finer search in {0.01, 0.15, 0.02, 0.03, 0.05, 0.07, 0.1 ,0.15, 0.22} obtained from resolution factors {1, 1.5, 2.2, 3.2, 4.6, 6.8, 10} show that the best initial lr values are likely be within {0.01, 0.015, 0.02, 0.03}
 * Adopting the similar grid-search multiplicative factors, the learning-rate decay can be searched in {0.9910, .9915, .9922, .9932, .9946, .9968,} with smaller resolution or {.991, 992, 995} with larger resolution.
 
+### Generic remarks
+Some test runs are unstable under searched learning rate, this is
+* either because the learning rate is too close to instability region
+* or due to the limited memory and computational power of the machine 
 
-### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
-#### Torch cnn only (27 April 2021)
-N/A
-
-#### Torch cnn and tf cnn (28 April 2021)
-N/A
-
-
-### II. Baseline MNIST learning with *2NN* and *CNN* models
-Model | Test acc | Time     | Batch size | Epochs | Lr/O   | Optim
-------| -------- | -------- | ---------- | ------ | ------ | ---------
-2NN   | 97.12%   | 1765s    | 100        | 200    | 0.01?  | vanilla SGD 
-CNN   | 99.09%   | 2014s    | 100        | 200    | 0.01?  | vanilla SGD 
-
-Both trianed models might be used for warm start in future training.
-
-### III. FedAvg MNIST learning with *2NN* and *CNN* models 
-#### A. Experiment 1: increase parallism
+### Experiment 1: increase parallism
 * Lr/O means the optimized value of learning rate
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
 * Grid searches are conducted using a validation dataset which is 20% of the original MNIST training set, then train the model over 200 or 400 rounds and compare the test acc to determine the best values.
 
-##### CNN/IID
+#### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
 * If the test acc at final round differs little, then check the final 10 rounds and choose the one with higher average value.
 * If two lr ties in test acc, 
@@ -87,7 +74,7 @@ CNN   |FedAVg|iid   | 98.45%       |0.18hrs   | A       | 0.1  |5  |∞  | 0.2  
 * For {E=5,B=10,C=0.2}, lr=0.2 leads to best performance in validation run. But it is sometimes unstable in real test even at the beginning round. lr=0.15 is validated, the results differs little with that of lr=0.1. Considering the stability boundary, so lr=0.1 is recommended over lr=0.2, 0.15.
 * For {E=1, B=10}, lr=0.2 and 0.15 is unstable in real test run, try {0.1, 0.07} instead. The other parameter combinations can follow similar approach for dealing instability under large lr.
 
-##### CNN/non-IID
+#### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
 * Compare the highest test acc achieved in all rounds.
     1. If two lr ties or differs little in test acc, take the one with smoother test loss and test acc curves.
@@ -108,47 +95,19 @@ CNN   |FedAVg|N-iid |              |          | A       | 1.0  |5  |∞  |      
 CNN   |FedAVg|N-iid | 96.98%       |0.99hrs   | T       | 0.5  |5  |∞  | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.47%       |0.56hrs   | T       | 0.2  |5  |∞  | 0.04  | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.76%       |0.35hrs   | A       | 0.1  |5  |∞  | 0.04  | SGD   | fs done
+
 ##### Remarks
 1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
 
 
-##### 2NN/IID
-Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   | 
 
-##### 2NN/non-IID
-Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |10 | 0.01  | SGD   | cancelled
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.2  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.1  |5  |10 | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.0  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 1.0  |5  |∞  | 0.01  | SGD   | cancelled
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.5  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.2  |5  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|N-iid | xxxx%        |xxxhrs    | A       | 0.1  |5  |∞  | 0.01  | SGD   |
-
-
-
-#### B. Experiment 2: increase local computation
+### Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1
 * The learning rate found using coarse search will be marked as "done cs"
 * The learning rate found using further finer search will be marked as "done fs"
 * Grid searches are conducted using a validation dataset which is 20% of the original MNIST training set, then train the model over 200 or 400 rounds and compare the test acc to determine the best values.
 
-##### CNN/IID
+#### CNN/IID
 * Default number of rounds is 200, if any run differs, then it will be marked as XX.XX%-XXX
 * Lr/O is ranked as per alternative search training 20 rounds on the full dataset and test on test set, original best search results is marked by *, status marked as re-rank
 
@@ -168,7 +127,7 @@ CNN   |FedAVg|iid   | 98.55%      |46.7mins  | T       | 0.1  |20 |10 | 0.1/0.15
 1. For {E=1, B=10}, lr=0.2 and 0.15 is unstable in real test run, try {0.1, 0.07} instead.
 2. For {E=5, B=50}, lr=0.2 is unstable in real test run after 297 rounds, try {0.15, 0.1, 0.07} instead.
 
-##### CNN/non-IID
+#### CNN/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
 * Compare the highest test acc achieved in all rounds.
     1. If two lr ties or differs little in test acc, take the one with smoother test loss and test acc curves.
@@ -185,41 +144,15 @@ CNN   |FedAVg|N-iid | 97.04%       |0.35hrs   | A       | 0.1  |5  |50 | 0.04   
 CNN   |FedAVg|N-iid | 97.34%       |0.95hrs   | T       | 0.1  |20 |50 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 96.52%       |0.35hrs   | A       | 0.1  |5  |10 | 0.04       | SGD   | fs done
 CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04       | SGD   | fs done
+
 ##### Remarks
 1. In the above table, 0.04 appears to be the best learning rates for most of the parameter combinations
 
 
-##### 2NN/IID
-Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
-2NN   |FedSGD|iid   | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | %           |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
 
+### Experiment 3: CIFAR10 learning performance
 
-##### 2NN/non-IID
-Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------    |--------  |-------- | -----|---|---| ----- | ------| -----
-2NN   |FedSGD|N-iid | %           |hrs       | T       | 0.1  |1  |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |50 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |1  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |50 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |50 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |5  |10 | 0.01  | SGD   | 
-2NN   |FedAVg|N-iid | %           |hrs       | T       | 0.1  |20 |10 | 0.01  | SGD   | 
-
-
-#### C. Experiment 3: CIFAR10 learning performance
-
-##### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
+#### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * For SGD, batch size is fixed at B=100, so number of mini-batch updates is also $500R$ since N=50,000 so mini-batch update per round is N/B=500.
@@ -264,7 +197,7 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
 
-##### 3-B: Per mini-batch update convergence FedAvg vs SGD 
+#### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
     1. 200 rounds (B=100) or for **100 rounds (B=50) SGD**,
     2. 200 rounds for FedAvg E=5, B=50, C=0.1
@@ -299,23 +232,9 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 
 
 
-#### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
+### Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 Consider these additional experiment over MNIST if time permits (on 5/6-th May):
 * test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation:
     - Running on T: lr=0.05, E=100 B=10 non-IID, E=50 B=10 IID; E=50 B=10 non-IID has been done on T.
     - Running on A: lr=0.05, E=100 B=10 IID, E=200 B=10 Non-IID
 * test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
-
-
-
-
-#### D. Training time summary
-Model |Method| Data |Time/rnd | 100-rnd time    | Machine |Frac | E | B | Lr    | Optim
-------|------|------|-------- | --------------  |-------- |-----|---|---| ----- | ---------
-CNN   |FedSGD|M-iid | 2.2s    | 3.7mins/0.06hrs | T       |0.1  |1  | ∞ | 0.01  | SGD
-CNN   |FedAVg|M-iid | 5.6s    | 9.3mins/0.16hrs | T       |0.1  |5  | ∞ | 0.01  | SGD
-CNN   |FedAvg|M-iid | 129.12s | 3.6hrs          | A       |1.0  |5  |10 | 0.01  | SGD 
-CNN   |FedAvg|M-iid | 39.4s   | 1.1hrs          | A       |0.1  |20 |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 25.2s   | 42mins/0.7hrs   | A       |0.2  |5  |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 42.34s  | 1.2hrs          | T       |0.1  |20 |10 | 0.01  | SGD
-CNN   |FedAvg|M-iid | 2.2s    | 3.6mins/0.06hrs | T       |0.1  |1  |50 | 0.01  | SGD
