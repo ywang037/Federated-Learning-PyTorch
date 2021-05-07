@@ -20,6 +20,7 @@ src/ipynb_checkpoints/
 runs/fedavg-cifar-IID/
 runs/fedavg-cifar-SGD/
 runs/fedavg-mnist-IID/
+runs/fedavg-mnist-non-IID/
 
 # arxived files
 # arxiv/
