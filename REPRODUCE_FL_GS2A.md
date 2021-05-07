@@ -233,8 +233,6 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
-* **TO-DO on 5-th May**:
-    - [ ] Test SGD with lr={5e-5, 1e-4} for 5000 rounds (running on A ... ).
 
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
@@ -255,8 +253,9 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         2. For FedAvg, larger lr in {0.05,0.07,0.1} converge quicker before 200 rounds, ***however, lr=0.05 outperforms and converges to 0.72 quicker afterwards***.
         3. For FedSGD, coarse searches in {0.05, 0.1, 0.2} find that lr=0.2 keeps increasing in test acc in 4000 rounds (3.8 hrs), and is better than smaller lr=0.1,0.05. So, next searches could be within {0.1, 0.2, 0.5} over 8000 rounds.
     * Tests over 4000/8000 rounds show that:
-        1. For FedAvg, tests of lr={0.005, 0.01, 0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc***. Both lr=0.05 and lr=0.01 converge in slower speed and to lower test acc, lr=0.05 converges a little bit quicker than lr=0.03 but it converges to a similar test acc as lr=0.01. None of {0.005,0.01,0.05} reach 74%. 
-        2. For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
+        1. For SGD, lr={2e-5, 5e-5, 7e-5, 1e-4} for 4000-5000 rounds **has not achieved test accuracy higher than 0.72**.
+        2. For FedAvg, tests of lr={0.005, 0.01, 0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc***. Both lr=0.05 and lr=0.01 converge in slower speed and to lower test acc, lr=0.05 converges a little bit quicker than lr=0.03 but it converges to a similar test acc as lr=0.01. None of {0.005,0.01,0.05} reach 74%. 
+        3. For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
     * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
     * Limited computational power and project timeline does not allow for
