@@ -234,7 +234,7 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 * **TO-DO on 5-th May**:
-    - [ ] Test SGD with lr={2e-5, 5e-5, 1e-4} for 10000 rounds (running on A ... ).
+    - [ ] Test SGD with lr={5e-5, 1e-4} for 5000 rounds (running on A ... ).
 
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
@@ -302,7 +302,7 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 
 #### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 Consider these additional experiment over MNIST if time permits (on 5/6-th May):
-- [ ] test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation.
+- [ ] test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation (running on T..., started by 0144 7 May...)
 - [ ] test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
 
 
