@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper - Part B-2: Experimental results
+# Work logs and notes on reproducing vanilla FL paper - Part B: Experimental results
 *NOTE: all the following results are obtained with WY's models*
 
 ### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 

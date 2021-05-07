@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper - Part C-2: grid search of learning rate
+# Work logs and notes on reproducing vanilla FL paper - Part C: grid search of learning rate
 
 ### Approach (fundamental principle)
 * WY's MLP and CNN models is used instead of original models found in AshwinRJ's repository
@@ -233,8 +233,6 @@ Model |Method|Data  | Val test acc|Time used | Machine | Frac | E | B | Lr/O  | 
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
-* **TO-DO on 5-th May**:
-    - [ ] Test SGD with lr={5e-5, 1e-4} for 5000 rounds (running on A ... ).
 
 
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
@@ -255,8 +253,9 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         2. For FedAvg, larger lr in {0.05,0.07,0.1} converge quicker before 200 rounds, ***however, lr=0.05 outperforms and converges to 0.72 quicker afterwards***.
         3. For FedSGD, coarse searches in {0.05, 0.1, 0.2} find that lr=0.2 keeps increasing in test acc in 4000 rounds (3.8 hrs), and is better than smaller lr=0.1,0.05. So, next searches could be within {0.1, 0.2, 0.5} over 8000 rounds.
     * Tests over 4000/8000 rounds show that:
-        1. For FedAvg, tests of lr={0.005, 0.01, 0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc***. Both lr=0.05 and lr=0.01 converge in slower speed and to lower test acc, lr=0.05 converges a little bit quicker than lr=0.03 but it converges to a similar test acc as lr=0.01. None of {0.005,0.01,0.05} reach 74%. 
-        2. For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
+        1. For SGD, lr={2e-5, 5e-5, 7e-5, 1e-4} for 4000-5000 rounds **has not achieved test accuracy higher than 0.72**.
+        2. For FedAvg, tests of lr={0.005, 0.01, 0.03, 0.05} in 4000 rounds show that ***lr=0.03 reach a higher test acc***. Both lr=0.05 and lr=0.01 converge in slower speed and to lower test acc, lr=0.05 converges a little bit quicker than lr=0.03 but it converges to a similar test acc as lr=0.01. None of {0.005,0.01,0.05} reach 74%. 
+        3. For FedSGD, test of lr={0.1, 0.2, 0.5} for 8000 rounds show that the larger lr the quicker the convergence, but ***lr=0.1 reach the highest test acc among these three lr***, and the related test loss is just about to rise again (just not to overfit), which suggests that in 8000 rounds, even smaller lr like 0.05, 0.03, and 0.02 may not achieve same test acc and also converge slower compared with lr=0.1. 
 2. If the target is to compare speedup for a specific test acc target, then one may not need to care too much about how to reach a higest final test acc for each algorithm. 
     * Instead, one may wish to tune the quickest fashion for the convergence of each algorithm, and then do the comparison of speedup.
     * Limited computational power and project timeline does not allow for
@@ -302,8 +301,10 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 
 #### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 Consider these additional experiment over MNIST if time permits (on 5/6-th May):
-- [ ] test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation (running on T..., started by 0144 7 May...)
-- [ ] test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
+* test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation:
+    - Running on T: lr=0.05, E=100 B=10 non-IID, E=50 B=10 IID; E=50 B=10 non-IID has been done on T.
+    - Running on A: lr=0.05, E=100 B=10 IID, E=200 B=10 Non-IID
+* test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
 
 
 
