@@ -3,10 +3,6 @@ data/cifar/cifar-10-python.tar.gz
 backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_loss-checkpoint.png
 backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_acc-checkpoint.png
 
-# old tensorboard runs
-logs/
-
-
 src/__pycache__/
 *.pyc
 
@@ -23,4 +19,4 @@ runs/fedavg-mnist-IID/
 runs/fedavg-mnist-non-IID/
 
 # arxived files
-# arxiv/
+arxiv/
