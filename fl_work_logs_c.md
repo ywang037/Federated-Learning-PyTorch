@@ -1,26 +1,10 @@
 # Work logs and notes on reproducing vanilla FL paper - Part B: Experimental results
 *NOTE: all the following results are obtained with WY's models*
 
-### I. Baseline CIFAR10 learning with *torch cnn* and *tf cnn* model 
-#### Torch cnn only
-N/A
 
-#### Torch cnn and tf cnn (28 April 2021)
-N/A
 
-### II. Baseline MNIST learning with *2NN* and *CNN* models
-Model | Test acc | Time     | Batch size | Epochs | Lr     | Optim
-------| -------- | -------- | ---------- | ------ | ------ | ---------
-2NN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD 
-CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD 
 
-### III. FedAvg MNIST learning with *2NN* and *CNN* models 
-##### Generic remarks
-1. Some test runs are unstable under searched learning rate, this is
-    * either because the learning rate is too close to instability region
-    * or due to the limited memory and computational power of the machine 
-
-#### A. Experiment 1: increase parallism
+### Experiment 1: increase parallism
 * The runs using optimized learning rate will be marked as "0.01/o"
 * Set 96%, 98% as targets for CNN, 2NN is to avoid the needed rounds from being too large to complete in time.
 * R-98 means the number of round where test acc hit 98%, similar for R-XX
@@ -29,7 +13,7 @@ CNN   | xx.xx%   | xxxxs    | 100        | 200    | 0.??   | SGD
 * The time taken for C=1.0 is formidable, even for IID cases. So, experiment for C=1.0 is cancelled for now.
     * one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
-##### CNN/IID
+#### CNN/IID
 Model |Method|Data  | Test acc (f,max) |R-98     |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----    |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|iid   | 98.58%,99.23%    |20       |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
@@ -43,12 +27,12 @@ CNN   |FedAVg|iid   | 98.66%,98.70%    |54 (1.6x)|100   |0.32hrs   | T       | 0
 CNN   |FedAVg|iid   | 98.48%,98.52%    |55 (1.6x)|100   |0.78hrs   | A       | 0.5  |5  |∞  | 0.2/o  | SGD   | done
 CNN   |FedAVg|iid   |                  |         |100   |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
 
-##### Remarks
+#### Remarks
 1. {E=5, B=∞} cannot reach 99% in allowed time i.e., within 100 rounds.
 2. As the fraction paramter C increases from 0.1 to 0.5, there is no significant speed up improvemnt observed, which is in line with the experimental results reported in the vanilla FL paper (referred to as vanilla FL results for short).
 
 
-##### CNN/non-IID
+#### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98      |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----     |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
 CNN   |FedAVg|N-iid | 99.27%,99.38%    |416       |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
@@ -68,7 +52,7 @@ CNN   |FedAVg|N-iid |                  |          |      |          | A       | 
 
 
 
-#### B. Experiment 2: increase local computation
+### Experiment 2: increase local computation
 * The fraction number is fixed at C=0.1.
 * The runs using optimized learning rate will be marked as "0.01/o".
 * R-98 means the number of round where test acc hit 98%, similar for R-XX.
@@ -76,7 +60,7 @@ CNN   |FedAVg|N-iid |                  |          |      |          | A       | 
 * Test acc (f,max) means final value and max value.
 * Status marked as "bm" indicate the benchmark runs, and "bm/d" indicate discarded benchmark runs.
 
-##### CNN/IID
+#### CNN/IID
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | bm/d
@@ -108,7 +92,7 @@ CNN   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T 
 6. Larger learning rates in general lead to quicker convergence or higher test acc in a given number of rounds, at the expense of being prone to instability. 
 7. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
 
-##### CNN/non-IID
+#### CNN/non-IID
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
@@ -129,7 +113,7 @@ CNN   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T 
 2. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
 
 
-##### CNN/IID (selected edition)
+#### CNN/IID (selected edition)
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99        |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |-----       |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614        |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
@@ -145,7 +129,7 @@ CNN   |FedAVg|iid   | 99.38%,99.31%    | 5  (46.0x)| 18  (12.8x)|600   |7.48hrs 
 ##### Remarks
 1. Learning curve of {E=5, B=50} is very noisy and unstable, may need a re-run
 
-##### CNN/non-IID (selected edition)
+#### CNN/non-IID (selected edition)
 Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
 ------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
 CNN   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
@@ -160,9 +144,9 @@ CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T 
 
 
 
-#### C. Experiment 3: CIFAR10 learning performance
+### Experiment 3: CIFAR10 learning performance
 
-##### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
+#### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1, FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * One cannot afford to perform that many rounds for FedSGD, a reasonable approach is to let FedAvg and FedSGD perform identical rounds of learning, as what are performed in the previous two experiments, e.g., 100-200 rounds.
     * Considering either *torch cnn* and *tf cnn* overfits in less than 100 epochs of SGD, one may perform 100 rounds FedAvg/FedSGD
@@ -191,7 +175,7 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         - Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
-##### 3-B: Per mini-batch update convergence FedAvg vs SGD 
+#### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * For SGD, batch size is fixed at B=100, so number of mini-batch updates is $500R$ since N=50,000 so mini-batch update per round is N/B=500.
 * For FedAvg, since E, B are fixed, so number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=50R$, and the total number of mini-batch updates conducted by all participant clients is $50R/C$, C is the fraction parameter.
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
@@ -226,7 +210,7 @@ CNN   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0
 7. For FedAvg E=5, B=50, C=1.0, larger lr in {0.001, 0.01, 0.1, 0.2, 0.32} achieve higher test acc in 20 round and also converges quicker, lr=0.5 converges even slower than lr=0.1 and become unstable after 10 rounds.
 
 
-#### C. Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
+### Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 Consider these additional experiment over MNIST if time permits (on 5/6-th May):
 - [ ] test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation.
 - [ ] test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
