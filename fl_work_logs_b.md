@@ -233,7 +233,7 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 
 
 ### Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
-Consider these additional experiment over MNIST if time permits (on 5/6-th May):
+#### 4-A FedAvg with large E
 * test FedAVg E={100,200,500} B=10 C=0.1 and compare with E=1 over IID/non-IID data, using lr=0.1 (the same as E=1 B=10 C=0.1) to see the effect of very large amount of local computation:
 
 Data | Time  | Machine | C   | E   | B  | Lr   | Optim | Status
@@ -245,10 +245,5 @@ N-IID|       | T       | 0.1 | 50  | 10 | 0.05 | SGD   | done
 N-IID|3.30hrs| T       | 0.1 | 100 | 10 | 0.05 | SGD   | done   
 N-IID|       | A       | 0.1 | 200 | 10 | 0.05 | SGD   | running   
 
-
-    1. IID
-        - Running 
-    2. Non-IID
-    - Running on T: lr=0.05, E=50 B=10 IID; E=50 B=10 non-IID, E=100 B=10 non-IID, has been done on T.
-    - Running on A: lr=0.05, E=100 B=10 IID, E=200 B=10 Non-IID
+#### 4-B Unbalanced Non-IID data
 * test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
