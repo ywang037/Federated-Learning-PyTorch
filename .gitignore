@@ -4,9 +4,9 @@ backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_loss-checkpoi
 backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_acc-checkpoint.png
 
 # python checkpoints
-src/__pycache__/
-src/.ipynb_checkpoints/
-*.pyc
+src/__pycache__/*.pyc
+src/.ipynb_checkpoints/*.pyc
+
 
 
 
