@@ -104,6 +104,21 @@ def exp_details(args):
     print(f'    Local Epochs        : {args.local_ep}\n')
     return
 
-# the function added by WY, used to count the number of trainable parameters
+# the function added by WY:
 def get_count_params(model):
+    """
+    Use this function to get number of trainable parameters.
+    """
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def make_learning_curve(x):
+    """
+    Use this function to get monotonically incerasing learning curve
+    from an input list x
+    """
+    running_max=0
+    y=[0]*len(x)
+    for idx, value in enumerate(x):
+        running_max = max(x[:idx+1])
+        y[idx] = running_max if x[idx] < running_max else x[idx]
+    return y
