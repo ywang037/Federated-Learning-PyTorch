@@ -201,11 +201,12 @@ Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Dec
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
 CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
-CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
+CNN   |FedAvg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
+3. The best lr for FedAvg could be within {0.01, 0.02, 0.05, 0.1, 0.2} 
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
