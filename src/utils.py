@@ -17,9 +17,27 @@ def get_dataset(args):
 
     if args.dataset == 'cifar':
         data_dir = './data/cifar/'
+        
+        # default normalization
+        mean = (0.5, 0.5, 0.5)
+        std = (0.5, 0.5, 0.5)
+        
+        # default transform
         apply_transform = transforms.Compose(
             [transforms.ToTensor(),
-             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+             transforms.Normalize(mean, std)])
+
+        # # alternative normilzation
+        # mean = (0.4914, 0.4822, 0.4465)
+        # std = (0.2023, 0.1994, 0.2010)
+
+        # # alternative transform
+        # apply_transform = transforms.Compose([
+        #     transforms.RandomCrop(32, padding=4),
+        #     transforms.RandomHorizontalFlip(),
+        #     transforms.ToTensor(),
+        #     transforms.Normalize(mean, std)
+        #     ])
 
         train_dataset = datasets.CIFAR10(data_dir, train=True, download=True,
                                        transform=apply_transform)
