@@ -22,8 +22,13 @@ def get_dataset(args):
         mean = (0.5, 0.5, 0.5)
         std = (0.5, 0.5, 0.5)
         
-        # default transform
-        apply_transform = transforms.Compose(
+        # default train transform
+        train_transform = transforms.Compose(
+            [transforms.ToTensor(),
+             transforms.Normalize(mean, std)])
+
+        # default test transform
+        test_transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize(mean, std)])
 
@@ -31,19 +36,25 @@ def get_dataset(args):
         # mean = (0.4914, 0.4822, 0.4465)
         # std = (0.2023, 0.1994, 0.2010)
 
-        # # alternative transform
-        # apply_transform = transforms.Compose([
-        #     transforms.RandomCrop(32, padding=4),
+        # # alternative train transform
+        # train_transform = transforms.Compose([
+        #     # transforms.CenterCrop(24),
         #     transforms.RandomHorizontalFlip(),
         #     transforms.ToTensor(),
         #     transforms.Normalize(mean, std)
         #     ])
 
+        # # alternative test transform
+        # test_transform = transforms.Compose([
+        #     transforms.ToTensor(),
+        #     transforms.Normalize(mean,std)
+        # ])        
+
         train_dataset = datasets.CIFAR10(data_dir, train=True, download=True,
-                                       transform=apply_transform)
+                                       transform=train_transform)
 
         test_dataset = datasets.CIFAR10(data_dir, train=False, download=True,
-                                      transform=apply_transform)
+                                      transform=test_transform)
 
         # sample training data amongst users
         if args.iid:
