@@ -228,11 +228,11 @@ if __name__ == '__main__':
                     format(args.dataset, args.model, args.epochs, args.frac,
                         args.iid, args.local_ep, args.local_bs))
         
-        # Plot Average Accuracy vs Communication rounds
+        # Plot test Accuracy vs Communication rounds
         plt.figure()
-        plt.title('Average Accuracy vs Communication rounds')
-        plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
-        plt.ylabel('Average Accuracy')
+        plt.title('Test Accuracy vs Communication rounds')
+        plt.plot(range(len(test_acc)), test_acc, color='k')
+        plt.ylabel('Test Accuracy')
         plt.xlabel('Communication Rounds')
         plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
                     format(args.dataset, args.model, args.epochs, args.frac,
