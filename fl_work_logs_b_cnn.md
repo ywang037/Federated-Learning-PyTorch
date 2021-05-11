@@ -204,7 +204,7 @@ CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    | 
 CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
 ##### Remarks
-1. reasdf
+1. The alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
