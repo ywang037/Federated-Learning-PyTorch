@@ -11,10 +11,10 @@
 ### Approach for MNIST IID data
 * Initial coarse searches in a grid {1e-4, 1e-3, 1e-2, 1e-1, 1.0}, best values were found around 1e-2 and 1e-1.
 * Follow-up finer searches using resolution $10^{1/3}$ with multiplicative factors {1,2,5,10} or resolution $10^(1/6)$ with multiplicative factors {1.5, 2.2, 3.2, 4.6, 6.8}
+* One may first run several tests with full training and get an initial decision, and then run tests with validation sets to verify if the lr search results using validation sets are in line with that obtained with full training set.
 
 ### Approach for MNIST non-IID data
-* Initial coarse searches in a grid {1e-5, 1e-4, 1e-3, 1e-2, 1e-1}, best values were found around 1e-3 and 1e-2
-* Follow-up finer searches using resolution $10^{1/3}$ with multiplicative factors {1,2,5,10} or resolution $10^(1/6)$ with multiplicative factors {1.5, 2.2, 3.2, 4.6, 6.8}
+* The fundamental approach follows the above described for IID data.
 
 
 
@@ -48,11 +48,9 @@ Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  |
 2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |1  |∞  | 0.01  | SGD   |
 2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |1  |∞  | 0.01  | SGD   | cancelled
 
-
-
-
 ##### Remarks
-* asdf
+* Searches for C=0 show that best lr may appear within {0.01, 0.02, 0.05, 0.1}.
+* Runs with higher value of C may be test for fewer number of rounds, compared to the baseline test run with C=0
 
 #### MLP/non-IID
 * Default number of rounds is 400, if any run differs, then it will be marked as XX.XX%-XXX
