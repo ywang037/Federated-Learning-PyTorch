@@ -82,7 +82,8 @@ if __name__ == '__main__':
     print(global_model,'\n')
 
     # cuda instructions to show gpu memory usage status
-    print(torch.cuda.memory_summary(torch.device))
+    torch.cuda.empty_cache()
+    print(torch.cuda.memory_summary(torch.device,abbreviated=True))
 
     # pause and print message for user to confirm the hyparameter are good to go
     answer = input("Press n to abort, press any other key to continue, then press ENTER: ")
