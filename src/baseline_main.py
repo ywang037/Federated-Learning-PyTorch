@@ -13,7 +13,7 @@ from torch.utils.tensorboard import SummaryWriter
 from utils import get_dataset, get_count_params
 from options import args_parser
 from update import test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch, CNNCifarTf, CNNCifarTfDp
+from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifarTorch, CNNCifarTfDp
 
 import time, csv
 from itertools import zip_longest
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     # save trained weights
     if args.save_model:
         save_path = f'./save/weights-baseline-{args.dataset}-{args.model}-ep{args.epochs}-bs{args.bs}-lr{args.lr}.pth'
-        torch.save(model.state_dict(), save_path)
+        torch.save(global_model.state_dict(), save_path)
 
     '''
     # one-time testing
