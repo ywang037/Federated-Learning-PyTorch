@@ -35,18 +35,18 @@ Some test runs are unstable under searched learning rate, this is
     1. If two lr ties or differs little in test acc, take the one with smoother test loss and test acc curves.
     2. If the lr achieve higher maximum test acc, but the test loss and test acc curves exhibits high instablity, then take the one with 2nd highes maximum test acc. 
 
-Model |Method|Data  | Val test acc |Time used | Machine | Frac | E | B | Lr/O  | Optim | Status
-------|------|------| --------     |--------- | --------| -----|---|---| ----- | ----- | ------
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |1  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |1  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.2  |1  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |1  |10 | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |1  |10 | 0.01  | SGD   | cancelled
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.0  |1  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.1  |1  |∞  | 0.01  | SGD   | 
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.2  |1  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 0.5  |1  |∞  | 0.01  | SGD   |
-2NN   |FedAVg|iid   | xxxx%        |xxxhrs    | A       | 1.0  |1  |∞  | 0.01  | SGD   | cancelled
+Model |Method|Data  | Val test acc |Time used          | Machine | Frac | E | B | Lr/O  | Optim | Status
+------|------|------| --------     |---------          | --------| -----|---|---| ----- | ----- | ------
+2NN   |FedAVg|iid   | xxxx%        |0.41hrs/1000 rnds  | A       | 0.0  |1  |10 | 0.02  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.1  |1  |10 | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.2  |1  |10 | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.5  |1  |10 | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 1.0  |1  |10 | 0.01  | SGD   | cancelled
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.0  |1  |∞  | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.1  |1  |∞  | 0.01  | SGD   | 
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.2  |1  |∞  | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 0.5  |1  |∞  | 0.01  | SGD   |
+2NN   |FedAVg|iid   | xxxx%        |xxxhrs             | A       | 1.0  |1  |∞  | 0.01  | SGD   | cancelled
 
 ##### Remarks
 * Searches for C=0 show that best lr may appear within {0.01, 0.02, 0.05, 0.1}.
