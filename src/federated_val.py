@@ -16,7 +16,7 @@ from tensorboardX import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, LocalUpdateVal, test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifar, CNNCifarTorch
+from models import TwoNN, CNNMnistWy, CNNFashion_Mnist, CNNCifarTorch
 from utils import get_dataset, average_weights, exp_details
 
 import time, csv
@@ -34,17 +34,12 @@ if __name__ == '__main__':
         torch.cuda.device(torch.cuda.current_device()) 
     device = 'cuda' if args.gpu else 'cpu'
 
-    # if args.gpu_id:
-    #     torch.cuda.set_device(args.gpu_id)
-    # device = 'cuda' if args.gpu else 'cpu'
-
     # load dataset and user groups
     train_dataset, test_dataset, user_groups = get_dataset(args)
 
     # BUILD MODEL
     if args.model == 'cnn':  # Convolutional neural netork
         if args.dataset == 'mnist':
-            # global_model = CNNMnist(args=args)
             # global_model = CNNMnist() # use WY's edition, no args are needed
             global_model = CNNMnistWy() # use WY's cnn for learning mnist            
         elif args.dataset == 'fmnist':
@@ -75,6 +70,11 @@ if __name__ == '__main__':
     if answer == 'n':
         exit('\nTraining is aborted by user')
     print('\nTraining starts...\n')
+
+    # start the tensorboard writer
+    logger_path_iid = f'runs_val/fedavg-{args.dataset}-IID/E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}-R{args.epochs}-{args.model}'
+    logger_path_noniid = f'runs_val/fedavg-{args.dataset}-non-IID/E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}-R{args.epochs}-{args.model}'
+    logger = SummaryWriter(logger_path_iid) if args.iid else SummaryWriter(logger_path_noniid)
 
     # copy weights
     global_weights = global_model.state_dict()
@@ -129,13 +129,18 @@ if __name__ == '__main__':
         print('\n| Global Round : {:>4}/{} | Validation loss: {:.2f} | Test loss: {:.2f}| Test acc = {:.2f}%'.format(
             epoch+1, args.epochs, loss_avg, round_test_loss, 100*round_test_acc))
 
-    # logger.flush()
-    # logger.close()
-    
+        # write training loss, test loss, and test acc to tensorboard writer
+        logger.add_scalar('Train loss', loss_avg, epoch+1)
+        logger.add_scalar('Test loss', round_test_loss, epoch+1)
+        logger.add_scalar('Test acc', round_test_acc, epoch+1)
+  
     # print the wall-clock-time used
     end_time=time.time() 
     time_elapsed = end_time-start_time
     print('\nValidation training completed, highest test acc: {:.2f}%, time elapsed: {:.2f}s ({:.2f}hrs)'.format(100*max(test_acc),time_elapsed,time_elapsed/3600))
+
+    logger.flush()
+    logger.close()
 
     # Saving the objects train_loss and train_accuracy:
     if args.save_record:
@@ -151,36 +156,5 @@ if __name__ == '__main__':
                 writer.writerow(['Epoch', 'Training loss', 'Test loss', 'Test acc'])
                 writer.writerows(export_data)
         
-        # # write to pkl file
-        # file_name = f'./save/objects/{args.dataset}_{args.model}_{args.epochs}_C[{args.frac}]_iid[{args.iid}]_E[{args.local_ep}]_B[{args.local_bs}].pkl'
-        # with open(file_name, 'wb') as f:
-        #     pickle.dump([train_loss, test_loss, test_acc], f)
-        #     # pickle.dump([train_loss, train_accuracy], f)
 
-    # # visualize the training results
-    # if args.plot:
-    #     matplotlib.use('Agg')
-    #     # Plot Loss curve
-    #     plt.figure()
-    #     plt.title('Training Loss vs Communication rounds')
-    #     plt.plot(range(len(train_loss)), train_loss, color='r')
-    #     plt.ylabel('Training loss')
-    #     plt.xlabel('Communication Rounds')
-    #     plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_loss.png'.
-    #                 format(args.dataset, args.model, args.epochs, args.frac,
-    #                     args.iid, args.local_ep, args.local_bs))
-        
-    #     # Plot Average Accuracy vs Communication rounds
-    #     plt.figure()
-    #     plt.title('Average Accuracy vs Communication rounds')
-    #     plt.plot(range(len(train_accuracy)), train_accuracy, color='k')
-    #     plt.ylabel('Average Accuracy')
-    #     plt.xlabel('Communication Rounds')
-    #     plt.savefig('../save/fed_{}_{}_{}_C[{}]_iid[{}]_E[{}]_B[{}]_acc.png'.
-    #                 format(args.dataset, args.model, args.epochs, args.frac,
-    #                     args.iid, args.local_ep, args.local_bs))
-
-    # PLOTTING (optional)
-    # import matplotlib
-    # import matplotlib.pyplot as plt
 
