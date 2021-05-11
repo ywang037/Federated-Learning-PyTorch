@@ -167,10 +167,10 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 
-
+#### CNN/IID
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
+CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
 CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
 CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
 
@@ -195,6 +195,16 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         1. Finer searches of best learning rate (and decay scheme) for each algorithm.
         2. Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
+
+#### CNN/non-IID
+Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
+------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
+CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
+CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
+CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
+
+##### Remarks
+1. reasdf
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
