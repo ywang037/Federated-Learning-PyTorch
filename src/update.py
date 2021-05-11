@@ -19,7 +19,8 @@ class DatasetSplit(Dataset):
 
     def __getitem__(self, item):
         image, label = self.dataset[self.idxs[item]]
-        return torch.tensor(image), torch.tensor(label)
+        return image, label 
+        # return torch.tensor(image), torch.tensor(label) # WY: don't understand the point as image and label are already torch.Tensor 
 
 
 class LocalUpdate(object):
