@@ -1,4 +1,4 @@
-# Work logs and notes on reproducing vanilla FL paper - Part B: Experimental results
+# Work logs and notes on reproducing vanilla FL paper - Part C: Experimental results
 *NOTE: all the following results are obtained with WY's models*
 
 
