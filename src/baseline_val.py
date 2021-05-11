@@ -184,7 +184,7 @@ if __name__ == '__main__':
     # save trained weights
     if args.save_model:
         save_path = f'./save/weights-baseline-{args.dataset}-{args.model}-ep{args.epochs}-bs{args.bs}-lr{args.lr}.pth'
-        torch.save(model.state_dict(), save_path)
+        torch.save(global_model.state_dict(), save_path)
 
     '''
     # one-time testing
