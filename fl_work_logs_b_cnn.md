@@ -155,15 +155,18 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
 #### Baseline SGD
 1. The baseline SGD benchmark is same for FedAvg/FedSGD in both IID and non-IID cases.
 2. It has been founded that adding batch normalization alone (after relu) in the current *tf cnn* can improve the test accuarcy remarkably.
+3. The run with batch normalization and `t1` transform tends to become overfit at the end of 200 epochs, whereas the run with dropout seems not even close to overfitting.
+4. `t2` transform takes 60% more time to train than using `t1` but only achieves similar performance as `t1`.
 
-Model     |Method|Data Augmentation                 | Epoch |Time      | Machine | B  | Lr/O      | Optim | Decay |  Status
--------   |------|------                            | ----  |--------  | -----   | -- | -----     |------ | ----- | ------
-CNN-dp    |SGD   |t0: default                       | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | benchmark
-CNN-dp    |SGD   |t1: mean, std, crop, flip         | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
-CNN-dp    |SGD   |t2: mean, std, crop, flip, color  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
-CNN-bn    |SGD   |t1: mean, std, crop, flip         | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
-CNN-bn    |SGD   |t2: mean, std, crop, flip, color  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | 
-CNN-bn-dp |SGD   |                                  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | 
+Model     |Method|Data Augmentation                 | Test acc | Epoch |Time      | Machine | B  | Lr/O      | Optim | Decay |  Status
+-------   |------|------                            |----------| ----  |--------  | -----   | -- | -----     |------ | ----- | ------
+CNN-dp    |SGD   |t0: default                       | 73.8%    | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | benchmark
+CNN-dp    |SGD   |t1: mean, std, crop, flip         | 80.0%    | 200   |1.05hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+CNN-dp    |SGD   |t2: mean, std, crop, flip, color  | 79.4%    | 200   |1.61hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+CNN-bn    |SGD   |t1: mean, std, crop, flip         | 84.5%    | 200   |1.10hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+CNN-dp    |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-bn    |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-bn-dp |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
 
 #### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
