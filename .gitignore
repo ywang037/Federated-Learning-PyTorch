@@ -25,3 +25,4 @@ runs/fedavg-mnist-non-IID/
 
 # arxived files
 arxiv/
+.vscode/settings.json
