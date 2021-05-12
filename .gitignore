@@ -7,10 +7,6 @@ backup-orginial/save/.ipynb_checkpoints/fed_mnist_cnn_50_C0.1_iid1_acc-checkpoin
 src/__pycache__/*.pyc
 src/.ipynb_checkpoints/*.pyc
 
-# vscode settings
-.vscode/settings.json
-
-
 # Notebook Checkpoints
 src/ipynb_checkpoints/
 
@@ -25,4 +21,4 @@ runs/fedavg-mnist-non-IID/
 
 # arxived files
 arxiv/
-.vscode/settings.json
+.vscode/
