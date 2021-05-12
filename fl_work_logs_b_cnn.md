@@ -215,15 +215,16 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 #### CNN/non-IID
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
-CNN   |FedSGD|iid   | 8000  |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | done
-CNN   |FedAvg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |       | SGD   | done
+CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | 
+CNN   |FedSGD|iid   |       |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | 
+CNN   |FedAvg|iid   | 2000  |~5.8hrs   | T/A     | 0.1  |5  |50 | 0.XX      |       | SGD   | 
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
-3. The best lr for FedAvg could be within {0.01, 0.02, 0.05, 0.1, 0.2}.
-4. It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
+3. For FedAvg:
+    - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
+    - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
