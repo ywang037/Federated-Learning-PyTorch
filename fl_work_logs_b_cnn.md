@@ -157,6 +157,9 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
 2. It has been founded that adding batch normalization alone (after relu) in the current *tf cnn* can improve the test accuarcy remarkably.
 3. The run with batch normalization and `t1` transform tends to become overfit at the end of 200 epochs, whereas the run with dropout seems not even close to overfitting.
 4. `t2` transform takes 60% more time to train than using `t1` but only achieves similar performance as `t1`.
+5. Up to 400 epochs, it has been observed that the test run with batch normalization alone and `t1` transform performs the best in both convergance rate and highest test accuracy, which suggests that the most favorable model is the one with batch normalization alone, i.e., `wycnn_tfbn` and most favorable data augmentation is transform `t1`.
+6. The model uses both batch normalization and dropout performs inferior to the one uses batch normalization only.
+7. All runs with data augmentation `t1` (no matter wycnn_tfdp, wycnn_tfbn, or wycnn_tfbndp) do not overfit up to 400 epochs.
 
 Model     |Method|Data Augmentation                 | Test acc | Epoch |Time      | Machine | B  | Lr/O      | Optim | Decay |  Status
 -------   |------|------                            |----------| ----  |--------  | -----   | -- | -----     |------ | ----- | ------
@@ -164,9 +167,9 @@ CNN-dp    |SGD   |t0: default                       | 73.8%    | 200   |hrs     
 CNN-dp    |SGD   |t1: mean, std, crop, flip         | 80.0%    | 200   |1.05hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 CNN-dp    |SGD   |t2: mean, std, crop, flip, color  | 79.4%    | 200   |1.61hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 CNN-bn    |SGD   |t1: mean, std, crop, flip         | 84.5%    | 200   |1.10hrs   | T       |100 | 0.01@dp   | SGD   |       | done
-CNN-dp    |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
-CNN-bn    |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
-CNN-bn-dp |SGD   |t1: mean, std, crop, flip         |          | 400   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-dp    |SGD   |t1: mean, std, crop, flip         | 82.3%    | 400   |2.09hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+CNN-bn    |SGD   |t1: mean, std, crop, flip         | 85.0%    | 400   |2.15hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+CNN-bn-dp |SGD   |t1: mean, std, crop, flip         | 83.3%    | 400   |2.17hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 
 #### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
