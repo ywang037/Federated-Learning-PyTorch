@@ -35,6 +35,7 @@ if __name__ == '__main__':
     device = 'cuda' if args.gpu else 'cpu'
 
     # load dataset and user groups
+    # user_groups is a dictionary, each item is the index of a user and the indices of images this asscociated to this user
     train_dataset, test_dataset, user_groups = get_dataset(args)
 
     # BUILD MODEL
@@ -109,6 +110,7 @@ if __name__ == '__main__':
         global_model.train()
         for idx in idxs_users:
             # to use the entire training set for grid search of lr, toggle the following line
+            # user_groups[idx] is an item in the dictionary user_groups which includes the index of a user (i.e., value of idx) and the related indices of images of this user
             local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[idx])
             w, loss = local_model.update_weights(model=copy.deepcopy(global_model), global_round=epoch)
 
