@@ -152,7 +152,7 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
 
 ### Experiment 3: CIFAR10 learning performance
 
-#### Baseline SGD
+#### Baseline SGD using data augmentation and model with batch normalization
 1. The baseline SGD benchmark is same for FedAvg/FedSGD in both IID and non-IID cases.
 2. It has been founded that adding batch normalization alone (after relu) in the current *tf cnn* can improve the test accuarcy remarkably.
 3. The run with batch normalization and `t1` transform tends to become overfit at the end of 200 epochs, whereas the run with dropout seems not even close to overfitting.
@@ -168,11 +168,13 @@ Model       |Method|Data Augmentation                 | Test acc | Epoch |Time  
 `wycnn_dp`  |SGD   |t0: default                       | 73.8%    | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | benchmark
 `wycnn_dp`  |SGD   |t1: mean, std, crop, flip         | 80.0%    | 200   |1.05hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 `wycnn_dp`  |SGD   |t2: mean, std, crop, flip, color  | 79.4%    | 200   |1.61hrs   | T       |100 | 0.01@dp   | SGD   |       | done
-`wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 84.5%    | 200   |1.10hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 `wycnn_dp`  |SGD   |t1: mean, std, crop, flip         | 82.3%    | 400   |2.09hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+`wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 84.5%    | 200   |1.10hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 `wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 85.0%    | 400   |2.15hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+`wycnn_bn`  |SGD   |t2: mean, std, crop, flip, color  |     %    | 400   |    hrs   | A       |100 | 0.01@dp   | SGD   |       | run on A
 `wycnn_bndp`|SGD   |t1: mean, std, crop, flip         | 83.3%    | 400   |2.17hrs   | T       |100 | 0.01@dp   | SGD   |       | done
 `tf_cnn`    |SGD   |t1: mean, std, crop, flip         | 84.2%    | 400   |1.85hrs   | T       |100 | 0.01@dp   | SGD   |       | done
+`tf_cnn`    |SGD   |t2: mean, std, crop, flip, color  |     %    | 400   |    hrs   | A       |100 | 0.01@dp   | SGD   |       | run on A
 
 #### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
