@@ -206,7 +206,8 @@ CNN   |FedAvg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
-3. The best lr for FedAvg could be within {0.01, 0.02, 0.05, 0.1, 0.2} 
+3. The best lr for FedAvg could be within {0.01, 0.02, 0.05, 0.1, 0.2}.
+4. It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
