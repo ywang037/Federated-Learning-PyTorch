@@ -159,7 +159,7 @@ class LocalUpdateVal(object):
         This function is only used to build a validation dataset for doing grid searches of learning rate.
         Returns train, validation and test dataloaders for a given dataset and user indexes.
         """
-        # split indexes for train, validation (80, 20)
+        # split (indices) of images of a user into train, validation (80, 20)
         idxs_train = idxs[:int(0.8*len(idxs))]
         idxs_val = idxs[int(0.8*len(idxs)):]
 
