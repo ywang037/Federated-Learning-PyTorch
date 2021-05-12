@@ -152,6 +152,19 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
 
 ### Experiment 3: CIFAR10 learning performance
 
+#### Baseline SGD
+1. The baseline SGD benchmark is same for FedAvg/FedSGD in both IID and non-IID cases.
+2. It has been founded that adding batch normalization alone (after relu) in the current *tf cnn* can improve the test accuarcy remarkably.
+
+Model     |Method|Data Augmentation                 | Epoch |Time      | Machine | B  | Lr/O      | Optim | Decay |  Status
+-------   |------|------                            | ----  |--------  | -----   | -- | -----     |------ | ----- | ------
+CNN-dp    |SGD   |t0: default                       | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | benchmark
+CNN-dp    |SGD   |t1: mean, std, crop, flip         | 200   |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-dp    |SGD   |t2: mean, std, crop, flip, color  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-bn    |SGD   |t1: mean, std, crop, flip         | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | run on T
+CNN-bn    |SGD   |t2: mean, std, crop, flip, color  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | 
+CNN-bn-dp |SGD   |                                  | xxxx  |hrs       | T       |100 | 0.01@dp   | SGD   |       | 
+
 #### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1
 * FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
