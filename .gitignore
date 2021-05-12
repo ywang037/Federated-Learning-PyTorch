@@ -8,7 +8,7 @@ src/__pycache__/*.pyc
 src/.ipynb_checkpoints/*.pyc
 
 # vscode settings
-.vscode/
+.vscode/settings.json
 
 
 # Notebook Checkpoints
