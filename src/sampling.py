@@ -6,6 +6,8 @@
 import numpy as np
 from torchvision import datasets, transforms
 
+# WY tries to build a function for drawing a representative validation set for learning rate optimization
+
 
 def mnist_iid(dataset, num_users):
     """
