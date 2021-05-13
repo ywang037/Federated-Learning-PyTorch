@@ -16,7 +16,7 @@ from tensorboardX import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, LocalUpdateVal, test_inference
-from models import MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifarTorch,  CNNCifarTfDp
+from models import CNNCifarTf, CNNCifarTfBn, MLP, TwoNN, CNNMnist, CNNMnistWy, CNNFashion_Mnist, CNNCifarTorch,  CNNCifarTfDp
 from utils import get_dataset, average_weights, exp_details
 
 import time, csv
@@ -46,13 +46,13 @@ if __name__ == '__main__':
         elif args.dataset == 'fmnist':
             global_model = CNNFashion_Mnist(args=args)
         elif args.dataset == 'cifar':
-            global_model = CNNCifarTorch() # use WY's edition, no args are needed
+            global_model = CNNCifarTf() # use WY's edition, no args are needed
             # global_model = CNNCifar(args=args)
     elif args.model == 'wycnn':
         if args.dataset == 'mnist':
             global_model = CNNMnistWy() # use WY's cnn for learning mnist
         elif args.dataset == 'cifar':
-            global_model = CNNCifarTfDp() # cnn from current TF tutorial
+            global_model = CNNCifarTfBn() # cnn from current TF tutorial
     elif args.model == 'mlp':  # Multi-layer preceptron
         if args.dataset == 'mnist':            
             img_size = train_dataset[0][0].shape
