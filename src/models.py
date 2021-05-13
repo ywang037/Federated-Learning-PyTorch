@@ -270,7 +270,6 @@ class CNNCifarTfBn(nn.Module):
             nn.BatchNorm2d(num_features=64),
             nn.MaxPool2d(kernel_size=2,stride=2), # output size 6*6, i.e., (64, 6, 6)
             nn.Conv2d(in_channels=64,out_channels=64,kernel_size=3), # output size 4*4, i.e., (64, 4, 4)
-            # nn.Dropout2d(), # this is WY's added layer to postpone overfitting, allowing for larger number of rounds for experiments
             nn.ReLU(),
             nn.BatchNorm2d(64)
         )

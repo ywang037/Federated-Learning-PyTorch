@@ -18,37 +18,37 @@ def get_dataset(args):
     if args.dataset == 'cifar':
         data_dir = './data/cifar/'
         
-        # default normalization
-        mean = (0.5, 0.5, 0.5)
-        std = (0.5, 0.5, 0.5)
+        # # default normalization
+        # mean = (0.5, 0.5, 0.5)
+        # std = (0.5, 0.5, 0.5)
         
-        # default train transform
-        train_transform = transforms.Compose(
-            [transforms.ToTensor(),
-             transforms.Normalize(mean, std)])
+        # # default train transform
+        # train_transform = transforms.Compose(
+        #     [transforms.ToTensor(),
+        #      transforms.Normalize(mean, std)])
 
-        # default test transform
-        test_transform = transforms.Compose(
-            [transforms.ToTensor(),
-             transforms.Normalize(mean, std)])
+        # # default test transform
+        # test_transform = transforms.Compose(
+        #     [transforms.ToTensor(),
+        #      transforms.Normalize(mean, std)])
 
-        # # alternative normilzation
-        # mean = (0.4914, 0.4822, 0.4465)
-        # std = (0.2023, 0.1994, 0.2010)
+        # alternative normilzation
+        mean = (0.4914, 0.4822, 0.4465)
+        std = (0.2023, 0.1994, 0.2010)
 
-        # # alternative train transform
-        # train_transform = transforms.Compose([
-        #     # transforms.RandomCrop(32,padding=4),
-        #     transforms.RandomHorizontalFlip(),
-        #     transforms.ToTensor(),
-        #     transforms.Normalize(mean, std)
-        #     ])
+        # alternative train transform
+        train_transform = transforms.Compose([
+            transforms.RandomCrop(32,padding=4),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std)
+            ])
 
-        # # alternative test transform
-        # test_transform = transforms.Compose([
-        #     transforms.ToTensor(),
-        #     transforms.Normalize(mean,std)
-        # ])        
+        # alternative test transform
+        test_transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(mean,std)
+        ])        
 
         train_dataset = datasets.CIFAR10(data_dir, train=True, download=True,
                                        transform=train_transform)
