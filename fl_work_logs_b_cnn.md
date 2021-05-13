@@ -154,7 +154,9 @@ CNN   |FedAVg|N-iid | 97.06%       |0.91hrs   | T       | 0.1  |20 |10 | 0.04   
 
 #### Baseline SGD using data augmentation and model with batch normalization
 1. The baseline SGD benchmark is same for FedAvg/FedSGD in both IID and non-IID cases.
-2. It has been founded that adding batch normalization alone (after relu) to model *tf cnn* can improve the test accuarcy remarkably.
+2. It has been founded that: 
+    - adding batch normalization alone (after relu) to model *tf cnn* can improve the test accuarcy remarkably.
+    - using data augmentation is very effective in regularization, which can drastically improve the generalization ability as well as test accuracy
 3. Up to 400 epochs, it has been observed that:
     - the test run with batch normalization alone and `t1` transform has clear advantages in both convergance rate and highest test accuracy, which suggests that the most favorable model could be the one with batch normalization alone, i.e., `wycnn_tfbn` and most favorable data augmentation could be transform `t1`.
     - The model uses both batch normalization and dropout performs inferior to the one uses batch normalization only, but is still obviously better than the one with dropout only.
