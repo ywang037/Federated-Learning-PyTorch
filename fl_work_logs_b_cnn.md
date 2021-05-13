@@ -194,7 +194,7 @@ Model       |Method|Data Augmentation                 | Test acc (max) | Epoch |
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay
 
-#### CNN/IID
+#### 3-A1 CNN/IID
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   | SGD   |       | run on A
@@ -223,12 +223,14 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         2. Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
-#### CNN/non-IID
-Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
-------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
-CNN   |SGD   |iid   | 200   |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | 
-CNN   |FedSGD|iid   |       |~8hrs     | A       | 0.1  |1  |∞  | 0.1@dp    |       | SGD   | 
-CNN   |FedAvg|iid   | 2000  |~5.8hrs   | T/A     | 0.1  |5  |50 | 0.XX      |       | SGD   | 
+
+#### 3-A2 CNN/non-IID
+Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
+---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
+`wycnn_bn` |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.01      |       | SGD   | `t1` transform |
+`wycnn_bn` |FedSGD|non-iid |       |~8hrs     | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform |
+`wycnn_bn` |FedAvg|non-iid | 2000  |    hrs   | T/A     | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform |
+`tf_cnn`   |FedAvg|non-iid | 2000  |    hrs   | T/A     | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform |
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
