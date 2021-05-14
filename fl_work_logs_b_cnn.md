@@ -228,13 +228,18 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
 ---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
 `wycnn_bn` |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.01      |       | SGD   | `t1` transform |
-`wycnn_bn` |FedSGD|non-iid | 8000  |<12 hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedSGD|non-iid | 8000  |8.2 hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid | 8000  |13.6hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedAvg|non-iid | 4000  |~14 hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |~14 hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |    hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | run on A
-`tf_cnn`   |FedAvg|non-iid | 4000  |    hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | run on A
+
+`wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
+`wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid | 8000  | XXXhrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t2` transform | run on A
+
+`wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid |~2700  | xxxhrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | error terminated
+`tf_cnn`   |FedAvg|non-iid | 4000  | xxxhrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | run on A
+`tf_cnn`   |FedAvg|non-iid | 4000  | xxxhrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t2` transform | run on A
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
@@ -244,8 +249,10 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
     - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
     - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` and `t1` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
     - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using `tf_cnn` with `t1`.
+    - Using lr=0.05, `tf_cnn` with `t2` outperform with `t1` in the first 2700 rounds. 
 4. For FedSGD:
-    - lr=0.05 outperform lr=0.1 obviously when using `wycnn_bn` and `t1`
+    - lr=0.05 outperform lr=0.1 obviously when using `wycnn_bn` and `t1`.
+    - using lr=0.05, `tf_cnn` and `t1` is far better than `wycnn_bn` and `t1`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
