@@ -229,7 +229,8 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 ---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
 `wycnn_bn` |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.01      |       | SGD   | `t1` transform |
 `wycnn_bn` |FedSGD|non-iid | 8000  |<12 hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedSGD|non-iid |       |    hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | run on A
+`wycnn_bn` |FedSGD|non-iid | 8000  |8.2 hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid | 8000  |13.6hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedAvg|non-iid | 4000  |~14 hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |~14 hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |    hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | run on A
@@ -241,8 +242,8 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 3. For FedAvg:
     - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
     - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
-    - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` in the first 2K rounds then become similarly bad. This run also seems to severely overfit after 1K rounds.
-    - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using model `tf_cnn` with `t1`.
+    - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` and `t1` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
+    - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using `tf_cnn` with `t1`.
 4. For FedSGD:
     - lr=0.05 outperform lr=0.1 obviously when using `wycnn_bn` and `t1`
 
