@@ -232,14 +232,14 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid | X000  | XXXhrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t2` transform | run on A
+`tf_cnn`   |FedSGD|non-iid | 8000  | xxxhrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | run on A
 
 `wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  | xxxhrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | run on A
 `tf_cnn`   |FedAvg|non-iid |~2700  | xxxhrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | error terminated
-`tf_cnn`   |FedAvg|non-iid | 4000  | xxxhrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | run on A
-`tf_cnn`   |FedAvg|non-iid | 4000  | xxxhrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t2` transform | run on A
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
