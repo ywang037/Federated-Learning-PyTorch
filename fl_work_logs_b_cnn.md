@@ -293,15 +293,23 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/O       | Optim | Status
 -----------  |------|----------| ----  |--------  | -----   |---   |---| - | -------    | ----- | ------
 `tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.01       | SGD   | 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.1        | SGD   | run on A
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.05       | SGD   | run on A
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.02       | SGD   | run on A
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | T       | 0.0  |5  |50 | 0.01       | SGD   |   
-`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | T       | 0.1  |1  |50 | xxxx       | SGD   |  
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.63hrs   | A       | 0.0  |5  |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       |         | 0.0  |5  |50 | 0.01       | SGD   |   
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.09hrs   | A       | 0.1  |1  |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.02       | SGD   | done 
 `tf_cnn`,`t1`|FedAVg|non-iid   | 200   |~1.0hrs   | A       | 0.1  |5  |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | T       | 0.1  |10 |50 | xxxx       | SGD   |  
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | T       | 0.1  |20 |50 | xxxx       | SGD   |  
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | T       | 1.0  |5  |50 | xxxx       | SGD   |  
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.1        | SGD   | run on A
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.05       | SGD   | run on A
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.02       | SGD   | run on A 
 
 ##### Remarks
 1. sdf
