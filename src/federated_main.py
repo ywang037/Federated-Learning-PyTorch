@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
     # cuda instructions to show gpu memory usage status
     torch.cuda.empty_cache()
-    print(torch.cuda.memory_summary(torch.device,abbreviated=True))
+    # print(torch.cuda.memory_summary(torch.device,abbreviated=True))
 
     # pause and print message for user to confirm the hyparameter are good to go
     answer = input("Press n to abort, press any other key to continue, then press ENTER: ")
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     # start the tensorboard writer
     logger_path_iid = f'runs/fedavg-{args.dataset}-IID-tf/E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}-R{args.epochs}-{args.model}'
-    logger_path_noniid = f'runs/fedavg-{args.dataset}-non-IID-tf/E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}-R{args.epochs}-{args.model}-t2'
+    logger_path_noniid = f'runs/fedavg-{args.dataset}-non-IID-tf/E{args.local_ep}-B{args.local_bs}-C{args.frac}-Lr{args.lr}-R{args.epochs}-{args.model}-t1'
     logger = SummaryWriter(logger_path_iid) if args.iid else SummaryWriter(logger_path_noniid)
     # logger = SummaryWriter('./logs')
 
