@@ -227,13 +227,16 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 #### 3-A2 CNN/non-IID
 Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
 ---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
-`wycnn_bn` |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.01      |       | SGD   | `t1` transform |
+`cnn_bn`   |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.1       |       | SGD   | `t1` transform |
+`cnn_bn`   |SGD   |iid     | 200   |hrs       | T       |      |   |100| 0.05      |       | SGD   | `t1` transform | run on A
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.02      |       | SGD   | `t1` transform | run on A
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.01      |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.005     |       | SGD   | `t1` transform | run on A
 
 `wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `best`
 `tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
-
 `wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `best`
@@ -292,8 +295,8 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 #### 3-B2 CNN/non-IID
 Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/O       | Optim | Status
 -----------  |------|----------| ----  |--------  | -----   |---   |---| - | -------    | ----- | ------
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | run on A
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | run on A
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.02       | SGD   | done
 `tf_cnn`,`t1`|SGD   |          | 100   |0.57hrs   | A       |      |   |50 | 0.01       | SGD   | done
 `tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.005      | SGD   | done
