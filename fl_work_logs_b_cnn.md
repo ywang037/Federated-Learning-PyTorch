@@ -292,9 +292,12 @@ CNN   |FedAVg|iid   | 20    |hrs       | T       | 1.0  |5  |50 | 0.32@dp      |
 #### 3-B2 CNN/non-IID
 Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/O       | Optim | Status
 -----------  |------|----------| ----  |--------  | -----   |---   |---| - | -------    | ----- | ------
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | 
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | 
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.02       | SGD   | 
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | run on A
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | run on A
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |0.57hrs   | A       |      |   |50 | 0.01       | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.005      | SGD   | done
+
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.63hrs   | A       | 0.0  |5  |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.02       | SGD   | done
@@ -309,18 +312,18 @@ Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.2        | SGD   | 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.5        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.5        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.2        | SGD   | 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.5        | SGD   |  
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.5        | SGD   | done 
 `tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.02       | SGD   | done 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.2        | SGD   | 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.5        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.5        | SGD   | done
 
 
 ##### Remarks
