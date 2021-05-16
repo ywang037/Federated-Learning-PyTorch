@@ -296,23 +296,35 @@ Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.63hrs   | A       | 0.0  |5  |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       |         | 0.0  |5  |50 | 0.01       | SGD   |   
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.01       | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.005      | SGD   |   
 `tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.09hrs   | A       | 0.1  |1  |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.2        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.5        | SGD   |  
 `tf_cnn`,`t1`|FedAVg|non-iid   | 200   |~1.0hrs   | A       | 0.1  |5  |50 | 0.05       | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.2        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.5        | SGD   | 
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.1        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.1        | SGD   | run on A
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.05       | SGD   | run on A
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       |         | 1.0  |5  |50 | 0.02       | SGD   | run on A 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.2        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.5        | SGD   |  
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.2        | SGD   | 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.5        | SGD   | 
+
 
 ##### Remarks
-1. sdf
+1. For E=5, B=50, C=0, lr=0.1 is unstable, lr=0.02 outperforms lr=0.05, so lr=0.01 and lr=0.005 can be tested further
+2. For E=1/10/20, B=50, C=0.1, lr=0.1 outperforms lr=0.02 and lr=0.05 outperforms, so lr=0.2 and lr=0.5 can be tested further
+3. For E=5, B=50, C=1.0, lr=0.1 outperforms lr=0.02 and lr=0.05 outperforms, so lr=0.2 and lr=0.5 can be tested further
 
 ### Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
 #### 4-A FedAvg with large E
