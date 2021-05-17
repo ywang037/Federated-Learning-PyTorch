@@ -227,13 +227,12 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 #### 3-A2 CNN/non-IID
 Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
 ---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.2       |       | SGD   | `t1` transform | run on A
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.1       |       | SGD   | `t1` transform | run on A
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.05      |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.2       |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.1       |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.05      |       | SGD   | `t1` transform | done, `selected`
 `cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.02      |       | SGD   | `t1` transform | done
 `cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.01      |       | SGD   | `t1` transform | done
 `cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.005     |       | SGD   | `t1` transform | done
-
 `wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `best`
@@ -248,17 +247,19 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
-3. For FedAvg:
+3. For SGD with runs up to 400 epochs:
+    - `lr=0.1` has quickest convergence in first 50 epochs, `lr=0.05` has the quickest convergence in first 250 epochs, `lr=0.01` has highest test accuracy in 400 epochs.
+4. For FedAvg with runs up to 4000 rounds:
     - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
     - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
     - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` and `t1` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
     - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using `tf_cnn` with `t1`.
     - Using `tf_cnn` with `lr=0.05` and data augmentation produces best results where `t2` performs similarly as `t1` up to 4K rounds, however `t2` takes about 47% more time. 
-4. For FedSGD:
+5. For FedSGD with runs up to 8000 rounds:
     - `lr=0.05` outperform lr=0.1 obviously when using `wycnn_bn` and `t1`.
     - using `lr=0.05` with `tf_cnn` and `t1` is far better than same lr with `wycnn_bn` and `t1`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
     - Similar to FedAvg, using `tf_cnn` with `lr=0.05` and `t1` outperforms same model with `lr=0.02` and `t1`. Moreover, using same model `tf_cnn` and same `lr=0.05`, `t2` performs similarly as `t1` but takes 27% more time.
-
+6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% in the allowed time (4K and 8K rounds, respectively), the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
