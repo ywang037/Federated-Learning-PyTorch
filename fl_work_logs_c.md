@@ -146,6 +146,34 @@ CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T 
 
 ### Experiment 3: CIFAR10 learning performance
 
+#### Baseline SGD using data augmentation and model with batch normalization
+1. The baseline SGD benchmark is same for FedAvg/FedSGD in both IID and non-IID cases.
+2. It has been founded that: 
+    - adding batch normalization alone (after relu) to model *tf cnn* can improve the test accuarcy remarkably.
+    - using data augmentation is very effective in regularization, which can drastically improve the generalization ability as well as test accuracy
+3. Up to 400 epochs, it has been observed that:
+    - the test run with batch normalization alone and `t1` transform has clear advantages in both convergance rate and highest test accuracy, which suggests that the most favorable model could be the one with batch normalization alone, i.e., `wycnn_tfbn` and most favorable data augmentation could be transform `t1`.
+    - The model uses both batch normalization and dropout performs inferior to the one uses batch normalization only, but is still obviously better than the one with dropout only.
+    - The original `tf_cnn` with `t1` transform perform even better than `wycnn_dp` and `wycnn_bndp` in test accuracy, only slighly inferior to `wycnn_bndp` in convergence rate before the first 100 epochs. This indicates that with data augmentation transform `t1`, it is no longer necessary to use the dropout layer, which even cause performance degradation in this case.
+    - The learning curve resulted from `wycnn_bn` with `t1` is less noisy than obtaiend by `tf_cnn` and `t1`. 
+    - Using `t2` or `t1` has no distinct difference: `t2` works slightly better for `wycnn_bn` whereas `t1` works slightly better for `tf_cnn`. 
+    - `t2` takes 60% and 92% more time to train than using `t1` in 200 and 400 epochs, respectively. 
+    - All runs with data augmentation `t1` or `t2`(no matter which model is used) do not tend to overfit up to 400 epochs.
+
+Model       |Method|Data Augmentation                 | Test acc (max) | Epoch |Time      | Machine | B  | Lr/O   | Optim | Decay |  Status
+-------     |------|------------------------------    |--------------- | ----  |--------  | -----   | -- | -----  |------ | ----- | ------
+`wycnn_dp`  |SGD   |t0: default                       | 73.8%          | 200   |hrs       | T       |100 | 0.01   | SGD   |       | benchmark
+`wycnn_dp`  |SGD   |t1: mean, std, crop, flip         | 80.0%          | 200   |1.05hrs   | T       |100 | 0.01   | SGD   |       | done
+`wycnn_dp`  |SGD   |t2: mean, std, crop, flip, color  | 79.4%          | 200   |1.61hrs   | T       |100 | 0.01   | SGD   |       | done
+`wycnn_dp`  |SGD   |t1: mean, std, crop, flip         | 82.3%          | 400   |2.09hrs   | T       |100 | 0.01   | SGD   |       | done
+`wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 84.5%          | 200   |1.10hrs   | T       |100 | 0.01   | SGD   |       | done
+`wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 85.0%          | 400   |2.15hrs   | T       |100 | 0.01   | SGD   |       | done
+`wycnn_bn`  |SGD   |t2: mean, std, crop, flip, color  | **85.2%**      | 400   |3.55hrs   | A       |100 | 0.01   | SGD   |       | done
+`wycnn_bndp`|SGD   |t1: mean, std, crop, flip         | 83.3%          | 400   |2.17hrs   | T       |100 | 0.01   | SGD   |       | done
+`tf_cnn`    |SGD   |t1: mean, std, crop, flip         | 84.2%          | 400   |1.85hrs   | T       |100 | 0.01   | SGD   |       | done, `selected`
+`tf_cnn`    |SGD   |t2: mean, std, crop, flip, color  | 84.2%          | 400   |3.54hrs   | A       |100 | 0.01   | SGD   |       | done
+
+
 #### 3-A: Speed up of convergence agaisnt comm. round, FedAvg vs FedSGD vs SGD
 * Fraction of users is fixed at C=0.1, FedSGD and FedAVg use fixed E=5, and FedAvg use fixed B=50
 * One cannot afford to perform that many rounds for FedSGD, a reasonable approach is to let FedAvg and FedSGD perform identical rounds of learning, as what are performed in the previous two experiments, e.g., 100-200 rounds.
@@ -153,6 +181,7 @@ CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T 
     * Reduced rounds of experiment is a make-do method, it is acceptable for the time being as long as the experiment result can reflect the same fundamental conclusion drawn in the vaniila FL paper
 * Decay means the learning-rate decay. No decay is tuned and applied
 
+#### 3-A1 CNN/IID
 Model |Method|Data  | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Status
 ------|------|------| ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | ------
 CNN   |SGD   |iid   | xxxx  |hrs       | T       |      |   |100| 0.01@dp   |       | SGD   | run on A
@@ -175,6 +204,46 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
         - Long-term runs (e.g., 200,000 rounds) of SGD in order to obtain the highest possible test acc is not fesible for the time being.
     * The convergence objective can be set to 0.68, 0.7, 0.72, 0.74
 
+#### 3-A2 CNN/non-IID
+Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
+---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.2       |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.1       |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.05      |       | SGD   | `t1` transform | done, `selected`
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.02      |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.01      |       | SGD   | `t1` transform | done
+`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.005     |       | SGD   | `t1` transform | done
+`wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
+`wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid | 8000  |    hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `best`
+`tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
+`wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `best`
+`tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |20.0hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | done
+
+##### Remarks
+1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
+2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
+3. For SGD with runs up to 400 epochs:
+    - `lr=0.1` has quickest convergence in first 50 epochs, `lr=0.05` has the quickest convergence in first 250 epochs, `lr=0.01` has highest test accuracy in 400 epochs.
+4. For FedAvg with runs up to 4000 rounds:
+    - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
+    - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
+    - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` and `t1` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
+    - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using `tf_cnn` with `t1`.
+    - Using `tf_cnn` with `lr=0.05` and data augmentation produces best results where `t2` performs similarly as `t1` up to 4K rounds, however `t2` takes about 47% more time. 
+5. For FedSGD with runs up to 8000 rounds:
+    - `lr=0.05` outperform lr=0.1 obviously when using `wycnn_bn` and `t1`.
+    - using `lr=0.05` with `tf_cnn` and `t1` is far better than same lr with `wycnn_bn` and `t1`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
+    - Similar to FedAvg, using `tf_cnn` with `lr=0.05` and `t1` outperforms same model with `lr=0.02` and `t1`. Moreover, using same model `tf_cnn` and same `lr=0.05`, `t2` performs similarly as `t1` but takes 27% more time.
+6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% in the allowed time (4K and 8K rounds, respectively), the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
+
+
+
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * For SGD, batch size is fixed at B=100, so number of mini-batch updates is $500R$ since N=50,000 so mini-batch update per round is N/B=500.
 * For FedAvg, since E, B are fixed, so number of mini-batch updates per participant is $n=R\times \frac{NE}{100B}=50R$, and the total number of mini-batch updates conducted by all participant clients is $50R/C$, C is the fraction parameter.
@@ -186,6 +255,8 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
     5. 2000 rounds for FedAvg E=5, B=50, C=0.0
 * The learning rates of every setting optimized to produce highest possible test acc over 100,000 mini-batch updates, while sacrificing the convergence speed as least as possible.
 
+
+#### 3-B1 CNN/IID
 Model |Method|Data  | T Rnd |Updata per R|Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
 ------|------|------| ----  |--------    |--------  | -----   |---   |---| - | -----        | ----- | ------
 CNN   |SGD   |iid   | 100   |1000        |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
@@ -208,6 +279,47 @@ CNN   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0
 5. For FedAvg E=10, B=50, C=0.1, tests over 100 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.1, 0.2, 0.32, 0.5, 0.7}.
 6. For FedAvg E=20, B=50, C=0.1, tests over 50 rounds show that lr=0.2 converges achieve highest test acc and converges quickest among lr={0.001, 0.01, 0.05, 0.1, 0.2, 0.5, 0.7}.
 7. For FedAvg E=5, B=50, C=1.0, larger lr in {0.001, 0.01, 0.1, 0.2, 0.32} achieve higher test acc in 20 round and also converges quicker, lr=0.5 converges even slower than lr=0.1 and become unstable after 10 rounds.
+
+#### 3-B2 CNN/non-IID
+Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/O       | Optim | Status
+-----------  |------|----------| ----  |--------  | -----   |---   |---| - | -------    | ----- | ------
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | done, `selected`
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |0.57hrs   | A       |      |   |50 | 0.01       | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.005      | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.63hrs   | A       | 0.0  |5  |50 | 0.1        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.02       | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.59hrs   | A       | 0.0  |5  |50 | 0.01       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.005      | SGD   | done  
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.09hrs   | A       | 0.1  |1  |50 | 0.1        | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.0hrs    | A       | 0.1  |1  |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.0hrs    | A       | 0.1  |1  |50 | 0.5        | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 200   |~1.0hrs   | A       | 0.1  |5  |50 | 0.05       | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.1        | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.5        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.1        | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.5        | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.1        | SGD   | done, `selected`
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.02       | SGD   | done 
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.2        | SGD   | done
+`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.5        | SGD   | done
+
+
+##### Remarks
+1. For E=5, B=50, C=0, lr=0.1 is unstable, lr=0.02 outperforms lr=0.05, so lr=0.01 and lr=0.005 can be tested further
+2. For E=1/10/20, B=50, C=0.1, lr=0.1 outperforms lr=0.02 and lr=0.05 outperforms, so lr=0.2 and lr=0.5 can be tested further
+3. For E=5, B=50, C=1.0, lr=0.1 outperforms lr=0.02 and lr=0.05 outperforms, so lr=0.2 and lr=0.5 can be tested further
 
 
 ### Experiment 4: Additional FedAvg with very large E and unbalanced non-IID data
