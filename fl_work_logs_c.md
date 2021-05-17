@@ -14,18 +14,18 @@
     * one could consider 200 rounds for C=1.0, E=5, B=10 of non-IID, in order to complete in allowed timeline.
 
 #### CNN/IID
-Model |Method|Data  | Test acc (f,max) |R-98     |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----    |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
-CNN   |FedAVg|iid   | 98.58%,99.23%    |20       |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.36%,99.36%    |6  (3.3x)|100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.35%,99.36%    |5  (4.0x)|100   |0.69hrs   | A       | 0.2  |5  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.29%,99.32%    |5  (4.0x)|100   |1.54hrs   | A       | 0.5  |5  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   |                  |         |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
-CNN   |FedAVg|iid   | 98.19%,98.45%    |88       |100   |0.05hrs   | A       | 0.0  |5  |∞  | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 98.36%,98.37%    |67 (1.3x)|100   |0.18hrs   | T       | 0.1  |5  |∞  | 0.2/o  | SGD   | done
-CNN   |FedAVg|iid   | 98.66%,98.70%    |54 (1.6x)|100   |0.32hrs   | T       | 0.2  |5  |∞  | 0.2/o  | SGD   | done
-CNN   |FedAVg|iid   | 98.48%,98.52%    |55 (1.6x)|100   |0.78hrs   | A       | 0.5  |5  |∞  | 0.2/o  | SGD   | done
-CNN   |FedAVg|iid   |                  |         |100   |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
+Model        |Method|Data  | Test acc (f,max) |R-98     |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----    |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
+`wycnn_dp`   |FedAVg|iid   | 98.58%,99.23%    |20       |500   |0.42hrs   | A       | 0.0  |5  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.36%,99.36%    |6  (3.3x)|100   |0.38hrs   | A       | 0.1  |5  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.35%,99.36%    |5  (4.0x)|100   |0.69hrs   | A       | 0.2  |5  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.29%,99.32%    |5  (4.0x)|100   |1.54hrs   | A       | 0.5  |5  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   |                  |         |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
+`wycnn_dp`   |FedAVg|iid   | 98.19%,98.45%    |88       |100   |0.05hrs   | A       | 0.0  |5  |∞  | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 98.36%,98.37%    |67 (1.3x)|100   |0.18hrs   | T       | 0.1  |5  |∞  | 0.2/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 98.66%,98.70%    |54 (1.6x)|100   |0.32hrs   | T       | 0.2  |5  |∞  | 0.2/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 98.48%,98.52%    |55 (1.6x)|100   |0.78hrs   | A       | 0.5  |5  |∞  | 0.2/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   |                  |         |100   |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
 
 #### Remarks
 1. {E=5, B=∞} cannot reach 99% in allowed time i.e., within 100 rounds.
@@ -33,18 +33,18 @@ CNN   |FedAVg|iid   |                  |         |100   |          | A       | 1
 
 
 #### CNN/non-IID
-Model |Method|Data  | Test acc (f,max) |R-98      |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----     |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
-CNN   |FedAVg|N-iid | 99.27%,99.38%    |416       |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.21%,99.30%    |75  (5.5x)|1500  |6.25hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.11%,99.19%    |40 (10.4x)|250   |1.67hrs   | A       | 0.2  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.95%,99.07%    |42  (9.9x)|200   |3.97hrs   | A       | 0.5  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid |                  |          |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
-CNN   |FedAVg|N-iid | 98.62%,98.98%    |778       |1500  |1.00hrs   | A       | 0.0  |5  |∞  | 0.02/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.92%,99.07%    |323 (2.4x)|1500  |3.08hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.99%,99.08%    |319 (2.4x)|1500  |5.54rs    | A       | 0.2  |5  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.36%,98.36%    |318 (2.5x)|400   |3.40hrs   | A       | 0.5  |5  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid |                  |          |      |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
+Model        |Method|Data  | Test acc (f,max) |R-98      |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----     |----- |--------  |-------- | -----|---|---| -----  | ----- | ------
+`wycnn_dp`   |FedAVg|N-iid | 99.27%,99.38%    |416       |1500  |1.4hrs    | A       | 0.0  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.21%,99.30%    |75  (5.5x)|1500  |6.25hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.11%,99.19%    |40 (10.4x)|250   |1.67hrs   | A       | 0.2  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.95%,99.07%    |42  (9.9x)|200   |3.97hrs   | A       | 0.5  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid |                  |          |      |          | A       | 1.0  |5  |10 |        | SGD   | cancelled
+`wycnn_dp`   |FedAVg|N-iid | 98.62%,98.98%    |778       |1500  |1.00hrs   | A       | 0.0  |5  |∞  | 0.02/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.92%,99.07%    |323 (2.4x)|1500  |3.08hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.99%,99.08%    |319 (2.4x)|1500  |5.54rs    | A       | 0.2  |5  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.36%,98.36%    |318 (2.5x)|400   |3.40hrs   | A       | 0.5  |5  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid |                  |          |      |          | A       | 1.0  |5  |∞  |        | SGD   | cancelled
 
 ##### Remarks
 1. Similar to IID cases, {E=5, B=∞} cannot reach 99% in allowed time, i.e., within 400 rounds.
@@ -61,25 +61,25 @@ CNN   |FedAVg|N-iid |                  |          |      |          | A       | 
 * Status marked as "bm" indicate the benchmark runs, and "bm/d" indicate discarded benchmark runs.
 
 #### CNN/IID
-Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----      |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | bm/d
-CNN   |FedSGD|iid   | 16.34%,99.08%    | 210       | 603  |1000  |0.66hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | bm/d
-CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614  |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.02%,99.09%    | 57  (x.xx)| 253  |600   |1.10hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | done 
-CNN   |FedAVg|iid   | 99.16%,99.12%    | 49  (x.xx)| 163  |600   |1.16hrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm 
-CNN   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.18%,99.10%    | 20  (x.xx)| 253  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.10%,98.98%    | 24  (x.xx)| 164  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | re-done
-CNN   |FedAVg|iid   | 99.19%,97.73%    | 17  (x.xx)| 121  |600   |3.89hrs   | A       | 0.1  |20 |∞  | 0.2/o  | SGD   | bm/d
-CNN   |FedAVg|iid   | 99.16%,99.11%    | 21  (x.xx)| 122  |600   |3.86hrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm 
-CNN   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
-CNN   |FedAVg|iid   | 99.28%,99.23%    | 8   (x.xx)| 37   |600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.26%,99.18%    | 10  (x.xx)| 46   |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | bm
-CNN   |FedAVg|iid   | 99.41%,99.38%    | 5   (x.xx)| 16   |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
+Model        |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----      |----- |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+`wycnn_dp`   |FedSGD|iid   | 98.94%,99.01%    | 200       | 573  |600   |0.40hrs   | T       | 0.1  |1  |∞  | 0.2/o  | SGD   | bm/d
+`wycnn_dp`   |FedSGD|iid   | 16.34%,99.08%    | 210       | 603  |1000  |0.66hrs   | T       | 0.1  |1  |∞  | 0.15/o | SGD   | bm/d
+`wycnn_dp`   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614  |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.02%,99.09%    | 57  (x.xx)| 253  |600   |1.10hrs   | T       | 0.1  |5  |∞  | 0.1/o  | SGD   | done 
+`wycnn_dp`   |FedAVg|iid   | 99.16%,99.12%    | 49  (x.xx)| 163  |600   |1.16hrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm 
+`wycnn_dp`   |FedAVg|iid   | 99.26%,99.41%    | 19  (x.xx)| 55   |600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.18%,99.10%    | 20  (x.xx)| 253  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.10%,98.98%    | 24  (x.xx)| 164  |600   |3.69hrs   | T       | 0.1  |20 |∞  | 0.15/o | SGD   | re-done
+`wycnn_dp`   |FedAVg|iid   | 99.19%,97.73%    | 17  (x.xx)| 121  |600   |3.89hrs   | A       | 0.1  |20 |∞  | 0.2/o  | SGD   | bm/d
+`wycnn_dp`   |FedAVg|iid   | 99.16%,99.11%    | 21  (x.xx)| 122  |600   |3.86hrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm 
+`wycnn_dp`   |FedAVg|iid   | 99.31%,99.41%    | 10  (x.xx)| 32   |600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.28%,99.21%    | 8   (x.xx)| 39   |600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.38%,99.29%    | 11  (x.xx)| 50   |600   |1.55hrs   | A       | 0.1  |5  |50 | 0.1/o  | SGD   | bm
+`wycnn_dp`   |FedAVg|iid   | 99.28%,99.23%    | 8   (x.xx)| 37   |600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.26%,99.18%    | 10  (x.xx)| 46   |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.1/o  | SGD   | bm
+`wycnn_dp`   |FedAVg|iid   | 99.41%,99.38%    | 5   (x.xx)| 16   |600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
 
 ##### Remarks
 1. For {E=1, B=inf}, lr=0.2 and lr=0.15 produce similar results in 600 rounds; lr=0.15 become unstable at last few rounds near 1000, so would the even larger lr=0.2. It seems that lr=0.1 might be more reasonable learning rate.
@@ -93,20 +93,20 @@ CNN   |FedAVg|iid   | 99.38%,99.31%    | 5   (x.xx)| 18   |600   |7.48hrs   | T 
 7. From the entries of R-98 column, it can be seen that increasing the local computation can lead to more speed up in general.
 
 #### CNN/non-IID
-Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 97.65%,98.15%    | 567 (    )|      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | bm/d
-CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | bm/d
-CNN   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | to bm
+Model        |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+`wycnn_dp`   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 97.65%,98.15%    | 567 (    )|      |600   |1.17hrs   | A       | 0.1  |5  |∞  | 0.02/o | SGD   | bm/d
+`wycnn_dp`   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.91%,99.06%    | 109 (5.7x)| 344  |600   |1.61hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | bm/d
+`wycnn_dp`   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | to bm
 
 ##### Remarks
 1. It can observed that, in general, the more local computation, the quicker the convergence (or the higher test acc that can be achived within the identical number or rounds). This is why parameter combinations have fewer local computations cannot reach 99% in same number of rounds (600 rounds).
@@ -114,33 +114,33 @@ CNN   |FedAVg|N-iid |      %,     %    |    (    x)| xxx  |600   |7.36hrs   | T 
 
 
 #### CNN/IID (selected edition)
-Model |Method|Data  | Test acc (f,max) |R-98       |R-99        |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----      |-----       |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614        |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.16%,99.12%    | 49  (4.7x)| 163  (1.4x)|600   |1.16hrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm 
-CNN   |FedAVg|iid   | 99.26%,99.41%    | 19 (12.1x)| 55   (4.2x)|600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.16%,99.11%    | 21 (11.0x)| 122  (1.9x)|600   |3.86hrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm 
-CNN   |FedAVg|iid   | 99.31%,99.41%    | 10 (23.0x)| 32   (7.2x)|600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
-CNN   |FedAVg|iid   | 99.28%,99.21%    | 8  (28.8x)| 39   (5.9x)|600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.28%,99.23%    | 8  (28.8x)| 37   (6.2x)|600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.41%,99.38%    | 5  (46.0x)| 16  (14.4x)|600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
-CNN   |FedAVg|iid   | 99.38%,99.31%    | 5  (46.0x)| 18  (12.8x)|600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
+Model        |Method|Data  | Test acc (f,max) |R-98       |R-99        |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----      |-----       |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+`wycnn_dp`   |FedSGD|iid   | 99.15%,99.09%    | 230       | 614        |1500  |1.02hrs   | A       | 0.1  |1  |∞  | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.16%,99.12%    | 49  (4.7x)| 163  (1.4x)|600   |1.16hrs   | A       | 0.1  |5  |∞  | 0.15/o | SGD   | bm 
+`wycnn_dp`   |FedAVg|iid   | 99.26%,99.41%    | 19 (12.1x)| 55   (4.2x)|600   |0.41hrs   | T       | 0.1  |1  |50 | 0.2/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.16%,99.11%    | 21 (11.0x)| 122  (1.9x)|600   |3.86hrs   | A       | 0.1  |20 |∞  | 0.1/o  | SGD   | bm 
+`wycnn_dp`   |FedAVg|iid   | 99.31%,99.41%    | 10 (23.0x)| 32   (7.2x)|600   |0.64hrs   | T       | 0.1  |1  |10 | 0.1/o  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.28%,99.21%    | 8  (28.8x)| 39   (5.9x)|600   |1.24hrs   | T       | 0.1  |5  |50 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.28%,99.23%    | 8  (28.8x)| 37   (6.2x)|600   |4.23hrs   | T       | 0.1  |20 |50 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.41%,99.38%    | 5  (46.0x)| 16  (14.4x)|600   |2.29hrs   | T       | 0.1  |5  |10 | 0.15/o | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 99.38%,99.31%    | 5  (46.0x)| 18  (12.8x)|600   |7.48hrs   | T       | 0.1  |20 |10 | 0.1/o  | SGD   | done
 
 ##### Remarks
 1. Learning curve of {E=5, B=50} is very noisy and unstable, may need a re-run
 
 #### CNN/non-IID (selected edition)
-Model |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
-------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
-CNN   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
-CNN   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
+Model        |Method|Data  | Test acc (f,max) |R-98       |R-99  |T Rnd |Time      | Machine | Frac | E | B | Lr     | Optim | Status
+-------------|------|------| --------         |-----      |----  |----  |--------  | -----   |---   |---| - | -----  | ----- | ------
+`wycnn_dp`   |FedSGD|N-iid | 98.75%,98.83%    | 621       |      |1500  |1.12hrs   | T       | 0.1  |1  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.73%,98.81%    | 264 (2.4x)|      |600   |1.25hrs   | A       | 0.1  |5  |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.54%,98.97%    | 152 (4.1x)|      |600   |0.65hrs   | A       | 0.1  |1  |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 98.79%,98.93%    | 157 (4.0x)|      |600   |3.99hrs   | A       | 0.1  |20 |∞  | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.17%,99.35%    | 79  (7.9x)| 204  |600   |0.70hrs   | T       | 0.1  |1  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.07%,99.15%    | 87  (7.1x)| 340  |600   |1.27hrs   | A       | 0.1  |5  |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.04%,99.16%    | 73  (8.5x)| 351  |600   |4.12hrs   | T       | 0.1  |20 |50 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.22%,99.30%    | 42 (14.8x)| 145  |600   |2.58hrs   | A       | 0.1  |5  |10 | 0.04/o | SGD   | done
+`wycnn_dp`   |FedAVg|N-iid | 99.15%,99.23%    | 55 (11.3x)| 175  |600   |7.36hrs   | T       | 0.1  |20 |10 | 0.04/o | SGD   | done
 
 
 
@@ -168,7 +168,7 @@ Model       |Method|Data Augmentation                 | Test acc (max) | Epoch |
 `wycnn_dp`  |SGD   |t1: mean, std, crop, flip         | 82.3%          | 400   |2.09hrs   | T       |100 | 0.01   | SGD   |       | done
 `wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 84.5%          | 200   |1.10hrs   | T       |100 | 0.01   | SGD   |       | done
 `wycnn_bn`  |SGD   |t1: mean, std, crop, flip         | 85.0%          | 400   |2.15hrs   | T       |100 | 0.01   | SGD   |       | done
-`wycnn_bn`  |SGD   |t2: mean, std, crop, flip, color  | **85.2%**      | 400   |3.55hrs   | A       |100 | 0.01   | SGD   |       | done
+`wycnn_bn`  |SGD   |t2: mean, std, crop, flip, color  | 85.2%          | 400   |3.55hrs   | A       |100 | 0.01   | SGD   |       | done
 `wycnn_bndp`|SGD   |t1: mean, std, crop, flip         | 83.3%          | 400   |2.17hrs   | T       |100 | 0.01   | SGD   |       | done
 `tf_cnn`    |SGD   |t1: mean, std, crop, flip         | 84.2%          | 400   |1.85hrs   | T       |100 | 0.01   | SGD   |       | done, `selected`
 `tf_cnn`    |SGD   |t2: mean, std, crop, flip, color  | 84.2%          | 400   |3.54hrs   | A       |100 | 0.01   | SGD   |       | done
@@ -207,23 +207,9 @@ CNN   |FedAVg|iid   | 4000  |9.18hrs   | T       | 0.1  |5  |50 | 0.03@dp   |   
 #### 3-A2 CNN/non-IID
 Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O      |Decay  | Optim | Augmentation   |Status
 ---------- |------|------- | ----  |--------  | -----   |---   |---| - | -----     |------ | ----- | -----------    |------
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.2       |       | SGD   | `t1` transform | done
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.1       |       | SGD   | `t1` transform | done
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.05      |       | SGD   | `t1` transform | done, `selected`
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.02      |       | SGD   | `t1` transform | done
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.01      |       | SGD   | `t1` transform | done
-`cnn_bn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.005     |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid | 8000  |    hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `best`
-`tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
-`wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `best`
-`tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |20.0hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | done
+`tf_cnn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.05      |       | SGD   | `t1` transform | done, `selected`
+`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `selected`
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `selected`
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
@@ -257,15 +243,15 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 
 
 #### 3-B1 CNN/IID
-Model |Method|Data  | T Rnd |Updata per R|Time      | Machine | Frac | E | B | Lr/O         | Optim | Status
-------|------|------| ----  |--------    |--------  | -----   |---   |---| - | -----        | ----- | ------
-CNN   |SGD   |iid   | 100   |1000        |hrs       | T       |      |   |50 | 0.0032@dp/o  | SGD   | done
-CNN   |FedAVg|iid   | 2000  |50          |hrs       | T       | 0.0  |5  |50 | 0.02@dp/o    | SGD   | done
-CNN   |FedAVg|iid   | 1000  |100         |hrs       | T       | 0.1  |1  |50 | 0.1@dp       | SGD   | done
-CNN   |FedAVg|iid   | 200   |500         |hrs       | T       | 0.1  |5  |50 | 0.1@dp       | SGD   | done
-CNN   |FedAVg|iid   | 100   |1000        |hrs       | T       | 0.1  |10 |50 | 0.2@dp       | SGD   | done
-CNN   |FedAVg|iid   | 50    |2000        |hrs       | T       | 0.1  |20 |50 | 0.2@dp       | SGD   | done
-CNN   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0.32@dp      | SGD   | done
+Model        |Method|Data  | T Rnd |Updata per R|Time      | Machine | Frac | E | B | Lr/O    | Optim | Status
+-------------|------|------| ----  |--------    |--------  | -----   |---   |---| - | -----   | ----- | ------
+`wycnn_dp`   |SGD   |iid   | 100   |1000        |hrs       | T       |      |   |50 | 0.0032  | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 2000  |50          |hrs       | T       | 0.0  |5  |50 | 0.02    | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 1000  |100         |hrs       | T       | 0.1  |1  |50 | 0.1     | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 200   |500         |hrs       | T       | 0.1  |5  |50 | 0.1     | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 100   |1000        |hrs       | T       | 0.1  |10 |50 | 0.2     | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 50    |2000        |hrs       | T       | 0.1  |20 |50 | 0.2     | SGD   | done
+`wycnn_dp`   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0.32    | SGD   | done
 
 ##### Remarks
 0. In the above table, the learning rate of each run is selected from all conducted grid searches so as to produce highest possible test acc within 100,000 mini-batch update.
@@ -283,37 +269,13 @@ CNN   |FedAVg|iid   | 20    |5000        |hrs       | T       | 1.0  |5  |50 | 0
 #### 3-B2 CNN/non-IID
 Model        |Method|Data      | T Rnd |Time      | Machine | Frac | E | B | Lr/O       | Optim | Status
 -----------  |------|----------| ----  |--------  | -----   |---   |---| - | -------    | ----- | ------
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.1        | SGD   | done
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | T       |      |   |50 | 0.05       | SGD   | done, `selected`
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|SGD   |          | 100   |0.57hrs   | A       |      |   |50 | 0.01       | SGD   | done
-`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.005      | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.63hrs   | A       | 0.0  |5  |50 | 0.1        | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.05       | SGD   | done
+`tf_cnn`,`t1`|SGD   |          | 100   |hrs       | A       |      |   |50 | 0.05       | SGD   | done, `selected`
 `tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.02       | SGD   | done, `selected`
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |1.59hrs   | A       | 0.0  |5  |50 | 0.01       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 2000  |hrs       | A       | 0.0  |5  |50 | 0.005      | SGD   | done  
 `tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.09hrs   | A       | 0.1  |1  |50 | 0.1        | SGD   | done, `selected`
-`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |hrs       | A       | 0.1  |1  |50 | 0.02       | SGD   | done 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.0hrs    | A       | 0.1  |1  |50 | 0.2        | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 1000  |1.0hrs    | A       | 0.1  |1  |50 | 0.5        | SGD   | done 
 `tf_cnn`,`t1`|FedAVg|non-iid   | 200   |~1.0hrs   | A       | 0.1  |5  |50 | 0.05       | SGD   | done, `selected`
 `tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.1        | SGD   | done, `selected`
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |0.59hrs   | A       | 0.1  |10 |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.2        | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 100   |hrs       | A       | 0.1  |10 |50 | 0.5        | SGD   | done
 `tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.1        | SGD   | done, `selected`
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |0.56hrs   | A       | 0.1  |20 |50 | 0.02       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.2        | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 50    |hrs       | A       | 0.1  |20 |50 | 0.5        | SGD   | done 
 `tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.1        | SGD   | done, `selected`
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.05       | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.02       | SGD   | done 
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.2        | SGD   | done
-`tf_cnn`,`t1`|FedAVg|non-iid   | 20    |hrs       | A       | 1.0  |5  |50 | 0.5        | SGD   | done
 
 
 ##### Remarks
