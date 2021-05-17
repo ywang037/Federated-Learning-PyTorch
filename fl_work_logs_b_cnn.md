@@ -235,12 +235,14 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |SGD   |iid     | 400   |hrs       | A       |      |   |100| 0.005     |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid | 8000  |    hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | run on A
-`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `best`
+`tf_cnn`   |FedSGD|non-iid | 8000  | ???hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedSGD|non-iid |20000  | ???hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `selected`
 `tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `best`
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `selected`
+`tf_cnn`   |FedAvg|non-iid |10000  |    hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | run on A
 `tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  |20.0hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | done
@@ -261,6 +263,9 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
     - using `lr=0.05` with `tf_cnn` and `t1` is far better than same lr with `wycnn_bn` and `t1`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
     - Similar to FedAvg, using `tf_cnn` with `lr=0.05` and `t1` outperforms same model with `lr=0.02` and `t1`. Moreover, using same model `tf_cnn` and same `lr=0.05`, `t2` performs similarly as `t1` but takes 27% more time.
 6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% in the allowed time (4K and 8K rounds, respectively), the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
+7. For FedAvg up to 4K rounds and FedSGD up to 8K rounds, although FedAvg has much higher speedup, **it is observed that the highest test accuracy achieved by FedAvg is slightly slower than that of FedSGD**. 
+    - Therefore, to validate this observation, it would be interesting to extend the rounds of test, say FedAvg over 10K and FedSGd over 20K, then compare the performance.
+    - lr=0.05, 0.02, 0.01 can be tested for FedAvg; lr=0.1, 0.05, 0.02 can be tested for FedSGD.
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
