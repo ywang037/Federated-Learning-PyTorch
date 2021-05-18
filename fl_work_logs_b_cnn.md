@@ -356,9 +356,12 @@ Data | Time  | Machine | C   | E   | B  | Lr   | Optim | Status
 IID  |1.64hrs| T       | 0.1 | 50  | 10 | 0.05 | SGD   | done   
 IID  |    hrs| A       | 0.1 | 100 | 10 | 0.05 | SGD   | running   
 IID  |    hrs| A       | 0.1 | 200 | 10 | 0.05 | SGD   |   
-N-IID|       | T       | 0.1 | 50  | 10 | 0.05 | SGD   | done   
-N-IID|3.30hrs| T       | 0.1 | 100 | 10 | 0.05 | SGD   | done   
-N-IID|       | A       | 0.1 | 200 | 10 | 0.05 | SGD   | running   
+N-IID|       |         | 0.1 | 5   | 10 | 0.05 | SGD   | done   
+N-IID|       |         | 0.1 | 25  | 10 | 0.05 | SGD   | done   
+N-IID|       |         | 0.1 | 50  | 10 | 0.05 | SGD   | done   
+N-IID|3.30hrs|         | 0.1 | 100 | 10 | 0.05 | SGD   | done   
+N-IID|       |         | 0.1 | 200 | 10 | 0.05 | SGD   | done   
+N-IID|       |         | 0.1 | 400 | 10 | 0.05 | SGD   | done  
 
 #### 4-B Unbalanced Non-IID data
 * test FedAVg E=1 B=10 C=0.1 over unbalanced non-IID data, and compare with IID, balanced-non-IID, may use the same lr as FedAvg E=1 B=10 C=0.1 in  balanced-IID 
