@@ -251,32 +251,38 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid |10000  |    hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | 
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | terminated at 9K rounds
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |50 | 0.005     |       | SGD   | `t1` transform | 
 `tf_cnn`   |FedAvg|non-iid | 4000  |20.0hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | done
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
 2. For these non-IID tests regarding CIFAR10, the baseline SGD is the same as IID tests.
-3. For SGD with runs up to 400 epochs:
+3. All the test runs referred below and shown in the above table use data augmentation `t1`. 
+4. For SGD with runs up to 400 epochs:
     - `lr=0.1` has quickest convergence in first 50 epochs, `lr=0.05` has the quickest convergence in first 250 epochs, `lr=0.01` has highest test accuracy in 400 epochs.
-4. For FedAvg with runs up to 4000 rounds:
-    - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
-    - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
-    - Test run with `wycnn_bn` and `t1` outperform `wycnn_dp` and `t1` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
-    - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` and data augmentation `t1` is much worsen than using `tf_cnn` with `t1`.
-    - Using `tf_cnn` with `lr=0.05` and data augmentation produces best results where `t2` performs similarly as `t1` up to 4K rounds, however `t2` takes about 47% more time. 
-5. For FedSGD using data augmentation `t1` 
+5. For FedAvg 
+    * with runs up to 4000 rounds:
+        - It has been observed that in these non-IID tests, the learning curves oscillates a lot more than those in IID cases, for all the lr tried.
+        - Larger lr in {0.005, 0.01, 0.02, 0.05, 0.1} performs better up to 2K rounds.
+        - Test run with `wycnn_bn` outperform `wycnn_dp` in the first 2K rounds but then become similarly bad. This run also seems to severely overfit after 1K rounds.
+        - **Unlike the case of SGD** (where data is not non-IID), in this non-IID setting, performance of FedAvg using `wycnn_bn` is much worsen than using `tf_cnn`
+        - Using `tf_cnn` with `lr=0.05` and data augmentation produces best results where `t2` performs similarly as `t1` up to 4K rounds, however `t2` takes about 47% more time. 
+    * with runs up to 10K rounds:
+        - Altough `lr=0.05` converges significantly faster than `lr=0.01` in the first 5K rounds, both runs show obvious signal of plateau by 9K-10K rounds (in both test accuracy curves and test loss curves, therefore not being likely to reach test accuracy higher than 80% in reasonable horizon) 
+6. For FedSGD 
     * with runs up to 8000 rounds:
-        - `lr=0.05` outperform lr=0.1 obviously when using `wycnn_bn` and `t1`.
-        - using `lr=0.05` with `tf_cnn` and `t1` is far better than same lr with `wycnn_bn` and `t1`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
-        - Similar to FedAvg, using `tf_cnn` with `lr=0.05` and `t1` outperforms same model with `lr=0.02` and `t1`. Moreover, using same model `tf_cnn` and same `lr=0.05`, `t2` performs similarly as `t1` but takes 27% more time.
+        - `lr=0.05` outperform lr=0.1 obviously when using `wycnn_bn`.
+        - using `lr=0.05` with `tf_cnn` is far better than same lr with `wycnn_bn`, so that for further runs, `wycnn_bn` will be abandoned for both FedAvg and FedSGD.
+        - Similar to FedAvg, using `tf_cnn` with `lr=0.05` outperforms same model with `lr=0.02`. Moreover, using same model `tf_cnn` and same `lr=0.05`, `t2` performs similarly as `t1` but takes 27% more time.
         - with `tf_cnn`, `lr=0.1` outperforms `lr=0.05` in 8K rounds. *So that it would be interesting to see how lr=0.2 performs in 8K rounds.*
     * with runs up to 30K rounds:
         - using `lr=0.5` the learning curve has crossed 80% around 16K rounds and reached a test accuracy >81% in the end, which suggests that 25K-30K rounds may reveal the entire shape of the learning curve. It would then be interesting to test lr=0.5 over longer rounds.
         - `lr=0.1` achieves little bit lower (almost the same) test accuracy (~83%) with a faster convergence than `lr=0.05`. However `lr=0.1` seems to plateau after 25K rounds whereas `lr=0.05` does not, so that it would be expected that `lr=0.05` may reach 84% test accuracy in next 10K rounds (up to 40K). It would also be interesting to see whether `lr=0.02` can catch up `lr=0.05` in 40K rounds. 40K rounds may take 48 hrs on A.
-6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% within 4K and 8K rounds, respectively, the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
-7. For FedAvg up to 4K rounds and FedSGD up to 8K rounds, although FedAvg has much higher speedup, **it is observed that the highest test accuracy achieved by FedAvg is slightly slower than that of FedSGD**. 
-    - Therefore, to validate this observation, it would be interesting to extend the rounds of test, say FedAvg over 10K and FedSGd over 20K, then compare the performance.
-    - *lr=0.05, 0.02, 0.01* can be tested for FedAvg; *lr=0.1, 0.05, 0.02* can be tested for FedSGD.
+7. For FedAvg up to 9-10K rounds with `lr={0.05, 0.01}` and FedSGD up to 30K rounds with `lr={0.1, 0.05}`, 
+    * although FedAvg converges much faster than FedSGD, **it starts to plateau around 75% test accuracy by 10K rounds and does not seem to improve much further whereas FedSGD reach test accuracy higher than 82% by 30K rounds**. 
+    * FedSGD with `lr=0.1` starts to surpass FedAvg with `lr={0.05, 0.01}` after 5K rounds, **which means the tested FedAvg runs have no advantage in speedup over FedSGD for test accuracy of 75% and above**.
+    * Moreover, FedAvg with `lr=0.01` does not have very big advantages in convergence speed over FedSGD with `lr=0.1` in the first 5K rounds, **which suggests a probability that FedAvg with an even smaller learning rate such as lr=0.005 may not have speedup gains over FedSGD with lr=0.01 and baseline SGD** since FedAvg using this small learning rate can loose the convergence speed advantage while still being relatively lower in test accuracy.
+
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
 * 300,000 rounds mini-batch updates used in the vanilla FL paper is too many to complete in the allowed time for now. Therefore, one may consider **100,000 mini-batch updates** instead, which is equivalent to
