@@ -284,7 +284,7 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
     * Moreover, FedAvg with `lr=0.01` does not have very big advantages in convergence speed over FedSGD with `lr=0.1` in the first 5K rounds, **which suggests a probability that FedAvg with an even smaller learning rate such as lr=0.005 may not have speedup gains over FedSGD with lr=0.01 and baseline SGD** since FedAvg using this small learning rate can loose the convergence speed advantage while still being relatively lower in test accuracy.
     * Results for MNIST learning obtained in the previous Exp 2B (non-IID) suggests that combination `{E=5, B=50}` can be outperformed by combinations like `{B=1, B=10}`, `{E=20, B=10}` and `{E=5, B=10}` (the best among these three). 
         - Therefore, one may change to test `{E=5, B=10}` and `{B=1, B=10}` rather than `{E=5, B=50}` which is used currently. 
-        - Note that  `{E=5, B=10}` leads to **5x minibatch updates per round** compared to `{E=5, B=50}`, and `{E=1, B=10}` leads to **the same amount of local computation per round** as `{E=5, B=50}`. According to the pervious experience, testing `{E=1, B=10}` can enjoy 1.75x speedup in test time duration whereas `{E=5, B=10}` may use largely the same amount of time as `{E=5, B=50}`.
+        - Note that  `{E=5, B=10}` leads to **5x minibatch updates per round** compared to `{E=5, B=50}`, and `{E=1, B=10}` leads to **the same amount of local computation per round** as `{E=5, B=50}`. According to the pervious experience, testing `{E=1, B=10}` can enjoy 1.75x speedup in test time duration whereas `{E=5, B=10}` may use largely the same amount of time as `{E=5, B=50}`. So that one can test `{E=1, B=10}` first.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
