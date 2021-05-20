@@ -236,9 +236,9 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `wycnn_bn` |FedSGD|non-iid | 8000  | <12hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedSGD|non-iid | 8000  | 8.2hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.4hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid |30000  |33.0hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedSGD|non-iid |30000  |33.0hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid |20000  |19.9hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid |30000  |32.5hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedSGD|non-iid |30000  |32.5hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `selected`
 `tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
 `wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
@@ -270,8 +270,8 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
         - with `tf_cnn`, `lr=0.1` outperforms `lr=0.05` in 8K rounds. *So that it would be interesting to see how lr=0.2 performs in 8K rounds.*
     * with runs up to 30K rounds:
         - using `lr=0.5` the learning curve has crossed 80% around 16K rounds and reached a test accuracy >81% in the end, which suggests that 25K-30K rounds may reveal the entire shape of the learning curve. It would then be interesting to test lr=0.5 over longer rounds.
-        - `lr=0.1` achieves little bit lower (almost the same) test accuracy (~83%) with a faster convergence than `lr=0.05`. However `lr=0.1` seems to plateau after 25K rounds whereas `lr=0.05` does not, so that it would be expected that `lr=0.05` may reach 84% test accuracy in next 10K rounds (up to 40K).
-6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% in the allowed time (4K and 8K rounds, respectively), the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
+        - `lr=0.1` achieves little bit lower (almost the same) test accuracy (~83%) with a faster convergence than `lr=0.05`. However `lr=0.1` seems to plateau after 25K rounds whereas `lr=0.05` does not, so that it would be expected that `lr=0.05` may reach 84% test accuracy in next 10K rounds (up to 40K). It would also be interesting to see whether `lr=0.02` can catch up `lr=0.05` in 40K rounds. 40K rounds may take 48 hrs on A.
+6. As runs of FedAvg and FedSGD do not achieve test accuracy higher than 78% within 4K and 8K rounds, respectively, the target test accuracy to benchmark is chosen as {72%, 74%, 76%}.
 7. For FedAvg up to 4K rounds and FedSGD up to 8K rounds, although FedAvg has much higher speedup, **it is observed that the highest test accuracy achieved by FedAvg is slightly slower than that of FedSGD**. 
     - Therefore, to validate this observation, it would be interesting to extend the rounds of test, say FedAvg over 10K and FedSGd over 20K, then compare the performance.
     - lr=0.05, 0.02, 0.01 can be tested for FedAvg; lr=0.1, 0.05, 0.02 can be tested for FedSGD.
