@@ -253,9 +253,12 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | terminated at 9K rounds
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |50 | 0.005     |       | SGD   | `t1` transform | 
 `tf_cnn`   |FedAvg|non-iid | 4000  |20.0hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t2` transform | done
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |1  |10 | 0.1       |       | SGD   | `t1` transform | run on A
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |1  |10 | 0.05      |       | SGD   | `t1` transform | run on A
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |1  |10 | 0.02      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |1  |10 | 0.1       |       | SGD   | `t1` transform | unstable
+`tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.05      |       | SGD   | `t1` transform | rone
+`tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.02      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.05      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.02      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | run on A 
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
@@ -288,6 +291,7 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
     * Results for MNIST learning obtained in the previous Exp 2B (non-IID) suggests that combination `{E=5, B=50}` can be outperformed by combinations like `{B=1, B=10}`, `{E=20, B=10}` and `{E=5, B=10}` (the best among these three). 
         - Therefore, one may change to test `{E=5, B=10}` and `{B=1, B=10}` rather than `{E=5, B=50}` which is used currently. 
         - Note that  `{E=5, B=10}` leads to **5x minibatch updates per round** compared to `{E=5, B=50}`, and `{E=1, B=10}` leads to **the same amount of local computation per round** as `{E=5, B=50}`. According to the pervious experience, testing `{E=1, B=10}` can enjoy 1.75x speedup in test time duration whereas `{E=5, B=10}` may use largely the same amount of time as `{E=5, B=50}`. So that one can test `{E=1, B=10}` first.
+        - Parameter combination `{B=1, B=10}` does not show improvement over `{B=5, B=50}` with `lr={0.05,0.02}` in 20K rounds, starting to plateau after 10K rounds.
 
 
 #### 3-B: Per mini-batch update convergence FedAvg vs SGD 
