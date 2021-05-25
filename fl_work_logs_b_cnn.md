@@ -256,8 +256,8 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |1  |10 | 0.1       |       | SGD   | `t1` transform | unstable
 `tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.05      |       | SGD   | `t1` transform | rone
 `tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.02      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.05      |       | SGD   | `t1` transform | run on A
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.02      |       | SGD   | `t1` transform | run on A
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.05      |       | SGD   | `t1` transform | unstable
+`tf_cnn`   |FedAvg|non-iid |20000  |94.0hrs   | A       | 0.1  |5  |10 | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | run on A 
 
 ##### Remarks
