@@ -258,7 +258,7 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.05      |       | SGD   | `t1` transform | unstable
 `tf_cnn`   |FedAvg|non-iid |20000  |94.0hrs   | A       | 0.1  |5  |10 | 0.02      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | run on A 
+`tf_cnn`   |FedAvg|non-iid |20000  |94.4hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | done
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
