@@ -238,15 +238,15 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedSGD|non-iid | 8000  | 8.4hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid |30000  |33.0hrs   | A       | 0.1  |1  |∞  | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid |20000  |19.9hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedSGD|non-iid |30000  |32.5hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedSGD|non-iid |30000  |32.5hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `selected`
 `tf_cnn`   |FedSGD|non-iid |40000  |    hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | 
-`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done, `selected`
+`tf_cnn`   |FedSGD|non-iid | 8000  | 8.3hrs   | A       | 0.1  |1  |∞  | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid | 8000  |10.6hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedSGD|non-iid |40000  |    hrs   | A       | 0.1  |1  |∞  | 0.02      |       | SGD   | `t1` transform | 
 `wycnn_bn` |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid | 4000  | ~14hrs   | A       | 0.1  |5  |50 | 0.1       |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `selected`
-`tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `selected`
 `tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |10000  |    hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | 
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
@@ -258,7 +258,7 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid |20000  |27.2hrs   | A       | 0.1  |1  |10 | 0.02      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |10 | 0.05      |       | SGD   | `t1` transform | unstable
 `tf_cnn`   |FedAvg|non-iid |20000  |94.0hrs   | A       | 0.1  |5  |10 | 0.02      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid |20000  |94.4hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | done
+`tf_cnn`   |FedAvg|non-iid |20000  |94.4hrs   | A       | 0.1  |5  |10 | 0.01      |       | SGD   | `t1` transform | done, `selected`
 
 ##### Remarks
 1. Further baseline test runs show that the alternative transform leads to better performance in both convergence rate and test acc when using the same lr as standard transform. However, in this series of tests, the standard transform is still used for the consistency.
