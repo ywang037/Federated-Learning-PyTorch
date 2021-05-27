@@ -248,7 +248,7 @@ Model      |Method|Data    | T Rnd |Time      | Machine | Frac | E | B | Lr/O   
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.05      |       | SGD   | `t1` transform | done, `selected`
 `tf_cnn`   |FedAvg|non-iid | 4000  |14.1hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | done
-`tf_cnn`   |FedAvg|non-iid |10000  |    hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | 
+`tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |50 | 0.02      |       | SGD   | `t1` transform | terminated at 11K rounds
 `tf_cnn`   |FedAvg|non-iid | 4000  |13.6hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | done
 `tf_cnn`   |FedAvg|non-iid |10000  | ~40hrs   | A       | 0.1  |5  |50 | 0.01      |       | SGD   | `t1` transform | terminated at 9K rounds
 `tf_cnn`   |FedAvg|non-iid |20000  |    hrs   | A       | 0.1  |5  |50 | 0.005     |       | SGD   | `t1` transform | 
